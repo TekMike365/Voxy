@@ -15,3 +15,8 @@ void Voxy::Init()
         return;
     }
 }
+
+void Voxy::Shutdown()
+{
+    glfwTerminate();
+}

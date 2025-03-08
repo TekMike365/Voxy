@@ -3,5 +3,5 @@
 namespace Voxy
 {
     void Init();
+    void Shutdown();
 }
-

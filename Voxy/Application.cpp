@@ -33,7 +33,5 @@ namespace Voxy
             // Poll for and process events
             glfwPollEvents();
         }
-
-        glfwTerminate();
     }
 }

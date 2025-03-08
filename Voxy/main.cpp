@@ -6,6 +6,9 @@
 int main()
 {
     Voxy::Init();
+
     Voxy::Application app;
     app.Run();
+
+    Voxy::Shutdown();
 }
