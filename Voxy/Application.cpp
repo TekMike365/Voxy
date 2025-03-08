@@ -6,12 +6,6 @@ namespace Voxy
 {
     Application::Application()
     {
-        if (!glfwInit())
-        {
-            VOXY_ERROR("Failed to initialise GLFW!");
-            return;
-        }
-
         m_Window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
         if (!m_Window)
         {

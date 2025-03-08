@@ -1,11 +1,11 @@
 #include "Log.h"
 
+#include "Voxy.h"
 #include "Application.h"
 
 int main()
 {
-    Voxy::Log::Init();
-
+    Voxy::Init();
     Voxy::Application app;
     app.Run();
 }

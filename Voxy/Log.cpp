@@ -11,6 +11,6 @@ namespace Voxy
         m_VoxyLogger->set_level(spdlog::level::trace);
         m_VoxyLogger->set_pattern("[%X] [%n] %^[%l]%$: %v");
 
-        m_VoxyLogger->info("Initialised logger!");
+        m_VoxyLogger->info("Initialized logger!");
     }
 }
