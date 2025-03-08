@@ -1,6 +1,6 @@
-#include <iostream>
+#include "Log.h"
 
 int main()
 {
-    std::cout << "Hello Voxy!" << std::endl;
+    Voxy::Log::Init();
 }
