@@ -1,1 +1,1 @@
-add_executable(Voxy src/main.cpp)
+add_executable(Voxy main.cpp)
