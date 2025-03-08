@@ -1,8 +1,7 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
-
 #include "Helpers.h"
+#include "Window.h"
 
 namespace Voxy
 {
@@ -15,6 +14,6 @@ namespace Voxy
         void Run();
 
     private:
-        GLFWwindow *m_Window;
+        Ref<Window> m_Window;
     };
 }
