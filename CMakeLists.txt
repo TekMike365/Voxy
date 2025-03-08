@@ -8,5 +8,6 @@ set(CXX_EXTENSIONS OFF)
 include(cmake/CPM.cmake)
 
 CPMAddPackage("gh:gabime/spdlog@1.15.1")
+CPMAddPackage("gh:glfw/glfw#3.4")
 
 add_subdirectory(Voxy)
