@@ -1,0 +1,1 @@
+add_executable(Voxy src/main.cpp)
