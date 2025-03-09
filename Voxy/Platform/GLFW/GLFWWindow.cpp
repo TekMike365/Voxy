@@ -1,6 +1,7 @@
 #include "GLFWWindow.h"
 
 #include "Log.h"
+#include "Events/WindowEvent.h"
 
 Ref<Voxy::Window> Voxy::Window::CreateWindow(const WindowParams &params)
 {
@@ -16,8 +17,18 @@ namespace Voxy::GLFW
         if (!m_Window)
             VOXY_ERROR("Failed to crate window.");
 
+        glfwSetWindowUserPointer(m_Window, this);
+
         // TODO: Move
         glfwMakeContextCurrent(m_Window);
+
+        // Events
+        glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window){
+            Window *wnd = (Window *)glfwGetWindowUserPointer(window);
+
+            WindowCloseEvent e;
+            wnd->m_CallbackFn(e);
+        });
     }
 
     Window::~Window()
@@ -33,10 +44,5 @@ namespace Voxy::GLFW
 
         // Poll for and process events
         glfwPollEvents();
-    }
-    
-    bool Window::ShouldClose()
-    {
-        return glfwWindowShouldClose(m_Window);
     }
 }

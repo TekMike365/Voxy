@@ -13,10 +13,12 @@ namespace Voxy::GLFW
         ~Window();
 
         virtual void OnUpdate() override;
-        virtual bool ShouldClose() override;
+
+        inline virtual void SetEventCallback(CallbackFn callback) override { m_CallbackFn = callback; }
 
     private:
         GLFWwindow *m_Window;
         WindowParams m_Params;
+        CallbackFn m_CallbackFn;
     };
 }
