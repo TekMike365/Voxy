@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sstream>
+
 #include "Event.h"
 
 namespace Voxy
@@ -20,6 +22,13 @@ namespace Voxy
         inline int GetHeight() const { return m_Height; }
 
         SET_EVENT_TYPE(WindowResize)
+
+        virtual std::string ToString() const override
+        {
+            std::stringstream ss;
+            ss << GetName() << "[" << m_Width << ", " << m_Height << "](w, h)";
+            return ss.str();
+        }
 
     private:
         int m_Width, m_Height;

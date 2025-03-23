@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <string>
 
 namespace Voxy
 {
@@ -22,6 +23,8 @@ namespace Voxy
 
     public:
         SET_EVENT_TYPE(None)
+
+        virtual std::string ToString() const { return GetName(); }
 
     private:
         bool m_Handled = false;
