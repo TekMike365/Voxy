@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include <glad/glad.h>
+
 #include "Log.h"
 
 #define BIND_APP_EVENT(fn) std::bind(&Application::fn, this, std::placeholders::_1)
@@ -21,6 +23,8 @@ namespace Voxy
         while (m_IsRunning)
         {
             // Render
+            glClearColor(0.3f, 0.7f, 0.8f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
 
             m_Window->OnUpdate();
         }

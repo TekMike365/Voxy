@@ -3,7 +3,7 @@ add_executable(
     Platform/GLFW/GLFWWindow.cpp
 )
 
-target_link_libraries(Voxy PRIVATE spdlog glfw)
+target_link_libraries(Voxy PRIVATE spdlog glfw OpenGL::GL glad)
 
 target_include_directories(Voxy PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 

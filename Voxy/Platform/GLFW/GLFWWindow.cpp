@@ -22,6 +22,10 @@ namespace Voxy::GLFW
         // TODO: Move
         glfwMakeContextCurrent(m_Window);
 
+        // TODO: Move
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            VOXY_ERROR("Glad couldn't be initialised.");
+
         // Events
         glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window){
             Window *wnd = (Window *)glfwGetWindowUserPointer(window);

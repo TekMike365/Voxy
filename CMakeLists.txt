@@ -10,4 +10,11 @@ include(cmake/CPM.cmake)
 CPMAddPackage("gh:gabime/spdlog@1.15.1")
 CPMAddPackage("gh:glfw/glfw#3.4")
 
+find_package(OpenGL)
+if(NOT OPENGL_FOUND)
+    message(SEND_ERROR "OpenGL required but not found.")
+endif()
+
+add_subdirectory(vendor/glad)
+
 add_subdirectory(Voxy)

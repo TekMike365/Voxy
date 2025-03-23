@@ -1,5 +1,6 @@
 #pragma once
 
+#include <glad/glad.h> // TODO: Remove
 #include <GLFW/glfw3.h>
 
 #include "Window.h"

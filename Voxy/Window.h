@@ -11,7 +11,7 @@ namespace Voxy
 {
     struct WindowParams
     {
-        uint32_t Width = 1024;
+        uint32_t Width = 1080;
         uint32_t Height = 720;
         std::string Title = "Voxy";
     };
