@@ -29,8 +29,10 @@ set(IMGUI_SOURCE
 
     "${IMGUI_PATH}/backends/imgui_impl_opengl3.cpp"
     "${IMGUI_PATH}/backends/imgui_impl_glfw.cpp"
+
+    "${IMGUI_PATH}/misc/cpp/imgui_stdlib.cpp"
 )
-set(IMGUI_INCLUDE ${IMGUI_PATH} "${IMGUI_PATH}/backends")
+set(IMGUI_INCLUDE ${IMGUI_PATH} "${IMGUI_PATH}/backends" "${IMGUI_PATH}/misc/cpp")
 
 # Adding projects
 add_subdirectory(Voxy)
