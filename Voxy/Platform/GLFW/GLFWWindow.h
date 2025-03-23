@@ -15,6 +15,8 @@ namespace Voxy::GLFW
 
         virtual void OnUpdate() override;
 
+        inline virtual void *GetWindowHandle() const override { return m_Window; };
+
         inline virtual void SetEventCallback(CallbackFn callback) override { m_CallbackFn = callback; }
 
     private:

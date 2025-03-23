@@ -25,6 +25,8 @@ namespace Voxy
 
         virtual void SetEventCallback(CallbackFn callback) = 0;
 
+        virtual void *GetWindowHandle() const = 0;
+
         static Ref<Window> CreateWindow(const WindowParams &params = WindowParams());
     };
 }

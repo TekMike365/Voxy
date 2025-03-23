@@ -5,6 +5,8 @@ set(CXX_STANDARD 17)
 set(CXX_STANDARD_REQUIRED ON)
 set(CXX_EXTENSIONS OFF)
 
+
+# Adding dependencies
 include(cmake/CPM.cmake)
 
 CPMAddPackage("gh:gabime/spdlog@1.15.1")
@@ -17,4 +19,18 @@ endif()
 
 add_subdirectory(vendor/glad)
 
+set(IMGUI_PATH "${PROJECT_SOURCE_DIR}/vendor/imgui")
+set(IMGUI_SOURCE
+    "${IMGUI_PATH}/imgui.cpp"
+    "${IMGUI_PATH}/imgui_demo.cpp"
+    "${IMGUI_PATH}/imgui_draw.cpp"
+    "${IMGUI_PATH}/imgui_tables.cpp"
+    "${IMGUI_PATH}/imgui_widgets.cpp"
+
+    "${IMGUI_PATH}/backends/imgui_impl_opengl3.cpp"
+    "${IMGUI_PATH}/backends/imgui_impl_glfw.cpp"
+)
+set(IMGUI_INCLUDE ${IMGUI_PATH} "${IMGUI_PATH}/backends")
+
+# Adding projects
 add_subdirectory(Voxy)
