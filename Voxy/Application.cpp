@@ -16,6 +16,11 @@ namespace Voxy
     {
         m_Window = Window::CreateWindow();
         m_Window->SetEventCallback(BIND_APP_EVENT(OnEvent));
+
+        // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
     }
 
     Application::~Application()
@@ -31,15 +36,10 @@ namespace Voxy
 
         bool show_demo_window = true;
         ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
+        
         while (m_IsRunning)
         {
             m_Window->OnUpdate();
-
-            // Start the Dear ImGui frame
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
 
             // 1. Show demo window
             if (show_demo_window)
@@ -77,6 +77,11 @@ namespace Voxy
             glClear(GL_COLOR_BUFFER_BIT);
 
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+            // Start the Dear ImGui frame
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
         }
     }
 
