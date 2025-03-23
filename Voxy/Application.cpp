@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "Helpers.h"
 #include "Layers/ImGuiLayer.h"
+#include <chrono>
 
 #define BIND_APP_EVENT(fn) std::bind(&Application::fn, this, std::placeholders::_1)
 
@@ -28,50 +29,44 @@ namespace Voxy
 
     void Application::Run()
     {
-
-        ImGuiIO &io = ImGui::GetIO();
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
-
-        bool show_demo_window = true;
-        ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+        auto last = std::chrono::high_resolution_clock::now();
+        Timestep dt;
 
         while (m_IsRunning)
         {
             m_Window->OnUpdate();
 
-            // 1. Show demo window
-            if (show_demo_window)
-                ImGui::ShowDemoWindow();
-
-            // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+            //TODO: Cleanup
+            // Debug Screen
+            ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+            const float PAD = 10.0f;
+            const ImGuiViewport *viewport = ImGui::GetMainViewport();
+            ImVec2 work_pos = viewport->WorkPos; // Use work area to avoid menu-bar/task-bar, if any!
+            ImVec2 work_size = viewport->WorkSize;
+            ImVec2 window_pos, window_pos_pivot;
+            window_pos.x = work_pos.x + work_size.x - PAD;
+            window_pos.y = work_pos.y + PAD;
+            window_pos_pivot.x = 1.0f;
+            window_pos_pivot.y = 0.0f;
+            ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
+            window_flags |= ImGuiWindowFlags_NoMove;
+            ImGui::SetNextWindowBgAlpha(0.35f); // Transparent background
+            if (ImGui::Begin("Example: Simple overlay", NULL, window_flags))
             {
-                static float f = 0.0f;
-                static int counter = 0;
-
-                ImGui::Begin("Hello, world!"); // Create a window called "Hello, world!" and append into it.
-
-                ImGui::Text("This is some useful text.");          // Display some text (you can use a format strings too)
-                ImGui::Checkbox("Demo Window", &show_demo_window); // Edit bools storing our window open/close state
-
-                ImGui::SliderFloat("float", &f, 0.0f, 1.0f);             // Edit 1 float using a slider from 0.0f to 1.0f
-                ImGui::ColorEdit3("clear color", (float *)&clear_color); // Edit 3 floats representing a color
-
-                if (ImGui::Button("Button")) // Buttons return true when clicked (most widgets return true when edited/activated)
-                    counter++;
-                ImGui::SameLine();
-                ImGui::Text("counter = %d", counter);
-
-                ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-                ImGui::End();
+                ImGui::Text("%.3f ms (%.1f FPS)", dt.GetMiliseconds(), 1.0f / dt.GetSeconds());
             }
+            ImGui::End();
 
             // TODO: Move
-            glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+            glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
             glClear(GL_COLOR_BUFFER_BIT);
 
             for (auto layer : m_LayerStack)
-                layer->OnUpdate();
+                layer->OnUpdate(dt);
+
+            auto now = std::chrono::high_resolution_clock::now();
+            dt = std::chrono::duration<float>(now - last).count();
+            last = now;
         }
     }
 

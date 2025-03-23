@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Events/Event.h"
+#include "Timestep.h"
 
 namespace Voxy
 {
@@ -11,7 +12,7 @@ namespace Voxy
 
         virtual void OnAttach() {}
         virtual void OnDetach() {}
-        virtual void OnUpdate() {}
+        virtual void OnUpdate(Timestep dt) {}
         virtual void OnEvent(Event &e) {}
 
         virtual const char* GetName() const { return "New Layer"; }

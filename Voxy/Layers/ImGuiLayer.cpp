@@ -10,7 +10,7 @@ namespace Voxy
         StartFrame();
     }
 
-    void ImGuiLayer::OnUpdate()
+    void ImGuiLayer::OnUpdate(Timestep dt)
     {
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
