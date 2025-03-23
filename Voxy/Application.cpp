@@ -7,6 +7,8 @@
 #include <imgui_impl_glfw.h>
 
 #include "Log.h"
+#include "Helpers.h"
+#include "Layers/ImGuiLayer.h"
 
 #define BIND_APP_EVENT(fn) std::bind(&Application::fn, this, std::placeholders::_1)
 
@@ -17,10 +19,7 @@ namespace Voxy
         m_Window = Window::CreateWindow();
         m_Window->SetEventCallback(BIND_APP_EVENT(OnEvent));
 
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        m_LayerStack.AddOverlay(std::make_shared<ImGuiLayer>());
     }
 
     Application::~Application()
@@ -67,21 +66,14 @@ namespace Voxy
                 ImGui::End();
             }
 
-            // Rendering
-            ImGui::Render();
-
             int display_w, display_h;
             glfwGetFramebufferSize((GLFWwindow *)m_Window->GetWindowHandle(), &display_w, &display_h);
             glViewport(0, 0, display_w, display_h);
             glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-            // Start the Dear ImGui frame
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
+            for (auto layer : m_LayerStack)
+                layer->OnUpdate();
         }
     }
 

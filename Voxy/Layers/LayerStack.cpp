@@ -1,0 +1,56 @@
+#include "LayerStack.h"
+
+#include "Log.h"
+
+namespace Voxy
+{
+    LayerStack::LayerStack()
+    {
+    }
+
+    LayerStack::~LayerStack()
+    {
+        for (Ref<Layer> layer : m_Layers)
+        {
+            layer->OnDetach();
+            VOXY_INFO("Detaching layer: {}", layer->GetName());
+        }
+    }
+
+    void LayerStack::AddLayer(const Ref<Layer> &layer)
+    {
+        m_Layers.insert(m_Layers.begin() + m_LayerInsertIdx++, layer);
+        layer->OnAttach();
+        VOXY_INFO("Attaching layer: {}", layer->GetName());
+    }
+
+    void LayerStack::AddOverlay(const Ref<Layer> &overlay)
+    {
+        m_Layers.push_back(overlay);
+        overlay->OnAttach();
+        VOXY_INFO("Attaching overlay: {}", overlay->GetName());
+    }
+
+    void LayerStack::RemoveLayer(const Ref<Layer> &layer)
+    {
+        auto end = m_Layers.begin() + m_LayerInsertIdx;
+        auto it = std::find(m_Layers.begin(), end, layer);
+        if (it != end)
+        {
+            m_Layers.erase(it);
+            layer->OnDetach();
+            VOXY_INFO("Detaching layer: {}", layer->GetName());
+        }
+    }
+
+    void LayerStack::RemoveOverlay(const Ref<Layer> &overlay)
+    {
+        auto it = std::find(m_Layers.begin() + m_LayerInsertIdx, m_Layers.end(), overlay);
+        if (it != m_Layers.end())
+        {
+            m_Layers.erase(it);
+            overlay->OnDetach();
+            VOXY_INFO("Detaching overlay: {}", overlay->GetName());
+        }
+    }
+}
