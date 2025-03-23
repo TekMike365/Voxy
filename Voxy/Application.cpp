@@ -36,7 +36,7 @@ namespace Voxy
         {
             m_Window->OnUpdate();
 
-            //TODO: Cleanup
+            // TODO: Cleanup
             // Debug Screen
             ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
             const float PAD = 10.0f;
