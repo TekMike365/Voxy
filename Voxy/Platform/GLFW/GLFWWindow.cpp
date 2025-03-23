@@ -37,6 +37,15 @@ namespace Voxy::GLFW
             WindowCloseEvent e;
             wnd->m_CallbackFn(e); });
 
+        glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow *window, int width, int height)
+                                       {
+            Window *wnd = (Window *)glfwGetWindowUserPointer(window);
+            wnd->m_Params.Width = width;
+            wnd->m_Params.Height = height;
+
+            WindowResizeEvent e(width, height);
+            wnd->m_CallbackFn(e); });
+
         //? Move
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();
@@ -64,11 +73,6 @@ namespace Voxy::GLFW
 
     void Window::OnUpdate()
     {
-        // Poll and handle events (inputs, window resize, etc.)
-        // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-        // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
-        // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
-        // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
         glfwPollEvents();
         if (glfwGetWindowAttrib(m_Window, GLFW_ICONIFIED) != 0)
         {
@@ -79,5 +83,6 @@ namespace Voxy::GLFW
         // TODO: Move
         // Swap front and back buffers
         glfwSwapBuffers(m_Window);
+        glViewport(0, 0, m_Params.Width, m_Params.Height);
     }
 }

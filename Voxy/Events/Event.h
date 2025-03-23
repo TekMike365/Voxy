@@ -7,7 +7,8 @@ namespace Voxy
     enum class EventType
     {
         None = 0,
-        WindowClose
+        WindowClose,
+        WindowResize
     };
 
 #define SET_EVENT_TYPE(T)                                                \
