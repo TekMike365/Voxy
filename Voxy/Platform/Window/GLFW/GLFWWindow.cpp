@@ -6,11 +6,6 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-Ref<Voxy::Window> Voxy::Window::CreateWindow(const WindowParams &params)
-{
-    return Ref<Window>(new GLFW::Window(params));
-}
-
 namespace Voxy::GLFW
 {
     Window::Window(const WindowParams &params)

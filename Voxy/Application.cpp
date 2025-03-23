@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include <chrono>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <imgui.h>
@@ -9,7 +11,6 @@
 #include "Log.h"
 #include "Helpers.h"
 #include "Layers/ImGuiLayer.h"
-#include <chrono>
 
 #define BIND_APP_EVENT(fn) std::bind(&Application::fn, this, std::placeholders::_1)
 
