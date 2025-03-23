@@ -2,6 +2,9 @@
 
 #include "Log.h"
 #include "Events/WindowEvent.h"
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 Ref<Voxy::Window> Voxy::Window::CreateWindow(const WindowParams &params)
 {
@@ -27,26 +30,54 @@ namespace Voxy::GLFW
             VOXY_ERROR("Glad couldn't be initialised.");
 
         // Events
-        glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window){
+        glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window)
+                                   {
             Window *wnd = (Window *)glfwGetWindowUserPointer(window);
 
             WindowCloseEvent e;
-            wnd->m_CallbackFn(e);
-        });
+            wnd->m_CallbackFn(e); });
+
+        //? Move
+        // Setup Dear ImGui context
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+
+        // Setup Dear ImGui style
+        ImGui::StyleColorsDark();
+        // ImGui::StyleColorsLight();
+
+        // Setup Platform/Renderer backends
+        ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+        ImGui_ImplOpenGL3_Init("#version 430 core");
     }
 
     Window::~Window()
     {
+        //? Move
+        // Cleanup
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+
         glfwDestroyWindow(m_Window);
     }
 
     void Window::OnUpdate()
     {
+        // Poll and handle events (inputs, window resize, etc.)
+        // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
+        // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
+        // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
+        // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
+        glfwPollEvents();
+        if (glfwGetWindowAttrib(m_Window, GLFW_ICONIFIED) != 0)
+        {
+            ImGui_ImplGlfw_Sleep(10);
+            return;
+        }
+
         // TODO: Move
         // Swap front and back buffers
         glfwSwapBuffers(m_Window);
-
-        // Poll for and process events
-        glfwPollEvents();
     }
 }
