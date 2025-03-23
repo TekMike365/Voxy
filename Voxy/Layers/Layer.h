@@ -13,7 +13,7 @@ namespace Voxy
         virtual void OnAttach() {}
         virtual void OnDetach() {}
         virtual void OnUpdate(Timestep dt) {}
-        virtual void OnEvent(Event &e) {}
+        virtual bool OnEvent(Event &e) { return false; }
 
         virtual const char* GetName() const { return "New Layer"; }
     };

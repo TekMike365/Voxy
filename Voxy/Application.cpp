@@ -74,6 +74,10 @@ namespace Voxy
     {
         EventDispatcher d(e);
         d.Dispatch<WindowCloseEvent>(BIND_APP_EVENT(OnWindowClose));
+
+        for (auto layer = m_LayerStack.rbegin(); layer != m_LayerStack.rend(); layer++)
+            if (layer->get()->OnEvent(e))
+                break;
     }
 
     bool Application::OnWindowClose(WindowCloseEvent &e)
