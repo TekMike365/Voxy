@@ -24,7 +24,7 @@ namespace Voxy
         VOXY_INFO("Attaching layer: {}", layer->GetName());
     }
 
-    void LayerStack::AddOverlay(const Ref<Layer> &overlay)
+    void LayerStack::PushOverlay(const Ref<Layer> &overlay)
     {
         m_Layers.push_back(overlay);
         overlay->OnAttach();

@@ -16,7 +16,7 @@ namespace Voxy
         ~LayerStack();
 
         void AddLayer(const Ref<Layer> &layer);
-        void AddOverlay(const Ref<Layer> &overlay);
+        void PushOverlay(const Ref<Layer> &overlay);
         void RemoveLayer(const Ref<Layer> &layer);
         void RemoveOverlay(const Ref<Layer> &overlay);
 

@@ -1,16 +1,12 @@
 #include "Application.h"
 
 #include <chrono>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <imgui.h>
-#include <imgui_impl_opengl3.h>
-#include <imgui_impl_glfw.h>
 
 #include "Log.h"
 #include "Helpers.h"
 #include "Layers/ImGuiLayer.h"
+#include "Layers/RenderingLayer.h"
 
 #define BIND_APP_EVENT(fn) std::bind(&Application::fn, this, std::placeholders::_1)
 
@@ -21,7 +17,8 @@ namespace Voxy
         m_Window = Window::CreateWindow();
         m_Window->SetEventCallback(BIND_APP_EVENT(OnEvent));
 
-        m_LayerStack.AddOverlay(std::make_shared<ImGuiLayer>());
+        m_LayerStack.PushOverlay(std::make_shared<RenderingLayer>());
+        m_LayerStack.PushOverlay(std::make_shared<ImGuiLayer>());
     }
 
     Application::~Application()
@@ -57,10 +54,6 @@ namespace Voxy
                 ImGui::Text("%.3f ms (%.1f FPS)", dt.GetMiliseconds(), 1.0f / dt.GetSeconds());
             }
             ImGui::End();
-
-            // TODO: Move
-            glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-            glClear(GL_COLOR_BUFFER_BIT);
 
             for (auto layer : m_LayerStack)
                 layer->OnUpdate(dt);

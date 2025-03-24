@@ -15,6 +15,6 @@ namespace Voxy
         virtual void OnUpdate(Timestep dt) {}
         virtual bool OnEvent(Event &e) { return false; }
 
-        virtual const char* GetName() const { return "New Layer"; }
+        virtual inline const char* GetName() const { return "New Layer"; }
     };
 }

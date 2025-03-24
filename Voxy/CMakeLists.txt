@@ -1,7 +1,7 @@
 add_executable(
     Voxy main.cpp Log.cpp Application.cpp Voxy.cpp
     Platform/Window/Window.cpp Platform/Window/GLFW/GLFWWindow.cpp
-    Layers/LayerStack.cpp Layers/ImGuiLayer.cpp
+    Layers/LayerStack.cpp Layers/ImGuiLayer.cpp Layers/RenderingLayer.cpp
     ${IMGUI_SOURCE}
 )
 
