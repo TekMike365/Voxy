@@ -13,7 +13,7 @@ namespace Voxy
         for (Ref<Layer> layer : m_Layers)
         {
             layer->OnDetach();
-            VOXY_INFO("Detaching layer: {}", layer->GetName());
+            VOXY_CORE_INFO("Detaching layer: {}", layer->GetName());
         }
     }
 
@@ -21,14 +21,14 @@ namespace Voxy
     {
         m_Layers.insert(m_Layers.begin() + m_LayerInsertIdx++, layer);
         layer->OnAttach();
-        VOXY_INFO("Attaching layer: {}", layer->GetName());
+        VOXY_CORE_INFO("Attaching layer: {}", layer->GetName());
     }
 
     void LayerStack::PushOverlay(const Ref<Layer> &overlay)
     {
         m_Layers.push_back(overlay);
         overlay->OnAttach();
-        VOXY_INFO("Attaching overlay: {}", overlay->GetName());
+        VOXY_CORE_INFO("Attaching overlay: {}", overlay->GetName());
     }
 
     void LayerStack::RemoveLayer(const Ref<Layer> &layer)
@@ -39,7 +39,7 @@ namespace Voxy
         {
             m_Layers.erase(it);
             layer->OnDetach();
-            VOXY_INFO("Detaching layer: {}", layer->GetName());
+            VOXY_CORE_INFO("Detaching layer: {}", layer->GetName());
         }
     }
 
@@ -50,7 +50,7 @@ namespace Voxy
         {
             m_Layers.erase(it);
             overlay->OnDetach();
-            VOXY_INFO("Detaching overlay: {}", overlay->GetName());
+            VOXY_CORE_INFO("Detaching overlay: {}", overlay->GetName());
         }
     }
 }

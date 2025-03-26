@@ -78,7 +78,7 @@ namespace Voxy
 
     bool Application::OnWindowClose(WindowCloseEvent &e)
     {
-        VOXY_WARN("Closing window!");
+        VOXY_CORE_WARN("Closing window!");
         m_IsRunning = false;
         return true;
     }

@@ -14,7 +14,7 @@ namespace Voxy::GLFW
     {
         m_Window = glfwCreateWindow(m_Params.Width, m_Params.Height, m_Params.Title.c_str(), NULL, NULL);
         if (!m_Window)
-            VOXY_ERROR("Failed to crate window.");
+            VOXY_CORE_ERROR("Failed to crate window.");
 
         glfwSetWindowUserPointer(m_Window, this);
 
@@ -23,7 +23,7 @@ namespace Voxy::GLFW
 
         // TODO: Move
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-            VOXY_ERROR("Glad couldn't be initialised.");
+            VOXY_CORE_ERROR("Glad couldn't be initialised.");
 
         // Events
         glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window)

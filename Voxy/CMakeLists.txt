@@ -14,7 +14,7 @@ add_library(Voxy SHARED
     ${IMGUI_SOURCE}
 )
 
-target_link_libraries(Voxy PRIVATE spdlog glfw OpenGL::GL glad)
+target_link_libraries(Voxy PUBLIC spdlog glfw OpenGL::GL glad)
 
 target_include_directories(Voxy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${IMGUI_INCLUDE})
 

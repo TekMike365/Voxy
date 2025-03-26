@@ -3,7 +3,11 @@
 class Sandbox : public Voxy::Application
 {
 public:
-    Sandbox() {}
+    Sandbox()
+    {
+        VOXY_INFO("I am alive!");
+    }
+
     ~Sandbox() {}
 };
 

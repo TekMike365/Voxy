@@ -11,7 +11,7 @@ void Voxy::Init()
     // Initialize GLFW
     if (!glfwInit())
     {
-        VOXY_ERROR("Failed to initialize GLFW!");
+        VOXY_CORE_ERROR("Failed to initialize GLFW!");
         return;
     }
 }
