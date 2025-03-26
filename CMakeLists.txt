@@ -5,6 +5,7 @@ set(CXX_STANDARD 17)
 set(CXX_STANDARD_REQUIRED ON)
 set(CXX_EXTENSIONS OFF)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Adding dependencies
 include(cmake/CPM.cmake)
@@ -36,3 +37,4 @@ set(IMGUI_INCLUDE ${IMGUI_PATH} "${IMGUI_PATH}/backends" "${IMGUI_PATH}/misc/cpp
 
 # Adding projects
 add_subdirectory(Voxy)
+add_subdirectory(Sandbox)

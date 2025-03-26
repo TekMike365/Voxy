@@ -1,7 +1,5 @@
 #pragma once
 
-namespace Voxy
-{
-    void Init();
-    void Shutdown();
-}
+#include "Voxy/Application.h"
+
+#include "Voxy/EntryPoint.h"

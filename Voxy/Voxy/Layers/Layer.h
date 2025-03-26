@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Events/Event.h"
-#include "Timestep.h"
+#include "Voxy/Events/Event.h"
+#include "Voxy/Timestep.h"
 
 namespace Voxy
 {

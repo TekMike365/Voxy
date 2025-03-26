@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Helpers.h"
 #include <vector>
 
+#include "Helpers.h"
 #include "Layer.h"
 
 namespace Voxy

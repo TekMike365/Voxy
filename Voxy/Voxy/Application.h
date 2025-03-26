@@ -12,7 +12,7 @@ namespace Voxy
     {
     public:
         Application();
-        ~Application();
+        virtual ~Application();
 
         void Run();
 
@@ -26,4 +26,7 @@ namespace Voxy
 
         LayerStack m_LayerStack;
     };
+
+    // To be defined in Client
+    Application *CreateApplication();
 }

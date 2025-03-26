@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "Voxy/Window.h"
 #include "GLFW/GLFWWindow.h"
 
 namespace Voxy
