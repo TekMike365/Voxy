@@ -30,6 +30,8 @@ namespace Voxy
         auto last = std::chrono::high_resolution_clock::now();
         Timestep dt;
 
+        VOXY_CORE_INFO("Main loop started");
+
         while (m_IsRunning)
         {
             m_Window->OnUpdate();

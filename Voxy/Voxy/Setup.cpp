@@ -8,6 +8,8 @@ void Voxy::Init()
 {
     Log::Init();
 
+    VOXY_CORE_INFO("Initializing");
+
     // Initialize GLFW
     if (!glfwInit())
     {
@@ -18,5 +20,6 @@ void Voxy::Init()
 
 void Voxy::Shutdown()
 {
+    VOXY_CORE_INFO("Shutting down");
     glfwTerminate();
 }
