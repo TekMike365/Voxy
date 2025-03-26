@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Voxy.h"
+#include "Setup.h"
 #include "Application.h"
 
 extern Voxy::Application *Voxy::CreateApplication();

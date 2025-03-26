@@ -1,4 +1,4 @@
-#include "Voxy.h"
+#include "Setup.h"
 
 #include <GLFW/glfw3.h>
 

@@ -2,7 +2,7 @@ add_library(Voxy SHARED
     Log.cpp
 
     Voxy/Application.cpp
-    Voxy/Voxy.cpp
+    Voxy/Setup.cpp
 
     Voxy/Platform/Window/Window.cpp
     Voxy/Platform/Window/GLFW/GLFWWindow.cpp
