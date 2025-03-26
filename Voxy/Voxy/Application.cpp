@@ -28,7 +28,7 @@ namespace Voxy
     void Application::Run()
     {
         auto last = std::chrono::high_resolution_clock::now();
-        Timestep dt;
+        TimeStep dt;
 
         VOXY_CORE_INFO("Main loop started");
 

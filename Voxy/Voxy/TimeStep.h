@@ -2,13 +2,13 @@
 
 namespace Voxy
 {
-    class Timestep
+    class TimeStep
     {
     public:
-        Timestep() = default;
-        Timestep(float seconds)
+        TimeStep() = default;
+        TimeStep(float seconds)
             : m_Seconds(seconds) {}
-        ~Timestep() = default;
+        ~TimeStep() = default;
 
         inline float GetSeconds() const { return m_Seconds; }
         inline float GetMiliseconds() const { return m_Seconds * 1000.0f; }

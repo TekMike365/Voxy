@@ -8,7 +8,7 @@ namespace Voxy
     {
     public:
         virtual void OnAttach() override;
-        virtual void OnUpdate(Timestep dt) override;
+        virtual void OnUpdate(TimeStep dt) override;
 
         virtual inline const char *GetName() const override { return "Dear ImGui Layer"; }
 
