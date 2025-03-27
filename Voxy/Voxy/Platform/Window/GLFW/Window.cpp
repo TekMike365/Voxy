@@ -1,4 +1,4 @@
-#include "GLFWWindow.h"
+#include "Window.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>

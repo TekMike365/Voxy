@@ -1,5 +1,5 @@
 #include "Voxy/IWindow.h"
-#include "GLFW/GLFWWindow.h"
+#include "GLFW/Window.h"
 
 #include "Log.h"
 
