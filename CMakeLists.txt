@@ -12,6 +12,7 @@ include(cmake/CPM.cmake)
 
 CPMAddPackage("gh:gabime/spdlog@1.15.1")
 CPMAddPackage("gh:glfw/glfw#3.4")
+CPMAddPackage("gh:g-truc/glm#1.0.1")
 
 find_package(OpenGL)
 if(NOT OPENGL_FOUND)

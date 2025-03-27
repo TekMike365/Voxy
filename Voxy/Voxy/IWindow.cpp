@@ -1,7 +1,6 @@
-#include "Voxy/IWindow.h"
-#include "GLFW/Window.h"
+#include "IWindow.h"
 
-#include "Log.h"
+#include "Platform/GLFW/Window.h"
 
 namespace Voxy
 {
@@ -11,4 +10,3 @@ namespace Voxy
         return Ref<IWindow>(new GLFW::Window(params));
     }
 }
-

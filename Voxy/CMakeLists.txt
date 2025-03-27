@@ -4,8 +4,11 @@ add_library(Voxy SHARED
     Voxy/Application.cpp
     Voxy/Setup.cpp
 
-    Voxy/Platform/Window/Window.cpp
-    Voxy/Platform/Window/GLFW/GLFWWindow.cpp
+    Voxy/IWindow.cpp
+    Voxy/Renderer/IGraphicsContext.cpp
+
+    Voxy/Platform/GLFW/Window.cpp
+    Voxy/Platform/OpenGL/GraphicsContext.cpp
 
     Voxy/Layers/LayerStack.cpp
     Voxy/Layers/ImGuiLayer.cpp
@@ -14,7 +17,7 @@ add_library(Voxy SHARED
     ${IMGUI_SOURCE}
 )
 
-target_link_libraries(Voxy PUBLIC spdlog glfw OpenGL::GL glad)
+target_link_libraries(Voxy PUBLIC spdlog glfw OpenGL::GL glad glm)
 
 target_include_directories(Voxy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${IMGUI_INCLUDE})
 

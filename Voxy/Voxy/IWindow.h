@@ -4,11 +4,14 @@
 #include <cstdint>
 #include <functional>
 
+#include "Log.h"
 #include "Helpers.h"
 #include "Events/Event.h"
 
 namespace Voxy
 {
+    class IGraphicsContext;
+
     struct WindowParams
     {
         uint32_t Width = 1080;
@@ -23,6 +26,8 @@ namespace Voxy
 
         virtual void OnUpdate() = 0;
 
+        virtual void InitImGui() = 0;
+        virtual void SetGraphicsContext(const Ref<IGraphicsContext> &context) = 0;
         virtual void SetEventCallback(CallbackFn callback) = 0;
 
         virtual void *GetWindowHandle() const = 0;

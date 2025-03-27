@@ -6,6 +6,7 @@
 
 #include "Log.h"
 #include "Voxy/Events/WindowEvent.h"
+#include "Voxy/Renderer/IGraphicsContext.h"
 
 namespace Voxy::GLFW
 {
@@ -17,13 +18,6 @@ namespace Voxy::GLFW
             VOXY_CORE_ERROR("Failed to crate window.");
 
         glfwSetWindowUserPointer(m_Window, this);
-
-        // TODO: Move
-        glfwMakeContextCurrent(m_Window);
-
-        // TODO: Move
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-            VOXY_CORE_ERROR("Glad couldn't be initialised.");
 
         // Events
         glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window)
@@ -41,28 +35,17 @@ namespace Voxy::GLFW
 
             WindowResizeEvent e(width, height);
             wnd->m_CallbackFn(e); });
-
-        //? Move
-        // Setup Dear ImGui context
-        IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
-
-        // Setup Dear ImGui style
-        ImGui::StyleColorsDark();
-        // ImGui::StyleColorsLight();
-
-        // Setup Platform/Renderer backends
-        ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
-        ImGui_ImplOpenGL3_Init("#version 430 core");
     }
 
     Window::~Window()
     {
-        //? Move
-        // Cleanup
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
+        if (m_ImGuiInitialised)
+        {
+            // Cleanup
+            ImGui_ImplOpenGL3_Shutdown();
+            ImGui_ImplGlfw_Shutdown();
+            ImGui::DestroyContext();
+        }
 
         glfwDestroyWindow(m_Window);
     }
@@ -76,9 +59,29 @@ namespace Voxy::GLFW
             return;
         }
 
-        // TODO: Move
-        // Swap front and back buffers
-        glfwSwapBuffers(m_Window);
-        glViewport(0, 0, m_Params.Width, m_Params.Height);
+        // TODO: More contexts
+        m_GraphicsContext->SwapBuffers();
+        m_GraphicsContext->SetViewport(0, 0, m_Params.Width, m_Params.Height);
+    }
+
+    void Window::InitImGui()
+    {
+        // TODO: Rework ImGui
+        if (m_ImGuiInitialised)
+            VOXY_CORE_ERROR("ImGui has already been initialized");
+
+        m_ImGuiInitialised = true;
+
+        // Setup Dear ImGui context
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+
+        // Setup Dear ImGui style
+        ImGui::StyleColorsDark();
+        // ImGui::StyleColorsLight();
+
+        // Setup Platform/Renderer backends
+        ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+        ImGui_ImplOpenGL3_Init("#version 430 core");
     }
 }
