@@ -3,11 +3,11 @@
 #include <glad/glad.h> // TODO: Remove
 #include <GLFW/glfw3.h>
 
-#include "Voxy/Window.h"
+#include "Voxy/IWindow.h"
 
 namespace Voxy::GLFW
 {
-    class Window : public Voxy::Window
+    class Window : public Voxy::IWindow
     {
     public:
         Window(const WindowParams &params);

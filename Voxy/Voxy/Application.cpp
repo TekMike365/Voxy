@@ -14,7 +14,7 @@ namespace Voxy
 {
     Application::Application()
     {
-        m_Window = Window::CreateWindow();
+        m_Window = IWindow::CreateWindow();
         m_Window->SetEventCallback(BIND_APP_EVENT(OnEvent));
 
         m_LayerStack.PushOverlay(std::make_shared<RenderingLayer>());

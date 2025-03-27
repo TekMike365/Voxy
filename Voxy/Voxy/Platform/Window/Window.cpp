@@ -1,14 +1,14 @@
-#include "Voxy/Window.h"
+#include "Voxy/IWindow.h"
 #include "GLFW/GLFWWindow.h"
 
 #include "Log.h"
 
 namespace Voxy
 {
-    Ref<Window> Window::CreateWindow(const WindowParams &params)
+    Ref<IWindow> IWindow::CreateWindow(const WindowParams &params)
     {
         VOXY_CORE_TRACE("Creating window");
-        return Ref<Window>(new GLFW::Window(params));
+        return Ref<IWindow>(new GLFW::Window(params));
     }
 }
 

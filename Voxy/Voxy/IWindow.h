@@ -16,7 +16,7 @@ namespace Voxy
         std::string Title = "Voxy";
     };
 
-    class Window
+    class IWindow
     {
     public:
         using CallbackFn = std::function<void(Event &)>;
@@ -28,6 +28,6 @@ namespace Voxy
         virtual void *GetWindowHandle() const = 0;
         virtual const WindowParams &GetParams() const = 0;
 
-        static Ref<Window> CreateWindow(const WindowParams &params = WindowParams());
+        static Ref<IWindow> CreateWindow(const WindowParams &params = WindowParams());
     };
 }

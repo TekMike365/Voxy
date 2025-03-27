@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Helpers.h"
-#include "Window.h"
+#include "IWindow.h"
 
 #include "Events/WindowEvent.h"
 #include "Layers/LayerStack.h"
@@ -21,7 +21,7 @@ namespace Voxy
         bool OnWindowClose(WindowCloseEvent &e);
 
     private:
-        Ref<Window> m_Window;
+        Ref<IWindow> m_Window;
         bool m_IsRunning = true;
 
         LayerStack m_LayerStack;
