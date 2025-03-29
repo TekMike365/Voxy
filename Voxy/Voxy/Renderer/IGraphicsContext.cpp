@@ -13,5 +13,6 @@ namespace Voxy
         }
 
         VOXY_CORE_ERROR("Unknown Graphics API");
+        return nullptr;
     }
 }

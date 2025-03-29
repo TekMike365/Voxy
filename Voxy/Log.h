@@ -12,8 +12,8 @@ namespace Voxy
     public:
         static void Init();
 
-        inline static Ref<spdlog::logger> &GetCoreVoxyLogger() { return m_CoreLogger; }
-        inline static Ref<spdlog::logger> &GetClientVoxyLogger() { return m_ClientLogger; }
+        inline static Ref<spdlog::logger> &GetCoreLogger() { return m_CoreLogger; }
+        inline static Ref<spdlog::logger> &GetClientLogger() { return m_ClientLogger; }
 
     private:
         static Ref<spdlog::logger> m_CoreLogger;
@@ -21,13 +21,19 @@ namespace Voxy
     };
 }
 
-#define VOXY_CORE_TRACE(...) Voxy::Log::GetCoreVoxyLogger()->trace(__VA_ARGS__)
-#define VOXY_CORE_INFO(...) Voxy::Log::GetCoreVoxyLogger()->info(__VA_ARGS__)
-#define VOXY_CORE_WARN(...) Voxy::Log::GetCoreVoxyLogger()->warn(__VA_ARGS__)
-#define VOXY_CORE_ERROR(...) Voxy::Log::GetCoreVoxyLogger()->error(__VA_ARGS__)
+#define VOXY_CORE_TRACE(...) Voxy::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define VOXY_CORE_INFO(...) Voxy::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define VOXY_CORE_WARN(...) Voxy::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define VOXY_CORE_ERROR(...) Voxy::Log::GetCoreLogger()->error(__VA_ARGS__)
 
-#define VOXY_TRACE(...) Voxy::Log::GetClientVoxyLogger()->trace(__VA_ARGS__)
-#define VOXY_INFO(...) Voxy::Log::GetClientVoxyLogger()->info(__VA_ARGS__)
-#define VOXY_WARN(...) Voxy::Log::GetClientVoxyLogger()->warn(__VA_ARGS__)
-#define VOXY_ERROR(...) Voxy::Log::GetClientVoxyLogger()->error(__VA_ARGS__)
+#define VOXY_TRACE(...) Voxy::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define VOXY_INFO(...) Voxy::Log::GetClientLogger()->info(__VA_ARGS__)
+#define VOXY_WARN(...) Voxy::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define VOXY_ERROR(...) Voxy::Log::GetClientLogger()->error(__VA_ARGS__)
 
+#define VOXY_ASSERT(x, ...)           \
+    if (!x)                           \
+    {                                 \
+        VOXY_CORE_ERROR(__VA_ARGS__); \
+        assert(0);                    \
+    }

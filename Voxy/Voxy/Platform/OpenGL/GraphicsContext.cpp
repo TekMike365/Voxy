@@ -20,8 +20,7 @@ namespace Voxy::OpenGL
         // Switch based on Platform
         glfwMakeContextCurrent((GLFWwindow *)m_Window->GetWindowHandle());
 
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-            VOXY_CORE_ERROR("Glad couldn't be initialised.");
+        VOXY_ASSERT(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Glad couldn't be initialised.");
     }
 
     void GraphicsContext::SwapBuffers() const

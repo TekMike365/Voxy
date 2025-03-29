@@ -14,8 +14,7 @@ namespace Voxy::GLFW
         : m_Params(params)
     {
         m_Window = glfwCreateWindow(m_Params.Width, m_Params.Height, m_Params.Title.c_str(), NULL, NULL);
-        if (!m_Window)
-            VOXY_CORE_ERROR("Failed to crate window.");
+        VOXY_ASSERT(m_Window, "Failed to crate window.");
 
         glfwSetWindowUserPointer(m_Window, this);
 
@@ -67,8 +66,7 @@ namespace Voxy::GLFW
     void Window::InitImGui()
     {
         // TODO: Rework ImGui
-        if (m_ImGuiInitialised)
-            VOXY_CORE_ERROR("ImGui has already been initialized");
+        VOXY_ASSERT(!m_ImGuiInitialised, "ImGui has already been initialized");
 
         m_ImGuiInitialised = true;
 
