@@ -1,15 +1,15 @@
-#include "IGraphicsContext.h"
+#include "GraphicsContext.h"
 
 #include "Voxy/Platform/OpenGL/GraphicsContext.h"
 
 namespace Voxy
 {
-    Ref<IGraphicsContext> IGraphicsContext::CreateContext(GraphicsAPI api, const Ref<IWindow> &window)
+    Ref<GraphicsContext> GraphicsContext::CreateContext(GraphicsAPI api, const void *window)
     {
         switch (api)
         {
             case GraphicsAPI::OpenGL:
-                return Ref<IGraphicsContext>(new OpenGL::GraphicsContext(window));
+                return Ref<GraphicsContext>(new OpenGL::GraphicsContext(window));
         }
 
         VOXY_CORE_ERROR("Unknown Graphics API");

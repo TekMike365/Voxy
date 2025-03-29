@@ -4,8 +4,8 @@ add_library(Voxy SHARED
     Voxy/Application.cpp
     Voxy/Setup.cpp
 
-    Voxy/IWindow.cpp
-    Voxy/Renderer/IGraphicsContext.cpp
+    Voxy/Window.cpp
+    Voxy/Renderer/GraphicsContext.cpp
 
     Voxy/Platform/GLFW/Window.cpp
     Voxy/Platform/OpenGL/GraphicsContext.cpp

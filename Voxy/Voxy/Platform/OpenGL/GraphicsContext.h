@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Voxy/Renderer/IGraphicsContext.h"
+#include "Voxy/Renderer/GraphicsContext.h"
 
 namespace Voxy::OpenGL
 {
-    class GraphicsContext : public IGraphicsContext
+    class GraphicsContext : public Voxy::GraphicsContext
     {
     public:
-        GraphicsContext(const Ref<IWindow> &window);
+        GraphicsContext(const void *window);
         ~GraphicsContext() = default;
 
         virtual void MakeCurrent() const override;
@@ -15,6 +15,6 @@ namespace Voxy::OpenGL
         virtual void SetViewport(int32_t x, int32_t y, size_t width, size_t height) const override;
 
     private:
-        Ref<IWindow> m_Window;
+        const void *m_Window;
     };
 }

@@ -10,7 +10,7 @@
 
 namespace Voxy
 {
-    class IGraphicsContext;
+    class GraphicsContext;
 
     struct WindowParams
     {
@@ -19,20 +19,18 @@ namespace Voxy
         std::string Title = "Voxy";
     };
 
-    class IWindow
+    class Window
     {
     public:
         using CallbackFn = std::function<void(Event &)>;
 
         virtual void OnUpdate() = 0;
 
-        virtual void InitImGui() = 0;
-        virtual void SetGraphicsContext(const Ref<IGraphicsContext> &context) = 0;
         virtual void SetEventCallback(CallbackFn callback) = 0;
 
         virtual void *GetWindowHandle() const = 0;
         virtual const WindowParams &GetParams() const = 0;
 
-        static Ref<IWindow> CreateWindow(const WindowParams &params = WindowParams());
+        static Ref<Window> CreateWindow(const WindowParams &params = WindowParams());
     };
 }

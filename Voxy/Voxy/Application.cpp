@@ -19,14 +19,8 @@ namespace Voxy
         VOXY_ASSERT(!s_Instance, "Application already exists")
         s_Instance = this;
 
-        m_Window = IWindow::CreateWindow();
+        m_Window = Window::CreateWindow();
         m_Window->SetEventCallback(BIND_APP_EVENT(OnEvent));
-
-        m_GraphicsContext = IGraphicsContext::CreateContext(GraphicsAPI::OpenGL, m_Window);
-        m_GraphicsContext->MakeCurrent();
-
-        m_Window->SetGraphicsContext(m_GraphicsContext);
-        m_Window->InitImGui();
 
         m_LayerStack.PushOverlay(std::make_shared<RenderingLayer>());
         m_LayerStack.PushOverlay(std::make_shared<ImGuiLayer>());

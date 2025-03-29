@@ -2,11 +2,11 @@
 
 #include <GLFW/glfw3.h>
 
-#include "Voxy/IWindow.h"
+#include "Voxy/Window.h"
 
 namespace Voxy::GLFW
 {
-    class Window : public Voxy::IWindow
+    class Window : public Voxy::Window
     {
     public:
         Window(const WindowParams &params);
@@ -14,8 +14,6 @@ namespace Voxy::GLFW
 
         virtual void OnUpdate() override;
 
-        virtual void InitImGui() override;
-        inline virtual void SetGraphicsContext(const Ref<IGraphicsContext> &context) override { m_GraphicsContext = context; }
         inline virtual void SetEventCallback(CallbackFn callback) override { m_CallbackFn = callback; }
 
         inline virtual void *GetWindowHandle() const override { return m_Window; };
@@ -25,7 +23,6 @@ namespace Voxy::GLFW
         GLFWwindow *m_Window;
         WindowParams m_Params;
         CallbackFn m_CallbackFn;
-        Ref<IGraphicsContext> m_GraphicsContext;
-        bool m_ImGuiInitialised = false;
+        Ref<GraphicsContext> m_GraphicsContext;
     };
 }
