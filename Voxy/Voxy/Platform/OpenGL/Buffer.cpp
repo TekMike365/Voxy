@@ -20,7 +20,7 @@ namespace Voxy::OpenGL
         return -1;
     }
 
-    Buffer::Buffer(Renderer::BufferType type, size_t size, const void *data)
+    Buffer::Buffer(BufferType type, size_t size, const void *data)
         : m_Type(type)
     {
         glGenBuffers(1, &m_ID);
