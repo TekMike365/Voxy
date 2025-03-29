@@ -17,6 +17,8 @@ namespace Voxy
 
         void Run();
 
+        static Application *Get() { return s_Instance; }
+
     private:
         void OnEvent(Event &e);
         bool OnWindowClose(WindowCloseEvent &e);
@@ -27,6 +29,8 @@ namespace Voxy
         bool m_IsRunning = true;
 
         LayerStack m_LayerStack;
+
+        static Application *s_Instance;
     };
 
     // To be defined in Client
