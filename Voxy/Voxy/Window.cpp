@@ -4,7 +4,7 @@
 
 namespace Voxy
 {
-    Ref<Window> Window::CreateWindow(const WindowParams &params)
+    Ref<Window> Window::Create(const WindowParams &params)
     {
         VOXY_CORE_TRACE("Creating window");
         return Ref<Window>(new GLFW::Window(params));

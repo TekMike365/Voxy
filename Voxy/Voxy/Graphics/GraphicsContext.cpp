@@ -4,15 +4,8 @@
 
 namespace Voxy
 {
-    Ref<GraphicsContext> GraphicsContext::CreateContext(GraphicsAPI api, const void *window)
+    Ref<GraphicsContext> GraphicsContext::Create(const void *window)
     {
-        switch (api)
-        {
-            case GraphicsAPI::OpenGL:
-                return Ref<GraphicsContext>(new OpenGL::GraphicsContext(window));
-        }
-
-        VOXY_CORE_ERROR("Unknown Graphics API");
-        return nullptr;
+        return Ref<GraphicsContext>(new OpenGL::GraphicsContext(window));
     }
 }

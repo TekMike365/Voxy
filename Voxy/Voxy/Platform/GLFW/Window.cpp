@@ -18,7 +18,7 @@ namespace Voxy::GLFW
 
         glfwSetWindowUserPointer(m_Window, this);
 
-        m_GraphicsContext = GraphicsContext::CreateContext(GraphicsAPI::OpenGL, m_Window);
+        m_GraphicsContext = GraphicsContext::Create(m_Window);
         m_GraphicsContext->MakeCurrent();
 
         // Events
