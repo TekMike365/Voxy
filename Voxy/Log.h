@@ -32,7 +32,7 @@ namespace Voxy
 #define VOXY_ERROR(...) Voxy::Log::GetClientLogger()->error(__VA_ARGS__)
 
 #define VOXY_ASSERT(x, ...)           \
-    if (!x)                           \
+    if (!(x))                           \
     {                                 \
         VOXY_CORE_ERROR(__VA_ARGS__); \
         assert(0);                    \
