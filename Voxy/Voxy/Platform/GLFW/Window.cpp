@@ -6,7 +6,7 @@
 
 #include "Log.h"
 #include "Voxy/Events/WindowEvent.h"
-#include "Voxy/Graphics/GraphicsContext.h"
+#include "Voxy/Renderer/GraphicsContext.h"
 
 namespace Voxy::GLFW
 {
