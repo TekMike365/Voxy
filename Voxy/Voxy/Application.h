@@ -2,7 +2,7 @@
 
 #include "Helpers.h"
 #include "Window.h"
-#include "Renderer/GraphicsContext.h"
+#include "Graphics/GraphicsContext.h"
 
 #include "Events/WindowEvent.h"
 #include "Layers/LayerStack.h"

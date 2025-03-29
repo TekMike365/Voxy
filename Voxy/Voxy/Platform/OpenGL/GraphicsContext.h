@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Voxy/Renderer/GraphicsContext.h"
+#include "Voxy/Graphics/GraphicsContext.h"
 
 namespace Voxy::OpenGL
 {
