@@ -7,7 +7,7 @@ namespace Voxy::Renderer
     class RenderCommand
     {
     public:
-        virtual void DrawIndexed(size_t count, size_t pointer = 0) = 0;
+        virtual void DrawIndexed(size_t indexCount, size_t indexPointer=0, size_t instanceCount=1) = 0;
 
         static Ref<RenderCommand> Create();
     };

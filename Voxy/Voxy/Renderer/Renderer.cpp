@@ -6,12 +6,12 @@ namespace Voxy::Renderer
 {
     static Ref<RenderCommand> s_RenderCommand = RenderCommand::Create();
 
-    void Submit(const Ref<VertexArray> &va, const Ref<Shader> &shader, const std::string &objectName)
+    void Submit(const Ref<VertexArray> &va, const Ref<Shader> &shader, const std::string &objectName, size_t count)
     {
         va->Bind();
         shader->Bind();
         auto &obj = va->GetObject(objectName);
-        s_RenderCommand->DrawIndexed(obj.IndexCount, obj.Pointer);
+        s_RenderCommand->DrawIndexed(obj.IndexCount, obj.Pointer, count);
         va->Unbind();
         shader->Unbind();
     }

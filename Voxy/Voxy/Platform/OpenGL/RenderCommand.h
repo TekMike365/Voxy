@@ -10,6 +10,6 @@ namespace Voxy::OpenGL
         RenderCommand() = default;
         ~RenderCommand() = default;
 
-        virtual void DrawIndexed(size_t count, size_t pointer = 0) override;
+        virtual void DrawIndexed(size_t indexCount, size_t indexPointer, size_t instanceCount) override;
     };
 }

@@ -67,6 +67,7 @@ namespace Voxy::OpenGL
         attrib.Buffer->Bind();
 
         glEnableVertexAttribArray(attrib.Index);
+        glVertexAttribDivisor(attrib.Index, attrib.Divisor);
         if (GetSTtype(attrib.Type) == STfloat || attrib.Normalised)
             glVertexAttribPointer(attrib.Index, GetSTcount(attrib.Type), GetGLType(attrib.Type), attrib.Normalised, attrib.Stride, (void *)attrib.Pointer);
         else

@@ -4,8 +4,11 @@
 
 namespace Voxy::OpenGL
 {
-    void RenderCommand::DrawIndexed(size_t count, size_t pointer)
+    void RenderCommand::DrawIndexed(size_t indexCount, size_t indexPointer, size_t instanceCount)
     {
-        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void *)pointer);
+        if (instanceCount == 1)
+            glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, (void *)indexPointer);
+        else
+            glDrawElementsInstanced(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, (void *)indexPointer, instanceCount);
     }
 }

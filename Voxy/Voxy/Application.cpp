@@ -40,9 +40,14 @@ namespace Voxy
         TimeStep dt;
 
         const float vertices[] = {
-            0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+             0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
             -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-            0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+             0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+        };
+
+        const float offsets[] = {
+            -0.5f, 0.0f, 0.0f,
+             0.5f, 0.0f, 0.0f,
         };
 
         const uint32_t indices[] = { 0, 1, 2 };
@@ -52,13 +57,14 @@ namespace Voxy
 
             layout (location = 0) in vec3 aPos;
             layout (location = 1) in vec3 aColor;
+            layout (location = 2) in vec3 aOffset;
 
             out vec3 vColor;
 
             void main()
             {
                 vColor = aColor;
-                gl_Position = vec4(aPos, 1.0);
+                gl_Position = vec4(aPos + aOffset, 1.0);
             }
         )";
 
@@ -79,10 +85,13 @@ namespace Voxy
         Ref<Buffer> vertexBuffer = Buffer::Create(BufferType::Vertex, 6 * 3 * sizeof(float), vertices);
         Ref<Buffer> indexBuffer = Buffer::Create(BufferType::Index, 3 * sizeof(uint32_t), indices);
 
+        Ref<Buffer> offsetsBuffer = Buffer::Create(BufferType::Vertex, 3 * 2 * sizeof(float), offsets);
+
         Ref<VertexArray> vertexArray = VertexArray::Create(indexBuffer);
         vertexArray->AddObject(0, 3, "triangle");
         vertexArray->AddAttribute(VertexAttribute(0, STfloat3, 0, 24, vertexBuffer));
         vertexArray->AddAttribute(VertexAttribute(1, STfloat3, 12, 24, vertexBuffer));
+        vertexArray->AddAttribute(VertexAttribute(2, STfloat3, 0, 12, offsetsBuffer, 1));
 
         Ref<Shader> shader = Shader::Create(vertexSource, fragmentSource);
 
@@ -118,7 +127,7 @@ namespace Voxy
             for (auto layer : m_LayerStack)
                 layer->OnUpdate(dt);
 
-            Renderer::Submit(vertexArray, shader, "triangle");
+            Renderer::Submit(vertexArray, shader, "triangle", 2);
 
             auto now = std::chrono::high_resolution_clock::now();
             dt = std::chrono::duration<float>(now - last).count();

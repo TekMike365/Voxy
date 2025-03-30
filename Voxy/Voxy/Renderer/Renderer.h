@@ -5,5 +5,5 @@
 
 namespace Voxy::Renderer
 {
-    void Submit(const Ref<VertexArray> &va, const Ref<Shader> &shader, const std::string &objectName);
+    void Submit(const Ref<VertexArray> &va, const Ref<Shader> &shader, const std::string &objectName, size_t count = 1);
 }
