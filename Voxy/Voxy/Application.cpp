@@ -43,6 +43,10 @@ namespace Voxy
              0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
             -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
              0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+
+             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
+             0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
+             1.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f,
         };
 
         const float offsets[] = {
@@ -50,7 +54,10 @@ namespace Voxy
              0.5f, 0.0f, 0.0f,
         };
 
-        const uint32_t indices[] = { 0, 1, 2 };
+        const uint32_t indices[] = {
+            0, 1, 2,
+            3, 4, 5
+        };
 
         const char* vertexSource = R"(
             #version 430 core
@@ -82,13 +89,14 @@ namespace Voxy
 
         using namespace Renderer;
 
-        Ref<Buffer> vertexBuffer = Buffer::Create(BufferType::Vertex, 6 * 3 * sizeof(float), vertices);
-        Ref<Buffer> indexBuffer = Buffer::Create(BufferType::Index, 3 * sizeof(uint32_t), indices);
+        Ref<Buffer> vertexBuffer = Buffer::Create(BufferType::Vertex, sizeof(vertices), vertices);
+        Ref<Buffer> indexBuffer = Buffer::Create(BufferType::Index, sizeof(indices), indices);
 
-        Ref<Buffer> offsetsBuffer = Buffer::Create(BufferType::Vertex, 3 * 2 * sizeof(float), offsets);
+        Ref<Buffer> offsetsBuffer = Buffer::Create(BufferType::Vertex, sizeof(offsets), offsets);
 
         Ref<VertexArray> vertexArray = VertexArray::Create(indexBuffer);
         vertexArray->AddObject(0, 3, "triangle");
+        vertexArray->AddObject(3, 3, "inversedTriangle");
         vertexArray->AddAttribute(VertexAttribute(0, STfloat3, 0, 24, vertexBuffer));
         vertexArray->AddAttribute(VertexAttribute(1, STfloat3, 12, 24, vertexBuffer));
         vertexArray->AddAttribute(VertexAttribute(2, STfloat3, 0, 12, offsetsBuffer, 1));
@@ -128,6 +136,7 @@ namespace Voxy
                 layer->OnUpdate(dt);
 
             Renderer::Submit(vertexArray, shader, "triangle", 2);
+            Renderer::Submit(vertexArray, shader, "inversedTriangle");
 
             auto now = std::chrono::high_resolution_clock::now();
             dt = std::chrono::duration<float>(now - last).count();
