@@ -10,6 +10,7 @@ add_library(Voxy SHARED
     Voxy/Renderer/VertexArray.cpp
     Voxy/Renderer/Shader.cpp
     Voxy/Renderer/RenderCommand.cpp
+    Voxy/Renderer/Renderer.cpp
 
     Voxy/Platform/GLFW/Window.cpp
     Voxy/Platform/OpenGL/GraphicsContext.cpp

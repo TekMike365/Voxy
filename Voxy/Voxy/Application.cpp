@@ -8,6 +8,10 @@
 #include "Layers/ImGuiLayer.h"
 #include "Layers/RenderingLayer.h"
 
+#include "Renderer/VertexArray.h"
+#include "Renderer/Shader.h"
+#include "Renderer/Renderer.h"
+
 #define BIND_APP_EVENT(fn) std::bind(&Application::fn, this, std::placeholders::_1)
 
 namespace Voxy
@@ -34,6 +38,53 @@ namespace Voxy
     {
         auto last = std::chrono::high_resolution_clock::now();
         TimeStep dt;
+
+        const float vertices[] = {
+            0.0f, 0.5f, 0.0f, 0.1f, 0.0f, 0.0f,
+            0.5f, 0.5f, 0.0f, 0.0f, 0.1f, 0.0f,
+            -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 0.1f,
+        };
+
+        const uint32_t indices[] = { 0, 1, 2 };
+
+        const char* vertexSource = R"(
+            #version 430 core
+
+            layout (location = 0) in vec3 aPos;
+            layout (location = 1) in vec3 aColor;
+
+            out vec3 vColor;
+
+            void main()
+            {
+                vColor = aColor;
+                gl_Position = vec4(aPos, 1.0);
+            }
+        )";
+
+        const char* fragmentSource = R"(
+            #version 430 core
+
+            in vec3 vColor;
+            out vec3 fColor;
+
+            void main()
+            {
+                fColor = vec4(vColor, 1.0);
+            }
+        )";
+
+        using namespace Renderer;
+
+        Ref<Buffer> vertexBuffer = Buffer::Create(BufferType::Vertex, sizeof(vertices), vertices);
+        Ref<Buffer> indexBuffer = Buffer::Create(BufferType::Index, sizeof(indices), indices);
+
+        Ref<VertexArray> vertexArray = VertexArray::Create(indexBuffer);
+        vertexArray->AddObject(0, 3, "triangle");
+        vertexArray->AddAttribute(VertexAttribute(STfloat3, 0, 0, 6 * sizeof(float), vertexBuffer));
+        vertexArray->AddAttribute(VertexAttribute(STfloat3, 1, 3 * sizeof(float), 6 * sizeof(float), vertexBuffer));
+
+        Ref<Shader> shader = Shader::Create(vertexSource, fragmentSource);
 
         VOXY_CORE_INFO("Main loop started");
 
@@ -66,6 +117,8 @@ namespace Voxy
 
             for (auto layer : m_LayerStack)
                 layer->OnUpdate(dt);
+
+            Renderer::Submit(vertexArray, shader, "triangle");
 
             auto now = std::chrono::high_resolution_clock::now();
             dt = std::chrono::duration<float>(now - last).count();

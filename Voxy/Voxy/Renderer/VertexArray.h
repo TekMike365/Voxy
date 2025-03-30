@@ -4,7 +4,7 @@
 #include "Log.h"
 #include "Buffer.h"
 
-#define _CREATE_SHADER_TYPE(idx, size, count) ((size * count) << 6) | (idx << 2) | (count - 1)
+#define _CREATE_SHADER_TYPE(idx, size, count) (size << 6) | (idx << 2) | (count - 1)
 
 namespace Voxy::Renderer
 {
@@ -13,24 +13,24 @@ namespace Voxy::Renderer
         STnone = 0,
 
         STint = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 1),
-        STint2 = _CREATE_SHADER_TYPE(STint, sizeof(int32_t), 2),
-        STint3 = _CREATE_SHADER_TYPE(STint, sizeof(int32_t), 3),
-        STint4 = _CREATE_SHADER_TYPE(STint, sizeof(int32_t), 4),
+        STint2 = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 2),
+        STint3 = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 3),
+        STint4 = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 4),
 
-        STuint = _CREATE_SHADER_TYPE(2, sizeof(int32_t), 1),
-        STuint2 = _CREATE_SHADER_TYPE(STuint, sizeof(int32_t), 2),
-        STuint3 = _CREATE_SHADER_TYPE(STuint, sizeof(int32_t), 3),
-        STuint4 = _CREATE_SHADER_TYPE(STuint, sizeof(int32_t), 4),
+        STuint = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 1),
+        STuint2 = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 2),
+        STuint3 = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 3),
+        STuint4 = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 4),
 
-        STfloat = _CREATE_SHADER_TYPE(3, sizeof(int32_t), 1),
-        STfloat2 = _CREATE_SHADER_TYPE(STfloat, sizeof(int32_t), 2),
-        STfloat3 = _CREATE_SHADER_TYPE(STfloat, sizeof(int32_t), 3),
-        STfloat4 = _CREATE_SHADER_TYPE(STfloat, sizeof(int32_t), 4),
+        STfloat = _CREATE_SHADER_TYPE(3, sizeof(float), 1),
+        STfloat2 = _CREATE_SHADER_TYPE(3, sizeof(float), 2),
+        STfloat3 = _CREATE_SHADER_TYPE(3, sizeof(float), 3),
+        STfloat4 = _CREATE_SHADER_TYPE(3, sizeof(float), 4),
     };
 
     inline ShaderType GetSTtype(ShaderType type) { return (ShaderType)(type & (~0b11)); }
     inline uint32_t GetSTcount(ShaderType type) { return type & 0b11; }
-    inline uint32_t GetSTsize(ShaderType type) { return type & (~0b111111); };
+    inline uint32_t GetSTsize(ShaderType type) { return (type & (~0b111111)) * GetSTcount(type); };
 
     struct VertexAttribute
     {
