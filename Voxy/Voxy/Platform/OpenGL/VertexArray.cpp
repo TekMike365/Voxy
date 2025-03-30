@@ -48,12 +48,21 @@ namespace Voxy::OpenGL
         glBindVertexArray(0);
     }
 
-    uint32_t VertexArray::AddElement(const VertexElement &element)
+    void VertexArray::AddObject(size_t pointer, size_t indexCount, const std::string &name)
+    {
+        m_Objects[name] = {pointer, indexCount};
+    }
+
+    VertexArray::Object &VertexArray::GetObject(const std::string &name)
+    {
+        return m_Objects.at(name);
+    }
+
+    void VertexArray::AddAttribute(const VertexAttribute &element)
     {
         using namespace Renderer;
 
         m_VertexElements.emplace_back(element);
-        uint32_t idx = m_VertexElements.size() - 1;
 
         Bind();
         element.Buffer->Bind();
@@ -66,29 +75,5 @@ namespace Voxy::OpenGL
 
         element.Buffer->Unbind();
         Unbind();
-
-        return idx;
-    }
-
-    void VertexArray::RemoveElement(uint32_t index)
-    {
-        using namespace Renderer;
-
-        const VertexElement &element = m_VertexElements.at(index);
-
-        Bind();
-        element.Buffer->Bind();
-
-        glDisableVertexAttribArray(element.Index);
-
-        element.Buffer->Unbind();
-        Unbind();
-
-        m_VertexElements.erase(m_VertexElements.begin() + index);
-    }
-
-    Renderer::VertexElement &VertexArray::GetElement(uint32_t index)
-    {
-        return m_VertexElements.at(index);
     }
 }

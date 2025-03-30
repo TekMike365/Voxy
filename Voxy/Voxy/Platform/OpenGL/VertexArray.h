@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
+#include <string>
 
 #include "Voxy/Renderer/VertexArray.h"
 
@@ -9,7 +11,7 @@ namespace Voxy::OpenGL
     class VertexArray : public Renderer::VertexArray
     {
         using Buffer = Renderer::Buffer;
-        using VertexElement = Renderer::VertexElement;
+        using VertexAttribute = Renderer::VertexAttribute;
 
     public:
         VertexArray(const Ref<Buffer> &indexBuffer);
@@ -18,15 +20,16 @@ namespace Voxy::OpenGL
         virtual void Bind() const override;
         virtual void Unbind() const override;
 
-        virtual uint32_t AddElement(const VertexElement &element) override;
-        virtual void RemoveElement(uint32_t index) override;
-        virtual VertexElement &GetElement(uint32_t index) override;
+        virtual void AddObject(size_t pointer, size_t indexCount, const std::string &name) override;
+        virtual Object &GetObject(const std::string &name) override;
+        virtual void AddAttribute(const VertexAttribute &element) override;
 
         inline virtual const Ref<Buffer> &GetIndexBuffer() const override { return m_IndexBuffer; }
 
     private:
         uint32_t m_ID;
         Ref<Buffer> m_IndexBuffer;
-        std::vector<VertexElement> m_VertexElements;
+        std::vector<VertexAttribute> m_VertexElements;
+        std::unordered_map<std::string, Object> m_Objects;
     };
 }

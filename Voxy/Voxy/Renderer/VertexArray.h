@@ -3,7 +3,7 @@
 #include "Helpers.h"
 #include "Buffer.h"
 
-#define _CREATE_TYPE(idx, size, count) ((size * count) << 6) | (idx << 2) | (count - 1)
+#define _CREATE_SHADER_TYPE(idx, size, count) ((size * count) << 6) | (idx << 2) | (count - 1)
 
 namespace Voxy::Renderer
 {
@@ -11,27 +11,27 @@ namespace Voxy::Renderer
     {
         STnone = 0,
 
-        STint = _CREATE_TYPE(1, sizeof(int32_t), 1),
-        STint2 = _CREATE_TYPE(STint, sizeof(int32_t), 2),
-        STint3 = _CREATE_TYPE(STint, sizeof(int32_t), 3),
-        STint4 = _CREATE_TYPE(STint, sizeof(int32_t), 4),
+        STint = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 1),
+        STint2 = _CREATE_SHADER_TYPE(STint, sizeof(int32_t), 2),
+        STint3 = _CREATE_SHADER_TYPE(STint, sizeof(int32_t), 3),
+        STint4 = _CREATE_SHADER_TYPE(STint, sizeof(int32_t), 4),
 
-        STuint = _CREATE_TYPE(2, sizeof(int32_t), 1),
-        STuint2 = _CREATE_TYPE(STuint, sizeof(int32_t), 2),
-        STuint3 = _CREATE_TYPE(STuint, sizeof(int32_t), 3),
-        STuint4 = _CREATE_TYPE(STuint, sizeof(int32_t), 4),
+        STuint = _CREATE_SHADER_TYPE(2, sizeof(int32_t), 1),
+        STuint2 = _CREATE_SHADER_TYPE(STuint, sizeof(int32_t), 2),
+        STuint3 = _CREATE_SHADER_TYPE(STuint, sizeof(int32_t), 3),
+        STuint4 = _CREATE_SHADER_TYPE(STuint, sizeof(int32_t), 4),
 
-        STfloat = _CREATE_TYPE(3, sizeof(int32_t), 1),
-        STfloat2 = _CREATE_TYPE(STfloat, sizeof(int32_t), 2),
-        STfloat3 = _CREATE_TYPE(STfloat, sizeof(int32_t), 3),
-        STfloat4 = _CREATE_TYPE(STfloat, sizeof(int32_t), 4),
+        STfloat = _CREATE_SHADER_TYPE(3, sizeof(int32_t), 1),
+        STfloat2 = _CREATE_SHADER_TYPE(STfloat, sizeof(int32_t), 2),
+        STfloat3 = _CREATE_SHADER_TYPE(STfloat, sizeof(int32_t), 3),
+        STfloat4 = _CREATE_SHADER_TYPE(STfloat, sizeof(int32_t), 4),
     };
 
     inline ShaderType GetSTtype(ShaderType type) { return (ShaderType)(type & (~0b11)); }
     inline uint32_t GetSTcount(ShaderType type) { return type & 0b11; }
     inline uint32_t GetSTsize(ShaderType type) { return type & (~0b111111); };
 
-    struct VertexElement
+    struct VertexAttribute
     {
     private:
         using BufferRef = Ref<Renderer::Buffer>;
@@ -45,21 +45,28 @@ namespace Voxy::Renderer
         bool Normalised = false;
         BufferRef Buffer = nullptr;
 
-        VertexElement() = default;
-        VertexElement(ShaderType type, uint32_t Index, size_t stride, size_t pointer, const BufferRef &buffer, uint32_t divisor = 0, bool normalised = false)
+        VertexAttribute() = default;
+        VertexAttribute(ShaderType type, uint32_t Index, size_t stride, size_t pointer, const BufferRef &buffer, uint32_t divisor = 0, bool normalised = false)
             : Type(type), Stride(stride), Pointer(pointer), Buffer(buffer), Divisor(divisor), Normalised(normalised) {}
     };
 
-    // TODO: test
     class VertexArray
     {
+    public:
+        struct Object
+        {
+            size_t Pointer = 0;
+            size_t IndexCount = 0;
+        };
+
     public:
         virtual void Bind() const = 0;
         virtual void Unbind() const = 0;
 
-        virtual uint32_t AddElement(const VertexElement &element) = 0;
-        virtual void RemoveElement(uint32_t index) = 0;
-        virtual VertexElement &GetElement(uint32_t index) = 0;
+        virtual void AddObject(size_t pointer, size_t indexCount, const std::string &name) = 0;
+        virtual Object &GetObject(const std::string &name) = 0;
+        virtual void AddAttribute(const VertexAttribute &element) = 0;
+
         virtual const Ref<Buffer> &GetIndexBuffer() const = 0;
 
         static Ref<VertexArray> Create(const Ref<Buffer> &indexBuffer);
