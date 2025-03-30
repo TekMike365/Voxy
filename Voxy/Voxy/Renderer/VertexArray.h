@@ -47,7 +47,7 @@ namespace Voxy::Renderer
         BufferRef Buffer = nullptr;
 
         VertexAttribute() = default;
-        VertexAttribute(ShaderType type, uint32_t Index, size_t stride, size_t pointer, const BufferRef &buffer, uint32_t divisor = 0, bool normalised = false)
+        VertexAttribute(ShaderType type, uint32_t Index, size_t pointer, size_t stride, const BufferRef &buffer, uint32_t divisor = 0, bool normalised = false)
             : Type(type), Stride(stride), Pointer(pointer), Buffer(buffer), Divisor(divisor), Normalised(normalised)
         {
             VOXY_ASSERT(buffer->GetType() == BufferType::Vertex, "VertexAttribute only accepts VertexBuffer");
