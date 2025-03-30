@@ -58,22 +58,22 @@ namespace Voxy::OpenGL
         return m_Objects.at(name);
     }
 
-    void VertexArray::AddAttribute(const VertexAttribute &element)
+    void VertexArray::AddAttribute(const VertexAttribute &attrib)
     {
         using namespace Renderer;
 
-        m_VertexElements.emplace_back(element);
+        m_VertexElements.emplace_back(attrib);
 
         Bind();
-        element.Buffer->Bind();
+        attrib.Buffer->Bind();
 
-        glEnableVertexAttribArray(element.Index);
-        if (GetSTtype(element.Type) == STfloat || element.Normalised)
-            glVertexAttribPointer(element.Index, GetSTcount(element.Type), GetGLType(element.Type), element.Normalised, element.Stride, (void *)element.Pointer);
+        glEnableVertexAttribArray(attrib.Index);
+        if (GetSTtype(attrib.Type) == STfloat || attrib.Normalised)
+            glVertexAttribPointer(attrib.Index, GetSTcount(attrib.Type), GetGLType(attrib.Type), attrib.Normalised, attrib.Stride, (void *)attrib.Pointer);
         else
-            glVertexAttribIPointer(element.Index, GetSTcount(element.Type), GetGLType(element.Type), element.Stride, (void *)element.Pointer);
+            glVertexAttribIPointer(attrib.Index, GetSTcount(attrib.Type), GetGLType(attrib.Type), attrib.Stride, (void *)attrib.Pointer);
 
-        element.Buffer->Unbind();
+        attrib.Buffer->Unbind();
         Unbind();
     }
 }

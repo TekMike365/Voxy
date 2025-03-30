@@ -69,7 +69,7 @@ namespace Voxy::Renderer
 
         virtual void AddObject(size_t pointer, size_t indexCount, const std::string &name) = 0;
         virtual Object &GetObject(const std::string &name) = 0;
-        virtual void AddAttribute(const VertexAttribute &element) = 0;
+        virtual void AddAttribute(const VertexAttribute &attrib) = 0;
 
         virtual const Ref<Buffer> &GetIndexBuffer() const = 0;
 

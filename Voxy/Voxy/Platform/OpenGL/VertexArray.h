@@ -22,7 +22,7 @@ namespace Voxy::OpenGL
 
         virtual void AddObject(size_t pointer, size_t indexCount, const std::string &name) override;
         virtual Object &GetObject(const std::string &name) override;
-        virtual void AddAttribute(const VertexAttribute &element) override;
+        virtual void AddAttribute(const VertexAttribute &attrib) override;
 
         inline virtual const Ref<Buffer> &GetIndexBuffer() const override { return m_IndexBuffer; }
 
