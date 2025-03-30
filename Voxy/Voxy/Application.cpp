@@ -40,13 +40,13 @@ namespace Voxy
         TimeStep dt;
 
         const float vertices[] = {
-             0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-             0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+             0.0f,  0.5f, -1.0f, 1.0f, 0.0f, 0.0f,
+            -0.5f, -0.5f, -1.0f, 0.0f, 1.0f, 0.0f,
+             0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f,
 
-             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,
-             0.0f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
-             1.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f,
+             0.5f, -0.5f, -1.0f, 0.0f, 1.0f, 1.0f,
+             0.0f,  0.5f, -1.0f, 1.0f, 0.0f, 1.0f,
+             1.0f,  0.5f, -1.0f, 1.0f, 1.0f, 0.0f,
         };
 
         const float offsets[] = {
@@ -66,12 +66,14 @@ namespace Voxy
             layout (location = 1) in vec3 aColor;
             layout (location = 2) in vec3 aOffset;
 
+            uniform mat4 uProjection;
+
             out vec3 vColor;
 
             void main()
             {
                 vColor = aColor;
-                gl_Position = vec4(aPos + aOffset, 1.0);
+                gl_Position = uProjection * vec4(aPos + aOffset, 1.0);
             }
         )";
 
@@ -102,6 +104,8 @@ namespace Voxy
         vertexArray->AddAttribute(VertexAttribute(2, STfloat3, 0, 12, offsetsBuffer, 1));
 
         Ref<Shader> shader = Shader::Create(vertexSource, fragmentSource);
+        
+        Ref<Camera> camera = std::make_shared<Camera>(120.0f, m_Window->GetAspect());
 
         VOXY_CORE_INFO("Main loop started");
 
@@ -135,8 +139,10 @@ namespace Voxy
             for (auto layer : m_LayerStack)
                 layer->OnUpdate(dt);
 
+            Renderer::Begin(camera);
             Renderer::Submit(vertexArray, shader, "triangle", 2);
             Renderer::Submit(vertexArray, shader, "inversedTriangle");
+            Renderer::End();
 
             auto now = std::chrono::high_resolution_clock::now();
             dt = std::chrono::duration<float>(now - last).count();

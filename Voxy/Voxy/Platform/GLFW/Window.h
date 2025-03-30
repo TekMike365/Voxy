@@ -18,6 +18,7 @@ namespace Voxy::GLFW
 
         inline virtual void *GetWindowHandle() const override { return m_Window; };
         inline virtual const WindowParams &GetParams() const override { return m_Params; }
+        inline virtual float GetAspect() const { return m_Params.Width / m_Params.Height; }
 
     private:
         GLFWwindow *m_Window;

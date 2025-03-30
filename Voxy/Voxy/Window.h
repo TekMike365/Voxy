@@ -30,6 +30,7 @@ namespace Voxy
 
         virtual void *GetWindowHandle() const = 0;
         virtual const WindowParams &GetParams() const = 0;
+        virtual float GetAspect() const = 0;
 
         static Ref<Window> Create(const WindowParams &params = WindowParams());
     };

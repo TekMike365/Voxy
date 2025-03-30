@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 
 #include "Log.h"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Voxy::OpenGL
 {
@@ -59,6 +60,19 @@ namespace Voxy::OpenGL
 
         glDeleteShader(vshader);
         glDeleteShader(fshader);
+
+        // Store uniform locations
+        GLint uniformCount = 0;
+        glGetProgramiv(m_ID, GL_ACTIVE_UNIFORMS, &uniformCount);
+        for (GLint idx = 0; idx < uniformCount; idx++)
+        {
+            GLint size = 0;
+            GLenum type = 0;
+            GLchar buff[1024];
+            glGetActiveUniform(m_ID, idx, 1024, NULL, &size, &type, buff);
+
+            m_UniformLocationMap[(char *)buff] = (int32_t)idx;
+        }
     }
 
     Shader::~Shader()
@@ -74,5 +88,11 @@ namespace Voxy::OpenGL
     void Shader::Unbind() const
     {
         glUseProgram(0);
+    }
+
+    void Shader::UploadUniform(const glm::mat4 &mat, const std::string &name) const
+    {
+        int32_t location = m_UniformLocationMap.at(name);
+        glUniformMatrix4fv(location, 1, false, glm::value_ptr(mat));
     }
 }
