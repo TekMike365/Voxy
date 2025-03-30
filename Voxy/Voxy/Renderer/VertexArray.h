@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Helpers.h"
+#include "Log.h"
 #include "Buffer.h"
 
 #define _CREATE_SHADER_TYPE(idx, size, count) ((size * count) << 6) | (idx << 2) | (count - 1)
@@ -47,7 +48,10 @@ namespace Voxy::Renderer
 
         VertexAttribute() = default;
         VertexAttribute(ShaderType type, uint32_t Index, size_t stride, size_t pointer, const BufferRef &buffer, uint32_t divisor = 0, bool normalised = false)
-            : Type(type), Stride(stride), Pointer(pointer), Buffer(buffer), Divisor(divisor), Normalised(normalised) {}
+            : Type(type), Stride(stride), Pointer(pointer), Buffer(buffer), Divisor(divisor), Normalised(normalised)
+        {
+            VOXY_ASSERT(buffer->GetType() == BufferType::Vertex, "VertexAttribute only accepts VertexBuffer");
+        }
     };
 
     class VertexArray
