@@ -12,5 +12,7 @@ namespace Voxy::Renderer
         shader->Bind();
         auto &obj = va->GetObject(objectName);
         s_RenderCommand->DrawIndexed(obj.IndexCount, obj.Pointer);
+        va->Unbind();
+        shader->Unbind();
     }
 }

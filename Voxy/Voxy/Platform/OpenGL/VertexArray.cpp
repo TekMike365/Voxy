@@ -31,6 +31,7 @@ namespace Voxy::OpenGL
         glBindVertexArray(m_ID);
         m_IndexBuffer->Bind();
         Unbind();
+        m_IndexBuffer->Unbind();
     }
 
     VertexArray::~VertexArray()
@@ -61,8 +62,6 @@ namespace Voxy::OpenGL
     void VertexArray::AddAttribute(const VertexAttribute &attrib)
     {
         using namespace Renderer;
-
-        m_VertexElements.emplace_back(attrib);
 
         Bind();
         attrib.Buffer->Bind();

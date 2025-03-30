@@ -40,9 +40,9 @@ namespace Voxy
         TimeStep dt;
 
         const float vertices[] = {
-            0.0f, 0.5f, 0.0f, 0.1f, 0.0f, 0.0f,
-            0.5f, 0.5f, 0.0f, 0.0f, 0.1f, 0.0f,
-            -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 0.1f,
+            0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+            -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+            0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
         };
 
         const uint32_t indices[] = { 0, 1, 2 };
@@ -66,7 +66,7 @@ namespace Voxy
             #version 430 core
 
             in vec3 vColor;
-            out vec3 fColor;
+            out vec4 fColor;
 
             void main()
             {
@@ -76,13 +76,13 @@ namespace Voxy
 
         using namespace Renderer;
 
-        Ref<Buffer> vertexBuffer = Buffer::Create(BufferType::Vertex, sizeof(vertices), vertices);
-        Ref<Buffer> indexBuffer = Buffer::Create(BufferType::Index, sizeof(indices), indices);
+        Ref<Buffer> vertexBuffer = Buffer::Create(BufferType::Vertex, 6 * 3 * sizeof(float), vertices);
+        Ref<Buffer> indexBuffer = Buffer::Create(BufferType::Index, 3 * sizeof(uint32_t), indices);
 
         Ref<VertexArray> vertexArray = VertexArray::Create(indexBuffer);
         vertexArray->AddObject(0, 3, "triangle");
-        vertexArray->AddAttribute(VertexAttribute(STfloat3, 0, 0, 6 * sizeof(float), vertexBuffer));
-        vertexArray->AddAttribute(VertexAttribute(STfloat3, 1, 3 * sizeof(float), 6 * sizeof(float), vertexBuffer));
+        vertexArray->AddAttribute(VertexAttribute(0, STfloat3, 0, 24, vertexBuffer));
+        vertexArray->AddAttribute(VertexAttribute(1, STfloat3, 12, 24, vertexBuffer));
 
         Ref<Shader> shader = Shader::Create(vertexSource, fragmentSource);
 

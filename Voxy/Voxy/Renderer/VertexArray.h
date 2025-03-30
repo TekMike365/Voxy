@@ -29,7 +29,7 @@ namespace Voxy::Renderer
     };
 
     inline ShaderType GetSTtype(ShaderType type) { return (ShaderType)(type & (~0b11)); }
-    inline uint32_t GetSTcount(ShaderType type) { return type & 0b11; }
+    inline uint32_t GetSTcount(ShaderType type) { return (type & 0b11) + 1; }
     inline uint32_t GetSTsize(ShaderType type) { return (type & (~0b111111)) * GetSTcount(type); };
 
     struct VertexAttribute
@@ -47,8 +47,8 @@ namespace Voxy::Renderer
         BufferRef Buffer = nullptr;
 
         VertexAttribute() = default;
-        VertexAttribute(ShaderType type, uint32_t Index, size_t pointer, size_t stride, const BufferRef &buffer, uint32_t divisor = 0, bool normalised = false)
-            : Type(type), Stride(stride), Pointer(pointer), Buffer(buffer), Divisor(divisor), Normalised(normalised)
+        VertexAttribute(uint32_t index, ShaderType type, size_t pointer, size_t stride, const BufferRef &buffer, uint32_t divisor = 0, bool normalised = false)
+            : Type(type), Index(index), Stride(stride), Pointer(pointer), Buffer(buffer), Divisor(divisor), Normalised(normalised)
         {
             VOXY_ASSERT(buffer->GetType() == BufferType::Vertex, "VertexAttribute only accepts VertexBuffer");
         }

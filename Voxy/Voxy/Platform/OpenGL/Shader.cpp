@@ -42,15 +42,15 @@ namespace Voxy::OpenGL
         glCompileShader(vshader);
         LogCompileErrors(vshader);
 
-        const char *fsSource = vertexSource.c_str();
-        GLuint fshader = glCreateShader(GL_VERTEX_SHADER);
+        const char *fsSource = fragmentSource.c_str();
+        GLuint fshader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fshader, 1, &fsSource, NULL);
         glCompileShader(fshader);
-        LogCompileErrors(vshader);
+        LogCompileErrors(fshader);
 
         m_ID = glCreateProgram();
         glAttachShader(m_ID, vshader);
-        glAttachShader(m_ID, vshader);
+        glAttachShader(m_ID, fshader);
         glLinkProgram(m_ID);
         LogLinkingErrors(m_ID);
 

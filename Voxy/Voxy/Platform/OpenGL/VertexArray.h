@@ -29,7 +29,6 @@ namespace Voxy::OpenGL
     private:
         uint32_t m_ID;
         Ref<Buffer> m_IndexBuffer;
-        std::vector<VertexAttribute> m_VertexElements;
         std::unordered_map<std::string, Object> m_Objects;
     };
 }
