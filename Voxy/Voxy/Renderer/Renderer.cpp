@@ -5,10 +5,10 @@
 namespace Voxy::Renderer
 {
     static Ref<RenderCommand> s_RenderCommand = RenderCommand::Create();
-    static Ref<Camera> s_Camera = nullptr;
-    static Ref<Transform> s_View = nullptr;
+    static const Camera *s_Camera = nullptr;
+    static const Transform *s_View = nullptr;
 
-    void Begin(const Ref<Camera> &camera, const Ref<Transform> &view)
+    void Begin(const Camera *camera, const Transform *view)
     {
         s_Camera = camera;
         s_View = view;

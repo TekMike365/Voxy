@@ -28,7 +28,7 @@ add_library(Voxy SHARED
 
 target_link_libraries(Voxy PUBLIC spdlog glfw OpenGL::GL glad glm)
 
-target_include_directories(Voxy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${IMGUI_INCLUDE})
+target_include_directories(Voxy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${IMGUI_INCLUDE} ${ENTT_INCLUDE})
 
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")

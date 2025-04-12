@@ -36,6 +36,8 @@ set(IMGUI_SOURCE
 )
 set(IMGUI_INCLUDE ${IMGUI_PATH} "${IMGUI_PATH}/backends" "${IMGUI_PATH}/misc/cpp")
 
+set(ENTT_INCLUDE "${PROJECT_SOURCE_DIR}/vendor/entt")
+
 # Adding projects
 add_subdirectory(Voxy)
 add_subdirectory(Sandbox)

@@ -12,6 +12,8 @@
 #include "Renderer/Shader.h"
 #include "Renderer/Renderer.h"
 
+#include "Scene/Scene.h"
+
 #define BIND_APP_EVENT(fn) std::bind(&Application::fn, this, std::placeholders::_1)
 
 namespace Voxy
@@ -138,9 +140,12 @@ namespace Voxy
 
         Ref<Shader> shader = Shader::Create(vertexSource, fragmentSource);
 
-        Ref<Camera> camera = std::make_shared<Camera>(120.0f, m_Window->GetAspect());
-        Ref<Transform> view = std::make_shared<Transform>();
-        view->Position.z = -1.0f;
+        Scene scene;
+
+        Entity camera = scene.CreateEntity();
+        camera.AddComponent<Camera>(120.0f, m_Window->GetAspect());
+        auto &view = camera.AddComponent<Transform>();
+        view.Position.z = -1.0f;
 
         VOXY_CORE_INFO("Main loop started");
 
@@ -175,7 +180,7 @@ namespace Voxy
             for (auto layer : m_LayerStack)
                 layer->OnUpdate(dt);
 
-            Renderer::Begin(camera, view);
+            Renderer::Begin(&camera.GetComponent<Camera>(), &camera.GetComponent<Transform>());
             Renderer::Submit(vertexArray, shader, "triangle", 2);
             Renderer::Submit(vertexArray, shader, "inversedTriangle");
             Renderer::End();
