@@ -19,6 +19,9 @@ namespace Voxy
 
         static Application *Get() { return s_Instance; }
 
+        inline void PushLayer(const Ref<Layer> &layer) { m_LayerStack.PushLayer(layer); }
+        inline void PushOverlay(const Ref<Layer> &overlay) { m_LayerStack.PushOverlay(overlay); }
+
     private:
         void OnEvent(Event &e);
         bool OnWindowClose(WindowCloseEvent &e);

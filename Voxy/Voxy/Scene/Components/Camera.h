@@ -10,9 +10,16 @@ namespace Voxy
     public:
         Camera(float fovDeg = 120.0f, float aspect = 16.0f / 9.0f, float zNear = 0.1f, float zFar = 100.0f)
             : m_FovDeg(fovDeg), m_Aspect(aspect), m_ZNear(zNear), m_ZFar(zFar) { UpdateProjection(); }
-        ~Camera() = default;
+        ~Camera() 
+        {
+            if (s_MainCamera == this)
+                s_MainCamera = nullptr;
+        }
 
         inline const glm::mat4 &GetProjection() const { return m_Projection; }
+
+        inline bool IsMain() const { return s_MainCamera == this; }
+        inline void SetAsMain() const { s_MainCamera = this; }
 
         inline float GetFovDeg() const { return m_FovDeg; }
         inline float GetAspect() const { return m_Aspect; }
@@ -49,5 +56,7 @@ namespace Voxy
         float m_Aspect;
         float m_ZNear;
         float m_ZFar;
+
+        static const Camera *s_MainCamera;
     };
 };

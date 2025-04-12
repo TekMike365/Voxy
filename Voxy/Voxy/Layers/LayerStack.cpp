@@ -17,7 +17,7 @@ namespace Voxy
         }
     }
 
-    void LayerStack::AddLayer(const Ref<Layer> &layer)
+    void LayerStack::PushLayer(const Ref<Layer> &layer)
     {
         m_Layers.insert(m_Layers.begin() + m_LayerInsertIdx++, layer);
         layer->OnAttach();

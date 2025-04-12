@@ -180,11 +180,6 @@ namespace Voxy
             for (auto layer : m_LayerStack)
                 layer->OnUpdate(dt);
 
-            Renderer::Begin(&camera.GetComponent<Camera>(), &camera.GetComponent<Transform>());
-            Renderer::Submit(vertexArray, shader, "triangle", 2);
-            Renderer::Submit(vertexArray, shader, "inversedTriangle");
-            Renderer::End();
-
             auto now = std::chrono::high_resolution_clock::now();
             dt = std::chrono::duration<float>(now - last).count();
             last = now;

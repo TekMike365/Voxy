@@ -23,6 +23,9 @@ add_library(Voxy SHARED
     Voxy/Layers/ImGuiLayer.cpp
     Voxy/Layers/RenderingLayer.cpp
 
+    Voxy/Scene/Scene.cpp
+    Voxy/Scene/Components/Camera.cpp
+
     ${IMGUI_SOURCE}
 )
 

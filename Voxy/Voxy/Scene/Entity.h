@@ -18,6 +18,12 @@ namespace Voxy
             m_Entity = reg->create();
         }
 
+        Entity(entt::entity entity, const Ref<entt::registry> &registry)
+            : m_Entity(entity), m_Registry(registry)
+        {
+            VOXY_ASSERT(!m_Registry.expired(), "Registry doesn't exist");
+        }
+
         template <typename C, typename... Args>
         inline C &AddComponent(Args &&...args)
         {
