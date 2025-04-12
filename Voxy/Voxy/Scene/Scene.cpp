@@ -13,6 +13,8 @@ namespace Voxy
 
     void Scene::Update(TimeStep dt)
     {
+        // TODO: ! make it data oriented !
+
         bool began = false;
         for (auto [ett, camera] : m_Registry->view<Camera>().each())
         {

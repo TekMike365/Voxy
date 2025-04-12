@@ -5,7 +5,7 @@
 
 namespace Voxy
 {
-    class Camera
+    struct Camera
     {
     public:
         Camera(float fovDeg = 120.0f, float aspect = 16.0f / 9.0f, float zNear = 0.1f, float zFar = 100.0f)
