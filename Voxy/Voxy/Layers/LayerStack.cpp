@@ -13,7 +13,7 @@ namespace Voxy
         for (Ref<Layer> layer : m_Layers)
         {
             layer->OnDetach();
-            VOXY_CORE_TRACE("Detaching layer: {}", layer->GetName());
+            VOXY_CORE_TRACE("Detaching: {}", layer->GetName());
         }
     }
 

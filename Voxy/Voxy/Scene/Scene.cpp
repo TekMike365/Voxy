@@ -15,6 +15,10 @@ namespace Voxy
     {
         // TODO: ! make it data oriented !
 
+        // TODO: Make the Renderer have a command buffer ?
+        // TODO: Make Systems that act on data
+        // TODO: The renderer systems are responsable for batching and caching and then submiting the data for rendering
+
         bool began = false;
         for (auto [ett, camera] : m_Registry->view<Camera>().each())
         {
