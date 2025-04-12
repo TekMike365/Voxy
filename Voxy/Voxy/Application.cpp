@@ -139,6 +139,8 @@ namespace Voxy
         Ref<Shader> shader = Shader::Create(vertexSource, fragmentSource);
 
         Ref<Camera> camera = std::make_shared<Camera>(120.0f, m_Window->GetAspect());
+        Ref<Transform> view = std::make_shared<Transform>();
+        view->Position.z = -1.0f;
 
         VOXY_CORE_INFO("Main loop started");
 
@@ -173,7 +175,7 @@ namespace Voxy
             for (auto layer : m_LayerStack)
                 layer->OnUpdate(dt);
 
-            Renderer::Begin(camera);
+            Renderer::Begin(camera, view);
             Renderer::Submit(vertexArray, shader, "triangle", 2);
             Renderer::Submit(vertexArray, shader, "inversedTriangle");
             Renderer::End();
