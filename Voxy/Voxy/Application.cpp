@@ -40,26 +40,59 @@ namespace Voxy
         TimeStep dt;
 
         const float vertices[] = {
-             0.0f,  0.5f, -1.0f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, -1.0f, 0.0f, 1.0f, 0.0f,
-             0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f,
+            0.0f,
+            0.5f,
+            -1.0f,
+            1.0f,
+            0.0f,
+            0.0f,
+            -0.5f,
+            -0.5f,
+            -1.0f,
+            0.0f,
+            1.0f,
+            0.0f,
+            0.5f,
+            -0.5f,
+            -1.0f,
+            0.0f,
+            0.0f,
+            1.0f,
 
-             0.5f, -0.5f, -1.0f, 0.0f, 1.0f, 1.0f,
-             0.0f,  0.5f, -1.0f, 1.0f, 0.0f, 1.0f,
-             1.0f,  0.5f, -1.0f, 1.0f, 1.0f, 0.0f,
+            0.5f,
+            -0.5f,
+            -1.0f,
+            0.0f,
+            1.0f,
+            1.0f,
+            0.0f,
+            0.5f,
+            -1.0f,
+            1.0f,
+            0.0f,
+            1.0f,
+            1.0f,
+            0.5f,
+            -1.0f,
+            1.0f,
+            1.0f,
+            0.0f,
         };
 
         const float offsets[] = {
-            -0.5f, 0.0f, 0.0f,
-             0.5f, 0.0f, 0.0f,
+            -0.5f,
+            0.0f,
+            0.0f,
+            0.5f,
+            0.0f,
+            0.0f,
         };
 
         const uint32_t indices[] = {
             0, 1, 2,
-            3, 4, 5
-        };
+            3, 4, 5};
 
-        const char* vertexSource = R"(
+        const char *vertexSource = R"(
             #version 430 core
 
             layout (location = 0) in vec3 aPos;
@@ -77,7 +110,7 @@ namespace Voxy
             }
         )";
 
-        const char* fragmentSource = R"(
+        const char *fragmentSource = R"(
             #version 430 core
 
             in vec3 vColor;
@@ -104,7 +137,7 @@ namespace Voxy
         vertexArray->AddAttribute(VertexAttribute(2, STfloat3, 0, 12, offsetsBuffer, 1));
 
         Ref<Shader> shader = Shader::Create(vertexSource, fragmentSource);
-        
+
         Ref<Camera> camera = std::make_shared<Camera>(120.0f, m_Window->GetAspect());
 
         VOXY_CORE_INFO("Main loop started");
@@ -116,7 +149,8 @@ namespace Voxy
             {
                 // TODO: Cleanup
                 // Debug Screen
-                ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+                ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize |
+                                                ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
                 const float PAD = 10.0f;
                 const ImGuiViewport *viewport = ImGui::GetMainViewport();
                 ImVec2 work_pos = viewport->WorkPos; // Use work area to avoid menu-bar/task-bar, if any!
