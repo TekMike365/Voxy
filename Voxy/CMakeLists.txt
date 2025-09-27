@@ -1,6 +1,8 @@
 add_library(Voxy SHARED
     Log.cpp
 
+    Voxy/main.cpp
+
     Voxy/Application.cpp
     Voxy/Setup.cpp
 

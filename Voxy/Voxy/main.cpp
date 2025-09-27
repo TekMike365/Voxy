@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Setup.h"
 #include "Application.h"
 
