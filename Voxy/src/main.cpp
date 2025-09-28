@@ -1,34 +1,28 @@
 #include <GLFW/glfw3.h>
 
+#include "Window.hpp"
+#include "platform/GLFW/GLFW.hpp"
+#include "platform/GLFW/GLFW_Window.hpp"
+
 int main(void) {
-    GLFWwindow *window;
+    Voxy::Platform::GLFW_Init();
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window) {
-        glfwTerminate();
-        return -1;
-    }
+    auto wnd = Voxy::Window::Create();
 
     /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent((GLFWwindow *)wnd->GetHandle());
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose((GLFWwindow *)wnd->GetHandle())) {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
         /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        glfwSwapBuffers((GLFWwindow *)wnd->GetHandle());
 
         /* Poll for and process events */
         glfwPollEvents();
     }
 
-    glfwTerminate();
-    return 0;
+    Voxy::Platform::GLFW_Terminate();
 }

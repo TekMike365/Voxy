@@ -23,18 +23,18 @@ private:
 
 } // namespace Voxy
 
-#define VOXY_CORE_TRACE(...) Voxy::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define VOXY_CORE_INFO(...) Voxy::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define VOXY_CORE_WARN(...) Voxy::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define VOXY_CORE_ERROR(...) Voxy::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define VoxyCoreTrace(...) Voxy::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define VoxyCoreInfo(...) Voxy::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define VoxyCoreWarn(...) Voxy::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define VoxyCoreError(...) Voxy::Log::GetCoreLogger()->error(__VA_ARGS__)
 
-#define VOXY_TRACE(...) Voxy::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define VOXY_INFO(...) Voxy::Log::GetClientLogger()->info(__VA_ARGS__)
-#define VOXY_WARN(...) Voxy::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define VOXY_ERROR(...) Voxy::Log::GetClientLogger()->error(__VA_ARGS__)
+#define VoxyTrace(...) Voxy::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define VoxyInfo(...) Voxy::Log::GetClientLogger()->info(__VA_ARGS__)
+#define VoxyWarn(...) Voxy::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define VoxyError(...) Voxy::Log::GetClientLogger()->error(__VA_ARGS__)
 
-#define VOXY_ASSERT(x, ...)                                                    \
+#define VoxyAssert(x, ...)                                                     \
     if (!(x)) {                                                                \
-        VOXY_CORE_ERROR(__VA_ARGS__);                                          \
+        VoxyCoreError(__VA_ARGS__);                                            \
         assert(0);                                                             \
     }
