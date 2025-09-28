@@ -1,10 +1,3 @@
-# Compiler settings
-if (MSVC)
-    message(WARNING "Complier settings (MSVC): Why do you use this crap???")
-else()
-    add_compile_options(-Werror -Wall -Wextra -Wpedantic)
-endif()
-
 add_executable(Voxy
     "src/Log.cpp"
     "src/main.cpp"
@@ -24,3 +17,14 @@ target_include_directories(Voxy PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     ${ENTT_INCLUDE}
 )
+
+set_property(TARGET Voxy PROPERTY CXX_STANDARD 20)
+set_property(TARGET Voxy PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET Voxy PROPERTY CXX_EXTENSIONS OFF)
+
+# Compiler settings
+if (MSVC)
+    message(ERROR "Complier settings (MSVC): Why do you use this crap???")
+else()
+    add_compile_options(-Werror -Wall -Wextra -Wpedantic)
+endif()

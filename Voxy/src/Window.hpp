@@ -1,13 +1,18 @@
 #pragma once
 
+#include "Events/Event.hpp"
 #include "Helpers.hpp"
+#include <functional>
 
 namespace Voxy {
+
+using EventCallbackFn = std::function<void(Event &)>;
 
 struct WindowParams {
     const char *title = "Title";
     uint32_t width = 1280;
     uint32_t height = 720;
+    EventCallbackFn Callback = nullptr;
 };
 
 class Window {
