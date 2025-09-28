@@ -6,8 +6,8 @@ else()
 endif()
 
 add_executable(Voxy
-    "Log.cpp"
-    "main.cpp"
+    "src/Log.cpp"
+    "src/main.cpp"
 )
 target_link_libraries(Voxy PRIVATE
     spdlog
@@ -18,6 +18,6 @@ target_link_libraries(Voxy PRIVATE
     imgui
 )
 target_include_directories(Voxy PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
     ${ENTT_INCLUDE}
 )
