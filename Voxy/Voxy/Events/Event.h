@@ -38,10 +38,13 @@ namespace Voxy
         ~EventDispatcher() = default;
 
         template <typename E>
-        inline void Dispatch(std::function<bool(E &)> fn)
+        inline bool Dispatch(std::function<bool(E &)> fn)
         {
-            if (E::GetStaticType() == m_Event.GetType())
-                m_Event.m_Handled = fn(static_cast<E &>(m_Event));
+            if (E::GetStaticType() != m_Event.GetType())
+                return false;
+
+            m_Event.m_Handled = fn(static_cast<E &>(m_Event));
+            return true;
         }
 
     private:
