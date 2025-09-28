@@ -1,7 +1,9 @@
 #include "Application.hpp"
 
 #include "Layers/GUILayer.hpp"
+#include "Layers/RenderingLayer.hpp"
 #include "Log.hpp"
+
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
@@ -19,7 +21,8 @@ Application::Application() {
 
     m_Window = Voxy::Window::Create({.Callback = BIND_APP_EVENT(OnEvent)});
 
-    m_LayerStack.PushLayer(new GUILayer);
+    m_LayerStack.PushOverlay(new RenderingLayer);
+    m_LayerStack.PushOverlay(new GUILayer);
 }
 
 Application::~Application() {}

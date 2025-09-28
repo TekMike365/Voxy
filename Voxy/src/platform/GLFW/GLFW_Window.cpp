@@ -39,6 +39,8 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
             wnd->m_Params.width = width;
             wnd->m_Params.height = height;
 
+            glViewport(0, 0, width, height);
+
             WindowResizeEvent e(width, height);
             if (wnd->m_Params.Callback)
                 wnd->m_Params.Callback(e);
@@ -57,10 +59,6 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(m_HWND, true);
     ImGui_ImplOpenGL3_Init("#version 130");
-
-    // May need to be moved to GUILayer::Update
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
 }
 
 GLFW_Window::~GLFW_Window() {
@@ -73,18 +71,6 @@ GLFW_Window::~GLFW_Window() {
 
 void GLFW_Window::Update() {
     glfwPollEvents();
-
-    // TODO: Move rendering out of this
-
-    // Rendering
-    ImGui::Render();
-    glViewport(0, 0, m_Params.width, m_Params.height);
-
-    /* Render here */
-    glClearColor(0.95f, 0.64f, 0.48f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     /* Swap front and back buffers */
     glfwSwapBuffers(m_HWND);

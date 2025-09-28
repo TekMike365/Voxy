@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Events/Event.hpp"
-#include "Events/WindowEvents.hpp"
 #include "Layer.hpp"
 
 #include <imgui.h>
@@ -12,11 +10,19 @@ namespace Voxy {
 
 class GUILayer : public Layer {
 public:
+    virtual void OnAttach() override { NewFrame(); }
+
     virtual void OnUpdate() override {
-        if (m_FirstLoop)
-            m_FirstLoop = false;
-        else
-            ImGui::Render();
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        NewFrame();
+    }
+
+private:
+    void NewFrame() {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
 
