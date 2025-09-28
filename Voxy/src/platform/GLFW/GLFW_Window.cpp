@@ -14,6 +14,10 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
                               NULL, NULL);
     VoxyAssert(m_HWND, "GLFW: Couldn't create a window.");
 
+    // TODO: Move???
+    /* Make the window's context current */
+    glfwMakeContextCurrent(m_HWND);
+
     glfwSetWindowUserPointer(m_HWND, this);
 
     // Events

@@ -1,6 +1,7 @@
 add_executable(Voxy
     "src/Log.cpp"
     "src/main.cpp"
+    "src/Application.cpp"
 
     "src/platform/GLFW/GLFW.cpp"
     "src/platform/GLFW/GLFW_Window.cpp"
