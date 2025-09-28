@@ -33,14 +33,7 @@ int main(void) {
 
     /* Loop until the user closes the window */
     while (g_Running) {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers((GLFWwindow *)wnd->GetHandle());
-
-        /* Poll for and process events */
-        glfwPollEvents();
+        wnd->Update();
     }
 
     Voxy::Platform::GLFW_Terminate();

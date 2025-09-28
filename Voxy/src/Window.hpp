@@ -17,6 +17,8 @@ struct WindowParams {
 
 class Window {
 public:
+    virtual void Update() = 0;
+
     virtual uint32_t GetWidth() const = 0;
     virtual uint32_t GetHeight() const = 0;
     virtual float GetAspect() const { return GetWidth() / GetHeight(); }
