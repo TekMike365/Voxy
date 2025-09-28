@@ -5,7 +5,7 @@
 
 namespace Voxy {
 
-enum class EventType { None = 0, WindowCloseEvent };
+enum class EventType { None = 0, WindowCloseEvent, WindowResizeEvent };
 
 #define EVENT_TYPE_DEFS(T)                                                     \
     static EventType GetStaticType() { return EventType::T; }                  \

@@ -33,15 +33,16 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
             wnd->m_Params.Callback(e);
     });
 
-    // glfwSetFramebufferSizeCallback(
-    //     m_Window, [](GLFWwindow *window, int width, int height) {
-    //         Window *wnd = (Window *)glfwGetWindowUserPointer(window);
-    //         wnd->m_Params.Width = width;
-    //         wnd->m_Params.Height = height;
+    glfwSetFramebufferSizeCallback(
+        m_HWND, [](GLFWwindow *window, int width, int height) {
+            GLFW_Window *wnd = (GLFW_Window *)glfwGetWindowUserPointer(window);
+            wnd->m_Params.width = width;
+            wnd->m_Params.height = height;
 
-    //         WindowResizeEvent e(width, height);
-    //         wnd->m_CallbackFn(e);
-    //     });
+            WindowResizeEvent e(width, height);
+            if (wnd->m_Params.Callback)
+                wnd->m_Params.Callback(e);
+        });
 
     /*
         Dear ImGui stuff
@@ -59,11 +60,11 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
 }
 
 GLFW_Window::~GLFW_Window() {
-    glfwDestroyWindow(m_HWND);
-
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+
+    glfwDestroyWindow(m_HWND);
 }
 
 void GLFW_Window::Update() {
