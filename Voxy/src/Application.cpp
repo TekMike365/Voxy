@@ -1,5 +1,6 @@
 #include "Application.hpp"
 
+#include "Layers/GUILayer.hpp"
 #include "Log.hpp"
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -10,14 +11,20 @@
 
 namespace Voxy {
 
+Application *Application::s_Instance = nullptr;
+
 Application::Application() {
+    VoxyAssert(!s_Instance, "There can oly be one instance of Application");
+    s_Instance = this;
+
     m_Window = Voxy::Window::Create({.Callback = BIND_APP_EVENT(OnEvent)});
+
+    m_LayerStack.PushLayer(new GUILayer);
 }
 
 Application::~Application() {}
 
 void Application::Run() {
-
     // IO stuff
     ImGuiIO &io = ImGui::GetIO();
     io.ConfigFlags |=
@@ -32,10 +39,8 @@ void Application::Run() {
 
     VoxyCoreInfo("Main loop started");
     while (m_IsRunning) {
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        for (Layer *layer : m_LayerStack)
+            layer->OnUpdate();
 
         // 1. Show the big demo window (Most of the sample code is in
         // ImGui::ShowDemoWindow()! You can browse its code to learn more about
@@ -98,7 +103,16 @@ void Application::Run() {
 
 void Application::OnEvent(Event &e) {
     EventDispatcher d(e);
-    d.Dispatch<Voxy::WindowCloseEvent>(BIND_APP_EVENT(OnWindowClose));
+
+    bool handled =
+        d.Dispatch<Voxy::WindowCloseEvent>(BIND_APP_EVENT(OnWindowClose));
+
+    if (handled)
+        return;
+
+    for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++)
+        if ((*it)->OnEvent(e))
+            break;
 }
 
 bool Application::OnWindowClose(WindowCloseEvent &e) {

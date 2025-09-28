@@ -6,6 +6,8 @@ add_executable(Voxy
 
     "src/platform/GLFW/GLFW.cpp"
     "src/platform/GLFW/GLFW_Window.cpp"
+
+    "src/Layers/LayerStack.cpp"
 )
 target_link_libraries(Voxy PRIVATE
     spdlog

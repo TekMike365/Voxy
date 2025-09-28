@@ -57,6 +57,10 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(m_HWND, true);
     ImGui_ImplOpenGL3_Init("#version 130");
+
+    // May need to be moved to GUILayer::Update
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
 }
 
 GLFW_Window::~GLFW_Window() {
