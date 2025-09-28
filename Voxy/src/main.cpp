@@ -1,7 +1,5 @@
 #include <GLFW/glfw3.h>
 
-enum class Test { None = 0, This, Should, Be, On, One, Line };
-
 int main(void) {
 	GLFWwindow *window;
 
