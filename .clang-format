@@ -1,8 +1,4 @@
 BasedOnStyle: LLVM
-
-// May change
-IndentWidth: 8
-TabWidth: 8
-
-UseTab: ForIndentation
 ColumnLimit: 80
+IndentWidth: 4
+AccessModifierOffset: -4
