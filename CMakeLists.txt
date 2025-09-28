@@ -5,8 +5,6 @@ set(CXX_STANDARD 17)
 set(CXX_STANDARD_REQUIRED ON)
 set(CXX_EXTENSIONS OFF)
 
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
 # Adding dependencies
 include(cmake/CPM.cmake)
 
@@ -21,8 +19,9 @@ endif()
 
 add_subdirectory(vendor/glad)
 
+# ImGui
 set(IMGUI_PATH "${PROJECT_SOURCE_DIR}/vendor/imgui")
-set(IMGUI_SOURCE
+add_library(imgui STATIC
     "${IMGUI_PATH}/imgui.cpp"
     "${IMGUI_PATH}/imgui_demo.cpp"
     "${IMGUI_PATH}/imgui_draw.cpp"
@@ -34,10 +33,17 @@ set(IMGUI_SOURCE
 
     "${IMGUI_PATH}/misc/cpp/imgui_stdlib.cpp"
 )
-set(IMGUI_INCLUDE ${IMGUI_PATH} "${IMGUI_PATH}/backends" "${IMGUI_PATH}/misc/cpp")
+target_link_libraries(imgui PRIVATE
+    glfw
+)
+target_include_directories(imgui PUBLIC 
+    ${IMGUI_PATH}
+    "${IMGUI_PATH}/backends"
+    "${IMGUI_PATH}/misc/cpp"
+)
 
+# entt
 set(ENTT_INCLUDE "${PROJECT_SOURCE_DIR}/vendor/entt")
 
 # Adding projects
 add_subdirectory(Voxy)
-add_subdirectory(Sandbox)

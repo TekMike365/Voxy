@@ -1,42 +1,23 @@
-add_library(Voxy SHARED
-    Log.cpp
-
-    Voxy/main.cpp
-
-    Voxy/Application.cpp
-    Voxy/Setup.cpp
-
-    Voxy/Window.cpp
-    Voxy/Renderer/GraphicsContext.cpp
-    Voxy/Renderer/Buffer.cpp
-    Voxy/Renderer/VertexArray.cpp
-    Voxy/Renderer/Shader.cpp
-    Voxy/Renderer/RenderCommand.cpp
-    Voxy/Renderer/Renderer.cpp
-
-    Voxy/Platform/GLFW/Window.cpp
-    Voxy/Platform/OpenGL/GraphicsContext.cpp
-    Voxy/Platform/OpenGL/Buffer.cpp
-    Voxy/Platform/OpenGL/VertexArray.cpp
-    Voxy/Platform/OpenGL/Shader.cpp
-    Voxy/Platform/OpenGL/RenderCommand.cpp
-
-    Voxy/Layers/LayerStack.cpp
-    Voxy/Layers/ImGuiLayer.cpp
-    Voxy/Layers/RenderingLayer.cpp
-
-    Voxy/Scene/Scene.cpp
-    Voxy/Scene/Components/Camera.cpp
-
-    ${IMGUI_SOURCE}
-)
-
-target_link_libraries(Voxy PUBLIC spdlog glfw OpenGL::GL glad glm)
-
-target_include_directories(Voxy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${IMGUI_INCLUDE} ${ENTT_INCLUDE})
-
-
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    add_compile_options(-Wall -Wextra)
+# Compiler settings
+if (MSVC)
+    message(WARNING "Complier settings (MSVC): Why do you use this crap???")
+else()
+    add_compile_options(-Werror -Wall -Wextra -Wpedantic)
 endif()
 
+add_executable(Voxy
+    "Log.cpp"
+    "main.cpp"
+)
+target_link_libraries(Voxy PRIVATE
+    spdlog
+    glfw
+    OpenGL::GL
+    glad
+    glm
+    imgui
+)
+target_include_directories(Voxy PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${ENTT_INCLUDE}
+)
