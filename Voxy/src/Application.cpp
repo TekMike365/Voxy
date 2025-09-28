@@ -8,13 +8,14 @@
 namespace Voxy {
 
 Application::Application() {
-
     auto wnd = Voxy::Window::Create({.Callback = BIND_APP_EVENT(OnEvent)});
 
+    VoxyCoreInfo("Main loop started");
     while (m_IsRunning) {
         wnd->Update();
     }
 }
+
 Application::~Application() {}
 
 void Application::Run() {}
