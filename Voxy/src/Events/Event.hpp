@@ -24,7 +24,7 @@ public:
     template <typename E> bool Dispatch(std::function<bool(E &)> fn) {
         if (E::GetStaticType() != m_E.GetType())
             return false;
-        return fn((E &)m_E);
+        return fn(static_cast<E &>(m_E));
     }
 
 private:
