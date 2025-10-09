@@ -3,13 +3,13 @@
 #include <functional>
 #include <string>
 
-namespace Voxy {
-
-enum class EventType { None = 0, WindowCloseEvent, WindowResizeEvent };
-
 #define EVENT_TYPE_DEFS(T)                                                     \
     static EventType GetStaticType() { return EventType::T; }                  \
     virtual EventType GetType() const override { return EventType::T; }
+
+namespace Voxy {
+
+enum class EventType { None = 0, WindowCloseEvent, WindowResizeEvent };
 
 class Event {
 public:
