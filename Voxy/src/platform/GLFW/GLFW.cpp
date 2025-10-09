@@ -7,7 +7,7 @@
 namespace Voxy {
 
 void ErrorCallback(int error, const char *description) {
-    fprintf(stderr, "GLFW Error %d: %s\n", error, description);
+    VoxyCoreError("GLFW ({}): {}", error, description);
 }
 
 void Platform::GLFW_Init() {
