@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Window.hpp"
 #include <GLFW/glfw3.h>
+
+#include "Window.hpp"
 
 namespace Voxy {
 

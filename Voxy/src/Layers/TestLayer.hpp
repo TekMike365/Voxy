@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Layer.hpp"
 #include <imgui.h>
+
+#include "Layer.hpp"
 
 namespace Voxy {
 

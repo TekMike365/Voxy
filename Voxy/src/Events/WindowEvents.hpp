@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Event.hpp"
 #include <cstdint>
 #include <format>
+
+#include "Event.hpp"
 
 namespace Voxy {
 

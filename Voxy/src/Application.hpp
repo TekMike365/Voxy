@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Helpers.hpp"
+
 #include "Events/Event.hpp"
 #include "Events/WindowEvents.hpp"
-#include "Helpers.hpp"
-#include "Layers/LayerStack.hpp"
 #include "Window.hpp"
+
+#include "Layers/LayerStack.hpp"
 
 namespace Voxy {
 

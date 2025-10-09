@@ -1,14 +1,17 @@
 #pragma once
 
+#include <functional>
+
 #include "Events/Event.hpp"
 #include "Helpers.hpp"
-#include <functional>
 
 namespace Voxy {
 
-using EventCallbackFn = std::function<void(Event &)>;
-
 struct WindowParams {
+private:
+    using EventCallbackFn = std::function<void(Event &)>;
+
+public:
     const char *title = "Title";
     uint32_t width = 1280;
     uint32_t height = 720;

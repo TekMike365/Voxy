@@ -1,8 +1,9 @@
 #include "GLFW.hpp"
 
-#include "Log.hpp"
 #include <GLFW/glfw3.h>
 #include <imgui.h>
+
+#include "Log.hpp"
 
 namespace Voxy {
 

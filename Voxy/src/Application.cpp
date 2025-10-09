@@ -5,10 +5,6 @@
 #include "Layers/TestLayer.hpp"
 #include "Log.hpp"
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
-
 #define BIND_APP_EVENT(fn)                                                     \
     std::bind(&Application::fn, this, std::placeholders::_1)
 

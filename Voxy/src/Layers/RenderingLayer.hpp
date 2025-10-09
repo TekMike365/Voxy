@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Layer.hpp"
 #include <GLFW/glfw3.h>
+
+#include "Layer.hpp"
 
 namespace Voxy {
 

@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Layer.hpp"
 #include <cstdint>
 #include <iterator>
 #include <vector>
+
+#include "Layer.hpp"
 
 namespace Voxy {
 

@@ -1,10 +1,11 @@
 #include "GLFW_Window.hpp"
 
-#include "Events/WindowEvents.hpp"
-#include "Log.hpp"
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+
+#include "Events/WindowEvents.hpp"
+#include "Log.hpp"
 
 namespace Voxy {
 
