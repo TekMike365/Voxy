@@ -2,6 +2,7 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Log.hpp"
 #include "Window.hpp"
 
 namespace Voxy {
@@ -17,13 +18,12 @@ public:
     virtual uint32_t GetHeight() const override { return m_Params.height; }
 
     inline virtual Ref<GraphicsContext> GetGraphicsContext() const override {
-        return m_GraphicsContext;
+        return m_Params.graphicsContext;
     }
 
 private:
     WindowParams m_Params;
     GLFWwindow *m_HWND;
-    Ref<GraphicsContext> m_GraphicsContext;
 };
 
 } // namespace Voxy

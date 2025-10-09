@@ -2,7 +2,7 @@
 
 namespace Voxy {
 
-void GLFW_Init();
-void GLFW_Terminate();
+void OpenGL_Init();
+void OpenGL_Terminate();
 
 } // namespace Voxy

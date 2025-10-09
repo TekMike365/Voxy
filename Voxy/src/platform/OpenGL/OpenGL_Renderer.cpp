@@ -1,6 +1,6 @@
 #include "OpenGL_Renderer.hpp"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Voxy {
 

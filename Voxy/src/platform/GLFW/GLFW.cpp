@@ -11,7 +11,7 @@ void ErrorCallback(int error, const char *description) {
     VoxyCoreError("GLFW ({}): {}", error, description);
 }
 
-void Platform::GLFW_Init() {
+void GLFW_Init() {
     glfwSetErrorCallback(ErrorCallback);
     VoxyAssert(glfwInit(), "GLFW: failed to initialize.");
 
@@ -21,6 +21,6 @@ void Platform::GLFW_Init() {
     IMGUI_CHECKVERSION();
 }
 
-void Platform::GLFW_Terminate() { glfwTerminate(); }
+void GLFW_Terminate() { glfwTerminate(); }
 
 } // namespace Voxy

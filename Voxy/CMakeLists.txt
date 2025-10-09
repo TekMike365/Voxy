@@ -7,6 +7,7 @@ add_executable(Voxy
     "src/platform/GLFW/GLFW.cpp"
     "src/platform/GLFW/GLFW_Window.cpp"
 
+    "src/platform/OpenGL/OpenGL.cpp"
     "src/platform/OpenGL/OpenGL_Renderer.cpp"
     "src/platform/OpenGL/OpenGL_GraphicsContext.cpp"
 

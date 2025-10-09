@@ -25,6 +25,8 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
     glfwMakeContextCurrent(m_HWND);
     glfwSwapInterval(1); // Enable vsync
 
+    m_Params.graphicsContext = GraphicsContext::Create();
+
     glfwSetWindowUserPointer(m_HWND, this);
 
     // Events
@@ -42,14 +44,12 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
             wnd->m_Params.width = width;
             wnd->m_Params.height = height;
 
-            glViewport(0, 0, width, height);
+            wnd->m_Params.graphicsContext->SetViewport(0, 0, width, height);
 
             WindowResizeEvent e(width, height);
             if (wnd->m_Params.Callback)
                 wnd->m_Params.Callback(e);
         });
-
-    m_GraphicsContext = GraphicsContext::Create();
 
     /*
         Dear ImGui stuff
