@@ -3,6 +3,7 @@
 #include <functional>
 
 #include "Events/Event.hpp"
+#include "GraphicsContext.hpp"
 #include "Helpers.hpp"
 #include "Time.hpp"
 
@@ -27,7 +28,7 @@ public:
     virtual uint32_t GetHeight() const = 0;
     virtual float GetAspect() const { return GetWidth() / GetHeight(); }
 
-    virtual void *GetHandle() const = 0;
+    virtual Ref<GraphicsContext> GetGraphicsContext() const = 0;
 
 public:
     static Ref<Window> Create(WindowParams params = WindowParams());

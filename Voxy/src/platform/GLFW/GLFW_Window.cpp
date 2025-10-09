@@ -14,6 +14,8 @@ Ref<Window> Window::Create(WindowParams params) {
 }
 
 GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
+    VoxyCoreTrace("Creating window. Using GLFW");
+
     m_HWND = glfwCreateWindow(m_Params.width, m_Params.height, m_Params.title,
                               NULL, NULL);
     VoxyAssert(m_HWND, "GLFW: Couldn't create a window.");
@@ -47,6 +49,8 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
                 wnd->m_Params.Callback(e);
         });
 
+    m_GraphicsContext = GraphicsContext::Create();
+
     /*
         Dear ImGui stuff
     */
@@ -72,8 +76,6 @@ GLFW_Window::~GLFW_Window() {
 
 void GLFW_Window::Update(TimeStep deltaTime) {
     glfwPollEvents();
-
-    /* Swap front and back buffers */
     glfwSwapBuffers(m_HWND);
 }
 

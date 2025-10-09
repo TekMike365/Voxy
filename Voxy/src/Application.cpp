@@ -14,7 +14,7 @@ namespace Voxy {
 
 Application *Application::s_Instance = nullptr;
 
-Application::Application() {
+Application::Application() : m_LayerStack("CoreUpdateStack") {
     VoxyAssert(!s_Instance, "There can oly be one instance of Application");
     s_Instance = this;
 
@@ -33,10 +33,10 @@ void Application::Run() {
     TimeStep deltaTime = 0;
     Time now, then = Time::Now();
     while (m_IsRunning) {
+        m_Window->Update(deltaTime);
+
         for (Layer *layer : m_LayerStack)
             layer->OnUpdate(deltaTime);
-
-        m_Window->Update(deltaTime);
 
         now = Time::Now();
         deltaTime = now - then;

@@ -19,6 +19,8 @@ public:
         NewFrame();
     }
 
+    virtual const char *GetDebugName() const { return "GUILayer"; }
+
 private:
     void NewFrame() {
         ImGui_ImplOpenGL3_NewFrame();

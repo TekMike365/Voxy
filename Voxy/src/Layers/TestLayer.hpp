@@ -19,6 +19,8 @@ public:
 
     virtual bool OnEvent(Event &e) override { return false; }
 
+    virtual const char *GetDebugName() const { return "TestLayer"; }
+
 private:
     void DisplayOverlay(TimeStep deltaTime) {
         const ImGuiViewport *viewport = ImGui::GetMainViewport();

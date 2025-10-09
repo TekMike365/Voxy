@@ -11,6 +11,8 @@ public:
     virtual void OnDetach() {}
     virtual void OnUpdate(TimeStep deltaTime) {}
     virtual bool OnEvent(Event &e) { return false; }
+
+    virtual const char *GetDebugName() const = 0;
 };
 
 } // namespace Voxy

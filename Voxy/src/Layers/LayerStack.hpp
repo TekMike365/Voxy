@@ -10,6 +10,7 @@ namespace Voxy {
 
 class LayerStack {
 public:
+    LayerStack(const std::string &debugName);
     ~LayerStack();
 
     void PushLayer(Layer *layer);
@@ -29,6 +30,7 @@ public:
 private:
     std::vector<Layer *> m_Layers;
     size_t m_OverlaysBeginIdx = 0;
+    std::string m_DebugName;
 };
 
 } // namespace Voxy

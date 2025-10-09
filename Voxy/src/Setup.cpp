@@ -6,7 +6,7 @@
 void Voxy::Init() {
     Voxy::Log::Init();
 
-    VoxyCoreInfo("Initializing");
+    VoxyCoreInfo("Initializing...");
 
     Voxy::Platform::GLFW_Init();
 }

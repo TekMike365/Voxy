@@ -1,11 +1,19 @@
 #include "LayerStack.hpp"
 
+#include "Log.hpp"
+
 namespace Voxy {
 
+LayerStack::LayerStack(const std::string &debugName) : m_DebugName(debugName) {}
+
 LayerStack::~LayerStack() {
+    VoxyCoreTrace("{}: deleting layers...", m_DebugName);
+
     for (Layer *layer : m_Layers)
         if (layer) {
             layer->OnDetach();
+            VoxyCoreTrace("{}: '{}' deleted", m_DebugName,
+                          layer->GetDebugName());
             delete layer;
         }
 }
@@ -13,6 +21,7 @@ LayerStack::~LayerStack() {
 void LayerStack::PushLayer(Layer *layer) {
     m_Layers.insert(m_Layers.begin() + m_OverlaysBeginIdx++, layer);
     layer->OnAttach();
+    VoxyCoreTrace("{}: '{}' added", m_DebugName, layer->GetDebugName());
 }
 
 void LayerStack::RemoveLayer(Layer *layer) {
@@ -25,11 +34,14 @@ void LayerStack::RemoveLayer(Layer *layer) {
     (*it)->OnDetach();
     m_Layers.erase(it);
     m_OverlaysBeginIdx--;
+
+    VoxyCoreTrace("{}: '{}' removed", m_DebugName, layer->GetDebugName());
 }
 
 void LayerStack::PushOverlay(Layer *overlay) {
     m_Layers.push_back(overlay);
     overlay->OnAttach();
+    VoxyCoreTrace("{}: '{}' added", m_DebugName, overlay->GetDebugName());
 }
 
 void LayerStack::RemoveOverlay(Layer *overlay) {
@@ -41,6 +53,7 @@ void LayerStack::RemoveOverlay(Layer *overlay) {
 
     (*it)->OnDetach();
     m_Layers.erase(it);
+    VoxyCoreTrace("{}: '{}' removed", m_DebugName, overlay->GetDebugName());
 }
 
 } // namespace Voxy

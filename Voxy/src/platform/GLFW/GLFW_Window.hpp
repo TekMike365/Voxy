@@ -16,11 +16,14 @@ public:
     virtual uint32_t GetWidth() const override { return m_Params.width; }
     virtual uint32_t GetHeight() const override { return m_Params.height; }
 
-    virtual void *GetHandle() const override { return (void *)m_HWND; }
+    inline virtual Ref<GraphicsContext> GetGraphicsContext() const override {
+        return m_GraphicsContext;
+    }
 
 private:
     WindowParams m_Params;
     GLFWwindow *m_HWND;
+    Ref<GraphicsContext> m_GraphicsContext;
 };
 
 } // namespace Voxy
