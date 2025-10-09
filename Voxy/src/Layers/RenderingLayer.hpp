@@ -8,7 +8,7 @@ namespace Voxy {
 
 class RenderingLayer : public Layer {
 public:
-    virtual void OnUpdate() override {
+    virtual void OnUpdate(TimeStep deltaTime) override {
         /* Render here */
         glClearColor(0.95f, 0.64f, 0.48f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

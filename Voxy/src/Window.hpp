@@ -4,6 +4,7 @@
 
 #include "Events/Event.hpp"
 #include "Helpers.hpp"
+#include "Time.hpp"
 
 namespace Voxy {
 
@@ -20,7 +21,7 @@ public:
 
 class Window {
 public:
-    virtual void Update() = 0;
+    virtual void Update(TimeStep deltaTime) = 0;
 
     virtual uint32_t GetWidth() const = 0;
     virtual uint32_t GetHeight() const = 0;

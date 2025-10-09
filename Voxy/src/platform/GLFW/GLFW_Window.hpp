@@ -11,7 +11,7 @@ public:
     GLFW_Window(WindowParams &params);
     ~GLFW_Window();
 
-    virtual void Update() override;
+    virtual void Update(TimeStep deltaTime) override;
 
     virtual uint32_t GetWidth() const override { return m_Params.width; }
     virtual uint32_t GetHeight() const override { return m_Params.height; }

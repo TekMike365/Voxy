@@ -70,7 +70,7 @@ GLFW_Window::~GLFW_Window() {
     glfwDestroyWindow(m_HWND);
 }
 
-void GLFW_Window::Update() {
+void GLFW_Window::Update(TimeStep deltaTime) {
     glfwPollEvents();
 
     /* Swap front and back buffers */

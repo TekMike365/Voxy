@@ -1,9 +1,11 @@
 #include "Application.hpp"
 
+#include "Log.hpp"
+#include "Time.hpp"
+
 #include "Layers/GUILayer.hpp"
 #include "Layers/RenderingLayer.hpp"
 #include "Layers/TestLayer.hpp"
-#include "Log.hpp"
 
 #define BIND_APP_EVENT(fn)                                                     \
     std::bind(&Application::fn, this, std::placeholders::_1)
@@ -27,11 +29,18 @@ Application::~Application() {}
 
 void Application::Run() {
     VoxyCoreInfo("Main loop started");
+
+    TimeStep deltaTime = 0;
+    Time now, then = Time::Now();
     while (m_IsRunning) {
         for (Layer *layer : m_LayerStack)
-            layer->OnUpdate();
+            layer->OnUpdate(deltaTime);
 
-        m_Window->Update();
+        m_Window->Update(deltaTime);
+
+        now = Time::Now();
+        deltaTime = now - then;
+        then = now;
     }
 }
 

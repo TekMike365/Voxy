@@ -12,7 +12,7 @@ class GUILayer : public Layer {
 public:
     virtual void OnAttach() override { NewFrame(); }
 
-    virtual void OnUpdate() override {
+    virtual void OnUpdate(TimeStep deltaTime) override {
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
