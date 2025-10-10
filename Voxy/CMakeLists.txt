@@ -8,8 +8,8 @@ add_executable(Voxy
     "src/Platform/GLFW/Window.cpp"
 
     "src/Platform/OpenGL/OpenGL.cpp"
-    "src/Platform/OpenGL/Renderer.cpp"
     "src/Platform/OpenGL/GraphicsContext.cpp"
+    "src/Platform/OpenGL/Renderer/Renderer.cpp"
 
     "src/Layers/LayerStack.cpp"
 )

@@ -10,12 +10,12 @@
 namespace Voxy {
 
 Ref<Window> Window::Create(WindowParams params) {
-    return std::make_shared<Platform::GLFW::Window>(params);
+    return std::make_shared<Platform::GLFW_Window>(params);
 }
 
-namespace Platform::GLFW {
+namespace Platform {
 
-Window::Window(WindowParams &params) : m_Params(params) {
+GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
     VoxyCoreTrace("Creating window. Using GLFW");
 
     m_HWND = glfwCreateWindow(m_Params.width, m_Params.height, m_Params.title,
@@ -33,7 +33,7 @@ Window::Window(WindowParams &params) : m_Params(params) {
 
     // Events
     glfwSetWindowCloseCallback(m_HWND, [](GLFWwindow *window) {
-        Window *wnd = (Window *)glfwGetWindowUserPointer(window);
+        GLFW_Window *wnd = (GLFW_Window *)glfwGetWindowUserPointer(window);
 
         WindowCloseEvent e;
         if (wnd->m_Params.Callback)
@@ -42,7 +42,7 @@ Window::Window(WindowParams &params) : m_Params(params) {
 
     glfwSetFramebufferSizeCallback(
         m_HWND, [](GLFWwindow *window, int width, int height) {
-            Window *wnd = (Window *)glfwGetWindowUserPointer(window);
+            GLFW_Window *wnd = (GLFW_Window *)glfwGetWindowUserPointer(window);
             wnd->m_Params.width = width;
             wnd->m_Params.height = height;
 
@@ -68,7 +68,7 @@ Window::Window(WindowParams &params) : m_Params(params) {
     ImGui_ImplOpenGL3_Init("#version 130");
 }
 
-Window::~Window() {
+GLFW_Window::~GLFW_Window() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -76,10 +76,10 @@ Window::~Window() {
     glfwDestroyWindow(m_HWND);
 }
 
-void Window::Update(TimeStep deltaTime) {
+void GLFW_Window::Update(TimeStep deltaTime) {
     glfwPollEvents();
     glfwSwapBuffers(m_HWND);
 }
 
-} // namespace Platform::GLFW
+} // namespace Platform
 } // namespace Voxy

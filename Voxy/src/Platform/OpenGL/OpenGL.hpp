@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Voxy::Platform::OpenGL {
+namespace Voxy::Platform {
 
-void Init();
+void OpenGL_Init();
 
-} // namespace Voxy::Platform::OpenGL
+} // namespace Voxy::Platform

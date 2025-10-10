@@ -8,7 +8,7 @@ void Voxy::Init() {
 
     VoxyCoreInfo("Initializing...");
 
-    Platform::GLFW::Init();
+    Platform::GLFW_Init();
 }
 
-void Voxy::Terminate() { Platform::GLFW::Terminate(); }
+void Voxy::Terminate() { Platform::GLFW_Terminate(); }

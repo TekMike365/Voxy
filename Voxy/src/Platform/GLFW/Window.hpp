@@ -5,20 +5,19 @@
 #include "Core/Window.hpp"
 #include "Log.hpp"
 
-namespace Voxy::Platform::GLFW {
+namespace Voxy::Platform {
 
-class Window : public Voxy::Window {
+class GLFW_Window : public Window {
 public:
-    Window(WindowParams &params);
-    ~Window();
+    GLFW_Window(WindowParams &params);
+    ~GLFW_Window();
 
     virtual void Update(TimeStep deltaTime) override;
 
     virtual uint32_t GetWidth() const override { return m_Params.width; }
     virtual uint32_t GetHeight() const override { return m_Params.height; }
 
-    inline virtual Ref<Voxy::GraphicsContext>
-    GetGraphicsContext() const override {
+    inline virtual Ref<GraphicsContext> GetGraphicsContext() const override {
         return m_Params.graphicsContext;
     }
 
@@ -27,4 +26,4 @@ private:
     GLFWwindow *m_HWND;
 };
 
-} // namespace Voxy::Platform::GLFW
+} // namespace Voxy::Platform

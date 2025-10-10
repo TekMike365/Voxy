@@ -1,22 +1,22 @@
 #pragma once
 
 #include "Core/GraphicsContext.hpp"
-#include "Renderer.hpp"
+#include "Platform/OpenGL/Renderer/Renderer.hpp"
 
-namespace Voxy::Platform::OpenGL {
+namespace Voxy::Platform {
 
-class GraphicsContext : public Voxy::GraphicsContext {
+class OpenGL_GraphicsContext : public GraphicsContext {
 public:
-    GraphicsContext();
+    OpenGL_GraphicsContext();
 
     virtual void SetViewport(int x, int y, int width, int height) override;
 
-    inline virtual Ref<Voxy::Renderer> GetRenderer() const override {
+    inline virtual Ref<Renderer::Renderer> GetRenderer() const override {
         return m_Renderer;
     }
 
 private:
-    Ref<OpenGL::Renderer> m_Renderer;
+    Ref<Renderer::OpenGL_Renderer> m_Renderer;
 };
 
-} // namespace Voxy::Platform::OpenGL
+} // namespace Voxy::Platform

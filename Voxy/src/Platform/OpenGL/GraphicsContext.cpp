@@ -8,21 +8,21 @@
 namespace Voxy {
 
 Ref<GraphicsContext> GraphicsContext::Create() {
-    return std::make_shared<Platform::OpenGL::GraphicsContext>();
+    return std::make_shared<Platform::OpenGL_GraphicsContext>();
 }
 
-namespace Platform::OpenGL {
+namespace Platform {
 
-GraphicsContext::GraphicsContext() {
+OpenGL_GraphicsContext::OpenGL_GraphicsContext() {
     VoxyCoreTrace("Creating Graphics context. Using OpenGL");
 
-    OpenGL::Init();
-    m_Renderer = std::make_shared<OpenGL::Renderer>();
+    OpenGL_Init();
+    m_Renderer = std::make_shared<Renderer::OpenGL_Renderer>();
 }
 
-void GraphicsContext::SetViewport(int x, int y, int width, int height) {
+void OpenGL_GraphicsContext::SetViewport(int x, int y, int width, int height) {
     glViewport(x, y, width, height);
 }
 
-} // namespace Platform::OpenGL
+} // namespace Platform
 } // namespace Voxy

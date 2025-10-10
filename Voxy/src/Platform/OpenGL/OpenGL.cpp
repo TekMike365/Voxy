@@ -9,7 +9,7 @@ bool g_IsInitialized = false;
 
 namespace Voxy::Platform {
 
-void OpenGL::Init() {
+void OpenGL_Init() {
     if (g_IsInitialized)
         return;
 

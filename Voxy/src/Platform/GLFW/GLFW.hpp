@@ -1,8 +1,8 @@
 #pragma once
 
-namespace Voxy::Platform::GLFW {
+namespace Voxy::Platform {
 
-void Init();
-void Terminate();
+void GLFW_Init();
+void GLFW_Terminate();
 
-} // namespace Voxy::Platform::GLFW
+} // namespace Voxy::Platform

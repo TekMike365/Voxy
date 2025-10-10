@@ -7,6 +7,8 @@
 namespace Voxy {
 
 class RenderingLayer : public Layer {
+    using Renderer = Renderer::Renderer;
+
 public:
     virtual void OnAttach() override {
         m_Renderer = Application::GetInstance()
