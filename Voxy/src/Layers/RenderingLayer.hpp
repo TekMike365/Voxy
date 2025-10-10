@@ -2,7 +2,7 @@
 
 #include "Application.hpp"
 #include "Layer.hpp"
-#include "Renderer.hpp"
+#include "Renderer/Renderer.hpp"
 
 namespace Voxy {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer.hpp"
+#include "Renderer/Renderer.hpp"
 
 namespace Voxy {
 
