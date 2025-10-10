@@ -1,6 +1,6 @@
 #include <GLFW/glfw3.h>
 
-#include "Application.hpp"
+#include "Core/Application.hpp"
 #include "Setup.hpp"
 
 int main(void) {

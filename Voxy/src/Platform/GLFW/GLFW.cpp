@@ -5,13 +5,13 @@
 
 #include "Log.hpp"
 
-namespace Voxy {
-
 void ErrorCallback(int error, const char *description) {
     VoxyCoreError("GLFW ({}): {}", error, description);
 }
 
-void GLFW_Init() {
+namespace Voxy::Platform {
+
+void GLFW::Init() {
     glfwSetErrorCallback(ErrorCallback);
     VoxyAssert(glfwInit(), "GLFW: failed to initialize.");
 
@@ -21,6 +21,6 @@ void GLFW_Init() {
     IMGUI_CHECKVERSION();
 }
 
-void GLFW_Terminate() { glfwTerminate(); }
+void GLFW::Terminate() { glfwTerminate(); }
 
 } // namespace Voxy

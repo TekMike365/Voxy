@@ -2,14 +2,14 @@ add_executable(Voxy
     "src/Log.cpp"
     "src/main.cpp"
     "src/Setup.cpp"
-    "src/Application.cpp"
+    "src/Core/Application.cpp"
 
-    "src/platform/GLFW/GLFW.cpp"
-    "src/platform/GLFW/GLFW_Window.cpp"
+    "src/Platform/GLFW/GLFW.cpp"
+    "src/Platform/GLFW/Window.cpp"
 
-    "src/platform/OpenGL/OpenGL.cpp"
-    "src/platform/OpenGL/OpenGL_Renderer.cpp"
-    "src/platform/OpenGL/OpenGL_GraphicsContext.cpp"
+    "src/Platform/OpenGL/OpenGL.cpp"
+    "src/Platform/OpenGL/Renderer.cpp"
+    "src/Platform/OpenGL/GraphicsContext.cpp"
 
     "src/Layers/LayerStack.cpp"
 )

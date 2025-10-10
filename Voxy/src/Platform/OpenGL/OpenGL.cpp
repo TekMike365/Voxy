@@ -5,11 +5,11 @@
 
 #include "Log.hpp"
 
-namespace Voxy {
-
 bool g_IsInitialized = false;
 
-void OpenGL_Init() {
+namespace Voxy::Platform {
+
+void OpenGL::Init() {
     if (g_IsInitialized)
         return;
 
@@ -18,11 +18,4 @@ void OpenGL_Init() {
     g_IsInitialized = true;
 }
 
-void OpenGL_Terminate() {
-    if (!g_IsInitialized)
-        return;
-
-    g_IsInitialized = false;
-}
-
-} // namespace Voxy
+} // namespace Voxy::Platform

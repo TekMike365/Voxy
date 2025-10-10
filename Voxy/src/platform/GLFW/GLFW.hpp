@@ -1,8 +1,0 @@
-#pragma once
-
-namespace Voxy {
-
-void GLFW_Init();
-void GLFW_Terminate();
-
-} // namespace Voxy
