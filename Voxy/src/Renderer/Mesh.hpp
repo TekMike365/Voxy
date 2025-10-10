@@ -1,0 +1,85 @@
+#pragma once
+
+#include "Buffer.hpp"
+#include "Helpers.hpp"
+#include "Log.hpp"
+
+#define _CREATE_SHADER_TYPE(idx, size, count)                                  \
+    (size << 6) | (idx << 2) | (count - 1)
+
+namespace Voxy::Renderer {
+
+enum ShaderType {
+    STnone = 0,
+
+    STint = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 1),
+    STint2 = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 2),
+    STint3 = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 3),
+    STint4 = _CREATE_SHADER_TYPE(1, sizeof(int32_t), 4),
+
+    STuint = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 1),
+    STuint2 = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 2),
+    STuint3 = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 3),
+    STuint4 = _CREATE_SHADER_TYPE(2, sizeof(uint32_t), 4),
+
+    STfloat = _CREATE_SHADER_TYPE(3, sizeof(float), 1),
+    STfloat2 = _CREATE_SHADER_TYPE(3, sizeof(float), 2),
+    STfloat3 = _CREATE_SHADER_TYPE(3, sizeof(float), 3),
+    STfloat4 = _CREATE_SHADER_TYPE(3, sizeof(float), 4),
+};
+
+inline ShaderType GetSTtype(ShaderType type) {
+    return (ShaderType)(type & (~0b11));
+}
+
+inline uint32_t GetSTcount(ShaderType type) { return (type & 0b11) + 1; }
+
+inline uint32_t GetSTsize(ShaderType type) {
+    return (type & (~0b111111)) * GetSTcount(type);
+};
+
+struct VertexAttribute {
+public:
+    Ref<Buffer> buffer = nullptr;
+    size_t stride = 0;
+    size_t pointer = 0;
+    uint32_t index = 0;
+    uint32_t divisor = 0;
+    ShaderType type = STnone;
+    bool normalised = false;
+
+    VertexAttribute() = default;
+    VertexAttribute(uint32_t index, ShaderType type, size_t pointer,
+                    size_t stride, const Ref<Buffer> &buffer,
+                    uint32_t divisor = 0, bool normalised = false)
+        : type(type), index(index), stride(stride), pointer(pointer),
+          buffer(buffer), divisor(divisor), normalised(normalised) {
+        VoxyAssert(buffer->GetType() == BufferType::Vertex,
+                   "VertexAttribute only accepts VertexBuffer");
+    }
+};
+
+class Mesh {
+public:
+    struct Object {
+        size_t Pointer = 0;
+        size_t IndexCount = 0;
+    };
+
+public:
+    virtual void Bind() const = 0;
+    virtual void Unbind() const = 0;
+
+    virtual void AddObject(size_t pointer, size_t indexCount,
+                           const std::string &name) = 0;
+    virtual Object &GetObject(const std::string &name) = 0;
+    virtual void AddAttribute(const VertexAttribute &attrib) = 0;
+
+    virtual const Ref<Buffer> &GetIndexBuffer() const = 0;
+    virtual uint32_t GetID() const = 0;
+
+public:
+    static Ref<Mesh> Create(const Ref<Buffer> &indexBuffer);
+};
+
+} // namespace Voxy::Renderer

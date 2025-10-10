@@ -9,7 +9,11 @@ add_executable(Voxy
 
     "src/Platform/OpenGL/OpenGL.cpp"
     "src/Platform/OpenGL/GraphicsContext.cpp"
+
     "src/Platform/OpenGL/Renderer/Renderer.cpp"
+    "src/Platform/OpenGL/Renderer/Buffer.cpp"
+    "src/Platform/OpenGL/Renderer/Mesh.cpp"
+    "src/Platform/OpenGL/Renderer/Shader.cpp"
 
     "src/Layers/LayerStack.cpp"
 )
