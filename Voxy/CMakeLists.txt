@@ -16,6 +16,7 @@ add_executable(Voxy
     "src/Platform/OpenGL/Renderer/Shader.cpp"
 
     "src/Layers/LayerStack.cpp"
+    "src/Layers/TestLayer.cpp"
 )
 target_link_libraries(Voxy PRIVATE
     spdlog
@@ -38,5 +39,5 @@ set_property(TARGET Voxy PROPERTY CXX_EXTENSIONS OFF)
 if (MSVC)
     message(ERROR "Complier settings (MSVC): Why do you use this crap???")
 else()
-    add_compile_options(-Werror -Wall -Wextra -Wpedantic)
+    add_compile_options(-Werror -Wall -Wextra -pedantic)
 endif()

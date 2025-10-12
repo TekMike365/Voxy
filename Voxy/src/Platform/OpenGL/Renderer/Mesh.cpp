@@ -6,7 +6,7 @@
 
 namespace Voxy::Renderer {
 
-Ref<Mesh> Create(const Ref<Buffer> &indexBuffer) {
+Ref<Mesh> Mesh::Create(const Ref<Buffer> &indexBuffer) {
     return std::make_shared<OpenGL_Mesh>(indexBuffer);
 }
 
@@ -52,8 +52,6 @@ Mesh::Object &OpenGL_Mesh::GetObject(const std::string &name) {
 }
 
 void OpenGL_Mesh::AddAttribute(const VertexAttribute &attrib) {
-    using namespace Renderer;
-
     Bind();
     attrib.buffer->Bind();
 

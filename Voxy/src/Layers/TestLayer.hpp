@@ -4,17 +4,23 @@
 
 #include "Layer.hpp"
 
+#include "Renderer/Buffer.hpp"
+#include "Renderer/Mesh.hpp"
+#include "Renderer/Renderer.hpp"
+#include "Renderer/Shader.hpp"
+
 namespace Voxy {
 
 class TestLayer : public Layer {
 public:
-    virtual void OnAttach() override {}
+    virtual void OnAttach() override { SetupDemo(); }
 
     virtual void OnDetach() override {}
 
     virtual void OnUpdate(TimeStep deltaTime) override {
-        ImGui::ShowDemoWindow();
+        // ImGui::ShowDemoWindow();
         DisplayOverlay(deltaTime);
+        RenderDemo(deltaTime);
     }
 
     virtual bool OnEvent(Event &e) override { return false; }
@@ -22,34 +28,18 @@ public:
     virtual const char *GetDebugName() const { return "TestLayer"; }
 
 private:
-    void DisplayOverlay(TimeStep deltaTime) {
-        const ImGuiViewport *viewport = ImGui::GetMainViewport();
-        ImVec2 workPos = viewport->WorkPos; // Top-left
-        ImVec2 workSize = viewport->WorkSize;
+    void DisplayOverlay(TimeStep deltaTime);
+    void SetupDemo();
+    void RenderDemo(TimeStep deltaTime);
 
-        ImVec2 windowPos =
-            ImVec2(workPos.x + workSize.x, workPos.y); // Top-right
-        ImVec2 windowPosPivot = ImVec2(1.0f, 0.0f);    // Top-right
+private:
+    Ref<Renderer::Mesh> m_Mesh;
+    Ref<Renderer::Shader> m_Shader;
+    Ref<Renderer::Renderer> m_Renderer;
 
-        ImGui::SetNextWindowPos(windowPos, ImGuiCond_Always, windowPosPivot);
-        ImGui::SetNextWindowBgAlpha(0.65f);
-
-        ImGuiWindowFlags windowFlags =
-            ImGuiWindowFlags_NoDecoration |     // No title bar, resize borders,
-                                                // etc.
-            ImGuiWindowFlags_AlwaysAutoResize | // Window size adjusts to
-                                                // content
-            ImGuiWindowFlags_NoSavedSettings |  // Don't save settings (pos,
-                                                // size) to the ini file
-            ImGuiWindowFlags_NoFocusOnAppearing | // Don't steal focus
-            ImGuiWindowFlags_NoNav | // Disable keyboard/gamepad navigation
-            ImGuiWindowFlags_NoMove;
-
-        ImGui::Begin("Overlay", nullptr, windowFlags);
-        ImGui::Text("Frame: %.3f ms (%.1f FPS)", deltaTime.Miliseconds(),
-                    1.0f / deltaTime.Seconds());
-        ImGui::End();
-    }
+    Ref<Renderer::Buffer> m_VertexBuffer;
+    Ref<Renderer::Buffer> m_IndexBuffer;
+    Ref<Renderer::Buffer> m_OffsetsBuffer;
 };
 
 } // namespace Voxy

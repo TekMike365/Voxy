@@ -7,25 +7,37 @@ namespace Voxy::Renderer {
 void OpenGL_Renderer::Render() {
     glClearColor(0.95f, 0.64f, 0.48f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+
+    RenderMeshes();
 }
 
-void OpenGL_Renderer::SubmitMesh(Ref<Mesh> mesh, Ref<Shader> shader,
+void OpenGL_Renderer::SubmitMesh(const Ref<Mesh> &mesh,
+                                 const Ref<Shader> &shader,
                                  const std::string &objectName, size_t count) {
-    mesh->Bind();
-    shader->Bind();
+    m_Commands.emplace_back(
+        (MeshRenderCommandStruct){mesh, shader, objectName, count});
+}
 
-    auto &object = mesh->GetObject(objectName);
+void OpenGL_Renderer::RenderMeshes() {
+    for (auto e : m_Commands) {
+        e.mesh->Bind();
+        e.shader->Bind();
 
-    if (count == 1)
-        glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
-                       (void *)(object.pointer * sizeof(uint32_t)));
-    else
-        glDrawElementsInstanced(
-            GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
-            (void *)(object.pointer * sizeof(uint32_t)), count);
+        auto &object = e.mesh->GetObject(e.objectName);
 
-    shader->Unbind();
-    mesh->Unbind();
+        if (e.count == 1)
+            glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
+                           (void *)(object.pointer * sizeof(uint32_t)));
+        else
+            glDrawElementsInstanced(
+                GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
+                (void *)(object.pointer * sizeof(uint32_t)), e.count);
+
+        e.mesh->Unbind();
+        e.shader->Unbind();
+    }
+
+    m_Commands.clear();
 }
 
 } // namespace Voxy::Renderer
