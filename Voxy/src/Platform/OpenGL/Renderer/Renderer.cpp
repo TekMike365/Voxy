@@ -9,21 +9,23 @@ void OpenGL_Renderer::Render() {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void OpenGL_Renderer::SubmitMesh(uint32_t meshId, uint32_t shaderId,
-                                 Mesh::Object meshObject, size_t count) {
-    glBindVertexArray(meshId);
-    glUseProgram(shaderId);
+void OpenGL_Renderer::SubmitMesh(Ref<Mesh> mesh, Ref<Shader> shader,
+                                 const std::string &objectName, size_t count) {
+    mesh->Bind();
+    shader->Bind();
+
+    auto &object = mesh->GetObject(objectName);
 
     if (count == 1)
-        glDrawElements(GL_TRIANGLES, meshObject.indexCount, GL_UNSIGNED_INT,
-                       (void *)(meshObject.pointer * sizeof(uint32_t)));
+        glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
+                       (void *)(object.pointer * sizeof(uint32_t)));
     else
         glDrawElementsInstanced(
-            GL_TRIANGLES, meshObject.indexCount, GL_UNSIGNED_INT,
-            (void *)(meshObject.pointer * sizeof(uint32_t)), count);
+            GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
+            (void *)(object.pointer * sizeof(uint32_t)), count);
 
-    glUseProgram(0);
-    glBindVertexArray(0);
+    shader->Unbind();
+    mesh->Unbind();
 }
 
 } // namespace Voxy::Renderer
