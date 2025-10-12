@@ -4,14 +4,14 @@
 
 namespace Voxy {
 
-class GraphicsContext {
+class IGraphicsContext {
 public:
     virtual void SetViewport(int x, int y, int width, int height) = 0;
 
-    virtual Ref<Renderer::Renderer> GetRenderer() const = 0;
+    virtual Ref<Renderer::IRenderer> GetRenderer() const = 0;
 
 public:
-    static Ref<GraphicsContext> Create();
+    static Ref<IGraphicsContext> Create();
 };
 
 } // namespace Voxy

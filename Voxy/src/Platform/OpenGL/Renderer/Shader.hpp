@@ -7,7 +7,7 @@
 
 namespace Voxy::Renderer {
 
-class OpenGL_Shader : public Shader {
+class OpenGL_Shader : public IShader {
 public:
     OpenGL_Shader(const std::string &vertexSource,
                   const std::string &fragmentSource);

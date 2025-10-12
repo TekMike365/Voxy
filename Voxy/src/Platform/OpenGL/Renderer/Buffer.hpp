@@ -4,7 +4,7 @@
 
 namespace Voxy::Renderer {
 
-class OpenGL_Buffer : public Buffer {
+class OpenGL_Buffer : public IBuffer {
 public:
     OpenGL_Buffer(BufferType type, size_t size, const void *data);
     ~OpenGL_Buffer();

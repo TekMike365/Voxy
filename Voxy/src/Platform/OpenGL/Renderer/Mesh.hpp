@@ -8,9 +8,9 @@
 
 namespace Voxy::Renderer {
 
-class OpenGL_Mesh : public Mesh {
+class OpenGL_Mesh : public IMesh {
 public:
-    OpenGL_Mesh(const Ref<Buffer> &indexBuffer);
+    OpenGL_Mesh(const Ref<IBuffer> &indexBuffer);
     ~OpenGL_Mesh();
 
     virtual void Bind() const override;
@@ -21,14 +21,14 @@ public:
     virtual Object &GetObject(const std::string &name) override;
     virtual void AddAttribute(const VertexAttribute &attrib) override;
 
-    inline virtual const Ref<Buffer> &GetIndexBuffer() const override {
+    inline virtual const Ref<IBuffer> &GetIndexBuffer() const override {
         return m_IndexBuffer;
     }
     virtual uint32_t GetID() const override { return m_ID; }
 
 private:
     uint32_t m_ID;
-    Ref<Buffer> m_IndexBuffer;
+    Ref<IBuffer> m_IndexBuffer;
     std::unordered_map<std::string, Object> m_Objects;
 };
 

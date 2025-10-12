@@ -7,7 +7,7 @@
 
 namespace Voxy::Renderer {
 
-class Shader {
+class IShader {
 public:
     virtual void Bind() const = 0;
     virtual void Unbind() const = 0;
@@ -18,8 +18,8 @@ public:
     virtual uint32_t GetID() const = 0;
 
 public:
-    static Ref<Shader> Create(const std::string &vertexSource,
-                              const std::string &fragmentSource);
+    static Ref<IShader> Create(const std::string &vertexSource,
+                               const std::string &fragmentSource);
 };
 
 } // namespace Voxy::Renderer

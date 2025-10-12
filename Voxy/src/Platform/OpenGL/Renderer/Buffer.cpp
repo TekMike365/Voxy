@@ -6,8 +6,8 @@
 
 namespace Voxy::Renderer {
 
-Ref<Buffer> Buffer::Create(BufferType type, size_t size, const void *data) {
-    return Ref<Buffer>(new OpenGL_Buffer(type, size, data));
+Ref<IBuffer> IBuffer::Create(BufferType type, size_t size, const void *data) {
+    return Ref<IBuffer>(new OpenGL_Buffer(type, size, data));
 }
 
 inline GLenum GetGLType(BufferType type) {

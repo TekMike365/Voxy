@@ -7,7 +7,7 @@
 
 namespace Voxy::Platform {
 
-class GLFW_Window : public Window {
+class GLFW_Window : public IWindow {
 public:
     GLFW_Window(WindowParams &params);
     ~GLFW_Window();
@@ -17,7 +17,7 @@ public:
     virtual uint32_t GetWidth() const override { return m_Params.width; }
     virtual uint32_t GetHeight() const override { return m_Params.height; }
 
-    inline virtual Ref<GraphicsContext> GetGraphicsContext() const override {
+    inline virtual Ref<IGraphicsContext> GetGraphicsContext() const override {
         return m_Params.graphicsContext;
     }
 

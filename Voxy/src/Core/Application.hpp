@@ -17,7 +17,7 @@ public:
 
     void Run();
 
-    Ref<Window> GetWindow() { return m_Window; }
+    Ref<IWindow> GetWindow() { return m_Window; }
 
 public:
     static Application *GetInstance() { return s_Instance; }
@@ -28,7 +28,7 @@ private:
 
 private:
     LayerStack m_LayerStack;
-    Ref<Window> m_Window;
+    Ref<IWindow> m_Window;
     bool m_IsRunning = true;
 
 private:
