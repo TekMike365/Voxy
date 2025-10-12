@@ -38,10 +38,6 @@ OpenGL_Mesh::OpenGL_Mesh(const Ref<Buffer> &indexBuffer)
 
 OpenGL_Mesh::~OpenGL_Mesh() { glDeleteVertexArrays(1, &m_ID); }
 
-void OpenGL_Mesh::Bind() const { glBindVertexArray(m_ID); }
-
-void OpenGL_Mesh::Unbind() const { glBindVertexArray(0); }
-
 void OpenGL_Mesh::AddObject(size_t pointer, size_t indexCount,
                             const std::string &name) {
     m_Objects[name] = {pointer, indexCount};
@@ -69,5 +65,7 @@ void OpenGL_Mesh::AddAttribute(const VertexAttribute &attrib) {
     attrib.buffer->Unbind();
     Unbind();
 }
+
+void OpenGL_Mesh::SBind(uint32_t id) { glBindVertexArray(id); }
 
 } // namespace Voxy::Renderer

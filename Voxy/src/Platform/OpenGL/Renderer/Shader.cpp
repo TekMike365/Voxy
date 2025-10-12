@@ -79,14 +79,12 @@ OpenGL_Shader::OpenGL_Shader(const std::string &vertexSource,
 
 OpenGL_Shader::~OpenGL_Shader() { glDeleteProgram(m_ID); }
 
-void OpenGL_Shader::Bind() const { glUseProgram(m_ID); }
-
-void OpenGL_Shader::Unbind() const { glUseProgram(0); }
-
 void OpenGL_Shader::UploadUniform(const glm::mat4 &mat,
                                   const std::string &name) const {
     int32_t location = m_UniformLocationMap.at(name);
     glUniformMatrix4fv(location, 1, false, glm::value_ptr(mat));
 }
+
+void OpenGL_Shader::SBind(uint32_t id) { glUseProgram(id); }
 
 } // namespace Voxy::Renderer
