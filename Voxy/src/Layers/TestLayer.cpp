@@ -2,54 +2,6 @@
 
 #include "Core/Application.hpp"
 
-const float g_Vertices[] = {
-    0.0f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, // endl
-    -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // endl
-    0.5f,  -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, // endl
-
-    0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, // endl
-    0.0f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f, // endl
-    1.0f,  0.5f,  0.0f, 1.0f, 1.0f, 0.0f, // endl
-};
-
-const float g_Offsets[] = {
-    -0.5f, 0.0f, 0.0f, // endl
-    0.5f,  0.0f, 0.0f, // endl
-};
-
-const uint32_t g_Indices[] = {
-    0, 1, 2, // endl
-    3, 4, 5  // endl
-};
-
-const char *g_VertexSource = R"(
-            #version 430 core
-
-            layout (location = 0) in vec3 aPos;
-            layout (location = 1) in vec3 aColor;
-            layout (location = 2) in vec3 aOffset;
-
-            out vec3 vColor;
-
-            void main()
-            {
-                vColor = aColor;
-                gl_Position = vec4(aPos + aOffset, 1.0);
-            }
-        )";
-
-const char *g_FragmentSource = R"(
-            #version 430 core
-
-            in vec3 vColor;
-            out vec4 fColor;
-
-            void main()
-            {
-                fColor = vec4(vColor, 1.0);
-            }
-        )";
-
 namespace Voxy {
 
 void TestLayer::DisplayOverlay(TimeStep deltaTime) {
@@ -81,6 +33,55 @@ void TestLayer::DisplayOverlay(TimeStep deltaTime) {
 }
 
 void TestLayer::SetupDemo() {
+
+    const float g_Vertices[] = {
+        0.0f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, // endl
+        -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // endl
+        0.5f,  -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, // endl
+
+        0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, // endl
+        0.0f,  0.5f,  0.0f, 1.0f, 0.0f, 1.0f, // endl
+        1.0f,  0.5f,  0.0f, 1.0f, 1.0f, 0.0f, // endl
+    };
+
+    const float g_Offsets[] = {
+        -0.5f, 0.0f, 0.0f, // endl
+        0.5f,  0.0f, 0.0f, // endl
+    };
+
+    const uint32_t g_Indices[] = {
+        0, 1, 2, // endl
+        3, 4, 5  // endl
+    };
+
+    const char *g_VertexSource = R"(
+            #version 430 core
+
+            layout (location = 0) in vec3 aPos;
+            layout (location = 1) in vec3 aColor;
+            layout (location = 2) in vec3 aOffset;
+
+            out vec3 vColor;
+
+            void main()
+            {
+                vColor = aColor;
+                gl_Position = vec4(aPos + aOffset, 1.0);
+            }
+        )";
+
+    const char *g_FragmentSource = R"(
+            #version 430 core
+
+            in vec3 vColor;
+            out vec4 fColor;
+
+            void main()
+            {
+                fColor = vec4(vColor, 1.0);
+            }
+        )";
+
     using namespace Renderer;
 
     m_Renderer = Application::GetInstance()
