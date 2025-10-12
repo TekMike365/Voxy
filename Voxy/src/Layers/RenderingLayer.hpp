@@ -6,8 +6,8 @@
 
 namespace Voxy {
 
-class RenderingLayer : public ILayer {
-    using IRenderer = Renderer::IRenderer;
+class RenderingLayer : public Layer {
+    using Renderer = Renderer::Renderer;
 
 public:
     virtual void OnAttach() override {
@@ -22,7 +22,7 @@ public:
     virtual const char *GetDebugName() const { return "RenderingLayer"; }
 
 private:
-    Ref<IRenderer> m_Renderer;
+    Ref<Renderer> m_Renderer;
 };
 
 } // namespace Voxy

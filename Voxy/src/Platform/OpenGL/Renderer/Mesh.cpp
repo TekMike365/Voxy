@@ -6,7 +6,7 @@
 
 namespace Voxy::Renderer {
 
-Ref<IMesh> Create(const Ref<IBuffer> &indexBuffer) {
+Ref<Mesh> Create(const Ref<Buffer> &indexBuffer) {
     return std::make_shared<OpenGL_Mesh>(indexBuffer);
 }
 
@@ -24,7 +24,7 @@ inline GLenum GetGLType(ShaderType type) {
     return -1;
 }
 
-OpenGL_Mesh::OpenGL_Mesh(const Ref<IBuffer> &indexBuffer)
+OpenGL_Mesh::OpenGL_Mesh(const Ref<Buffer> &indexBuffer)
     : m_IndexBuffer(indexBuffer) {
     VoxyAssert(indexBuffer->GetType() == Renderer::BufferType::Index,
                "Buffer isn't of type Index buffer");
@@ -47,7 +47,7 @@ void OpenGL_Mesh::AddObject(size_t pointer, size_t indexCount,
     m_Objects[name] = {pointer, indexCount};
 }
 
-IMesh::Object &OpenGL_Mesh::GetObject(const std::string &name) {
+Mesh::Object &OpenGL_Mesh::GetObject(const std::string &name) {
     return m_Objects.at(name);
 }
 

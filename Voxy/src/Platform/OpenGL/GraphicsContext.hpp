@@ -5,13 +5,13 @@
 
 namespace Voxy::Platform {
 
-class OpenGL_GraphicsContext : public IGraphicsContext {
+class OpenGL_GraphicsContext : public GraphicsContext {
 public:
     OpenGL_GraphicsContext();
 
     virtual void SetViewport(int x, int y, int width, int height) override;
 
-    inline virtual Ref<Renderer::IRenderer> GetRenderer() const override {
+    inline virtual Ref<Renderer::Renderer> GetRenderer() const override {
         return m_Renderer;
     }
 

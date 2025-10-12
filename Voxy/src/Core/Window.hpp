@@ -17,11 +17,11 @@ public:
     const char *title = "Title";
     uint32_t width = 1280;
     uint32_t height = 720;
-    Ref<IGraphicsContext> graphicsContext = nullptr;
+    Ref<GraphicsContext> graphicsContext = nullptr;
     EventCallbackFn Callback = nullptr;
 };
 
-class IWindow {
+class Window {
 public:
     virtual void Update(TimeStep deltaTime) = 0;
 
@@ -29,10 +29,10 @@ public:
     virtual uint32_t GetHeight() const = 0;
     virtual float GetAspect() const { return GetWidth() / GetHeight(); }
 
-    virtual Ref<IGraphicsContext> GetGraphicsContext() const = 0;
+    virtual Ref<GraphicsContext> GetGraphicsContext() const = 0;
 
 public:
-    static Ref<IWindow> Create(WindowParams params = WindowParams());
+    static Ref<Window> Create(WindowParams params = WindowParams());
 };
 
 } // namespace Voxy

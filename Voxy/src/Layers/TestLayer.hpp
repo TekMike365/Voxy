@@ -6,7 +6,7 @@
 
 namespace Voxy {
 
-class TestLayer : public ILayer {
+class TestLayer : public Layer {
 public:
     virtual void OnAttach() override {}
 

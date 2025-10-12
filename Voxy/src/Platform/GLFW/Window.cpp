@@ -9,7 +9,7 @@
 
 namespace Voxy {
 
-Ref<IWindow> IWindow::Create(WindowParams params) {
+Ref<Window> Window::Create(WindowParams params) {
     return std::make_shared<Platform::GLFW_Window>(params);
 }
 
@@ -27,7 +27,7 @@ GLFW_Window::GLFW_Window(WindowParams &params) : m_Params(params) {
     glfwMakeContextCurrent(m_HWND);
     glfwSwapInterval(1); // Enable vsync
 
-    m_Params.graphicsContext = IGraphicsContext::Create();
+    m_Params.graphicsContext = GraphicsContext::Create();
 
     glfwSetWindowUserPointer(m_HWND, this);
 

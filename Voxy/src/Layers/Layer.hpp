@@ -5,7 +5,7 @@
 
 namespace Voxy {
 
-class ILayer {
+class Layer {
 public:
     virtual void OnAttach() {}
     virtual void OnDetach() {}

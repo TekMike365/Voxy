@@ -7,8 +7,8 @@
 
 namespace Voxy::Renderer {
 
-static Ref<IShader> Create(const std::string &vertexSource,
-                           const std::string &fragmentSource) {
+static Ref<Shader> Create(const std::string &vertexSource,
+                          const std::string &fragmentSource) {
     return std::make_shared<OpenGL_Shader>(vertexSource, fragmentSource);
 }
 

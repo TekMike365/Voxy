@@ -18,7 +18,7 @@ Application::Application() : m_LayerStack("CoreUpdateStack") {
     VoxyAssert(!s_Instance, "There can oly be one instance of Application");
     s_Instance = this;
 
-    m_Window = Voxy::IWindow::Create({.Callback = BIND_APP_EVENT(OnEvent)});
+    m_Window = Voxy::Window::Create({.Callback = BIND_APP_EVENT(OnEvent)});
 
     m_LayerStack.PushOverlay(new RenderingLayer);
     m_LayerStack.PushOverlay(new GUILayer);
@@ -35,7 +35,7 @@ void Application::Run() {
     while (m_IsRunning) {
         m_Window->Update(deltaTime);
 
-        for (ILayer *layer : m_LayerStack)
+        for (Layer *layer : m_LayerStack)
             layer->OnUpdate(deltaTime);
 
         now = Time::Now();

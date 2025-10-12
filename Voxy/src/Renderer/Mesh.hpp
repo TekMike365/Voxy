@@ -40,7 +40,7 @@ inline uint32_t GetSTsize(ShaderType type) {
 
 struct VertexAttribute {
 public:
-    Ref<IBuffer> buffer = nullptr;
+    Ref<Buffer> buffer = nullptr;
     size_t stride = 0;
     size_t pointer = 0;
     uint32_t index = 0;
@@ -50,7 +50,7 @@ public:
 
     VertexAttribute() = default;
     VertexAttribute(uint32_t index, ShaderType type, size_t pointer,
-                    size_t stride, const Ref<IBuffer> &buffer,
+                    size_t stride, const Ref<Buffer> &buffer,
                     uint32_t divisor = 0, bool normalised = false)
         : type(type), index(index), stride(stride), pointer(pointer),
           buffer(buffer), divisor(divisor), normalised(normalised) {
@@ -59,7 +59,7 @@ public:
     }
 };
 
-class IMesh {
+class Mesh {
 public:
     struct Object {
         size_t pointer = 0;
@@ -75,11 +75,11 @@ public:
     virtual Object &GetObject(const std::string &name) = 0;
     virtual void AddAttribute(const VertexAttribute &attrib) = 0;
 
-    virtual const Ref<IBuffer> &GetIndexBuffer() const = 0;
+    virtual const Ref<Buffer> &GetIndexBuffer() const = 0;
     virtual uint32_t GetID() const = 0;
 
 public:
-    static Ref<IMesh> Create(const Ref<IBuffer> &indexBuffer);
+    static Ref<Mesh> Create(const Ref<Buffer> &indexBuffer);
 };
 
 } // namespace Voxy::Renderer

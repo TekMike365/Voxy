@@ -7,7 +7,7 @@
 
 namespace Voxy {
 
-Ref<IGraphicsContext> IGraphicsContext::Create() {
+Ref<GraphicsContext> GraphicsContext::Create() {
     return std::make_shared<Platform::OpenGL_GraphicsContext>();
 }
 

@@ -8,7 +8,7 @@
 
 namespace Voxy {
 
-class GUILayer : public ILayer {
+class GUILayer : public Layer {
 public:
     virtual void OnAttach() override { NewFrame(); }
 
