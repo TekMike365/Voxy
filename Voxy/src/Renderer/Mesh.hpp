@@ -62,8 +62,8 @@ public:
 class Mesh {
 public:
     struct Object {
-        size_t Pointer = 0;
-        size_t IndexCount = 0;
+        size_t pointer = 0;
+        size_t indexCount = 0;
     };
 
 public:
