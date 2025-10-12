@@ -18,10 +18,10 @@ inline GLenum GetGLType(ShaderType type) {
         return GL_UNSIGNED_INT;
     case STfloat:
         return GL_FLOAT;
+    default:
+        VoxyAssert(0, "Unknown Shader Type");
+        return -1;
     }
-
-    VoxyAssert(0, "Unknown Shader Type");
-    return -1;
 }
 
 OpenGL_Mesh::OpenGL_Mesh(const Ref<Buffer> &indexBuffer)

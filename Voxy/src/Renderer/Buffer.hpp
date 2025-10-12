@@ -8,6 +8,8 @@ enum class BufferType { None = 0, Vertex, Index };
 
 class Buffer {
 public:
+    virtual ~Buffer() = default;
+
     virtual void Bind() const = 0;
     virtual void Unbind() const = 0;
 

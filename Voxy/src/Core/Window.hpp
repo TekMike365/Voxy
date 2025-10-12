@@ -23,6 +23,8 @@ public:
 
 class Window {
 public:
+    virtual ~Window() = default;
+
     virtual void Update(TimeStep deltaTime) = 0;
 
     virtual uint32_t GetWidth() const = 0;

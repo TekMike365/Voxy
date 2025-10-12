@@ -16,10 +16,10 @@ inline GLenum GetGLType(BufferType type) {
         return GL_ARRAY_BUFFER;
     case BufferType::Index:
         return GL_ELEMENT_ARRAY_BUFFER;
+    default:
+        VoxyAssert(0, "Unknown Buffer Type");
+        return -1;
     }
-
-    VoxyAssert(0, "Unknown Buffer Type");
-    return -1;
 }
 
 OpenGL_Buffer::OpenGL_Buffer(BufferType type, size_t size, const void *data)

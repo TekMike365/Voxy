@@ -13,13 +13,15 @@ public:
     virtual void OnAttach() override { NewFrame(); }
 
     virtual void OnUpdate(TimeStep deltaTime) override {
+        (void)deltaTime;
+
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         NewFrame();
     }
 
-    virtual const char *GetDebugName() const { return "GUILayer"; }
+    virtual const char *GetDebugName() const override { return "GUILayer"; }
 
 private:
     void NewFrame() {
@@ -27,9 +29,6 @@ private:
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
-
-private:
-    bool m_FirstLoop = true;
 };
 
 } // namespace Voxy

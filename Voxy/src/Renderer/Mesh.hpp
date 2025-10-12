@@ -52,8 +52,8 @@ public:
     VertexAttribute(uint32_t index, ShaderType type, size_t pointer,
                     size_t stride, const Ref<Buffer> &buffer,
                     uint32_t divisor = 0, bool normalised = false)
-        : type(type), index(index), stride(stride), pointer(pointer),
-          buffer(buffer), divisor(divisor), normalised(normalised) {
+        : buffer(buffer), stride(stride), pointer(pointer), index(index),
+          divisor(divisor), type(type), normalised(normalised) {
         VoxyAssert(buffer->GetType() == BufferType::Vertex,
                    "VertexAttribute only accepts VertexBuffer");
     }
@@ -67,6 +67,8 @@ public:
     };
 
 public:
+    virtual ~Mesh() = default;
+
     virtual void Bind() const = 0;
     virtual void Unbind() const = 0;
 

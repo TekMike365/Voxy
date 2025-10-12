@@ -14,8 +14,8 @@ void OpenGL_Renderer::Render() {
 void OpenGL_Renderer::SubmitMesh(const Ref<Mesh> &mesh,
                                  const Ref<Shader> &shader,
                                  const std::string &objectName, size_t count) {
-    m_Commands.emplace_back(
-        (MeshRenderCommandStruct){mesh, shader, objectName, count});
+    MeshRenderCommandStruct mrcs = {mesh, shader, objectName, count};
+    m_Commands.emplace_back(mrcs);
 }
 
 void OpenGL_Renderer::RenderMeshes() {

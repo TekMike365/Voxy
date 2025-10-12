@@ -59,6 +59,7 @@ void Application::OnEvent(Event &e) {
 }
 
 bool Application::OnWindowClose(WindowCloseEvent &e) {
+    (void)e;
     VoxyCoreWarn("Shutting down");
     m_IsRunning = false;
     return true;

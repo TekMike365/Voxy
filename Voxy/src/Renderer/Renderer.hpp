@@ -8,6 +8,8 @@ namespace Voxy::Renderer {
 
 class Renderer {
 public:
+    virtual ~Renderer() = default;
+
     virtual void Render() = 0;
     virtual void SubmitMesh(const Ref<Mesh> &mesh, const Ref<Shader> &shader,
                             const std::string &objectName,

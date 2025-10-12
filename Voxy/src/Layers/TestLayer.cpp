@@ -108,6 +108,7 @@ void TestLayer::SetupDemo() {
 }
 
 void TestLayer::RenderDemo(TimeStep deltaTime) {
+    (void)deltaTime;
     m_Renderer->SubmitMesh(m_Mesh, m_Shader, "triangle", 2);
     m_Renderer->SubmitMesh(m_Mesh, m_Shader, "inversedTriangle");
 }

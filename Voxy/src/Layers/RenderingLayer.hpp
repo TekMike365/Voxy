@@ -17,9 +17,14 @@ public:
                          ->GetRenderer();
     }
 
-    virtual void OnUpdate(TimeStep deltaTime) override { m_Renderer->Render(); }
+    virtual void OnUpdate(TimeStep deltaTime) override {
+        (void)deltaTime;
+        m_Renderer->Render();
+    }
 
-    virtual const char *GetDebugName() const { return "RenderingLayer"; }
+    virtual const char *GetDebugName() const override {
+        return "RenderingLayer";
+    }
 
 private:
     Ref<Renderer> m_Renderer;

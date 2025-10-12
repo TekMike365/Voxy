@@ -77,6 +77,8 @@ GLFW_Window::~GLFW_Window() {
 }
 
 void GLFW_Window::Update(TimeStep deltaTime) {
+    (void)deltaTime;
+
     glfwPollEvents();
     glfwSwapBuffers(m_HWND);
 }

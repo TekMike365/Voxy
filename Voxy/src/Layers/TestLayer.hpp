@@ -23,9 +23,12 @@ public:
         RenderDemo(deltaTime);
     }
 
-    virtual bool OnEvent(Event &e) override { return false; }
+    virtual bool OnEvent(Event &e) override {
+        (void)e;
+        return false;
+    }
 
-    virtual const char *GetDebugName() const { return "TestLayer"; }
+    virtual const char *GetDebugName() const override { return "TestLayer"; }
 
 private:
     void DisplayOverlay(TimeStep deltaTime);
