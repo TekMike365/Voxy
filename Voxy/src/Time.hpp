@@ -4,7 +4,7 @@
 
 namespace Voxy {
 
-class TimeStep {
+struct TimeStep {
 public:
     TimeStep() = default;
     TimeStep(double milisec) : m_Milisec(milisec) {}
