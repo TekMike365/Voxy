@@ -85,6 +85,8 @@ void OpenGL_Shader::UploadUniform(const glm::mat4 &mat,
     glUniformMatrix4fv(location, 1, false, glm::value_ptr(mat));
 }
 
-void OpenGL_Shader::SBind(uint32_t id) { glUseProgram(id); }
+void OpenGL_Shader::Bind() const { glUseProgram(m_ID); }
+
+void OpenGL_Shader::Unbind() const { glUseProgram(0); }
 
 } // namespace Voxy::Renderer

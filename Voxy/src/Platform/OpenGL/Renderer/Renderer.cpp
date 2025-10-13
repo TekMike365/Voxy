@@ -19,7 +19,7 @@ void OpenGL_Renderer::SubmitMesh(const Ref<Mesh> &mesh,
                                  const std::string &objectName,
                                  const Transform &transform, size_t count) {
     m_CommandQ.PushDrawMeshCommand(
-        {transform, mesh->GetObject(objectName), shader, count, mesh->GetID()});
+        {transform, mesh->GetObject(objectName), mesh, shader, count});
 }
 
 } // namespace Voxy::Renderer

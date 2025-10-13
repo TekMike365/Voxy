@@ -7,7 +7,7 @@
 namespace Voxy::Renderer {
 
 void OpenGL_DrawMeshCommand::Execute() const {
-    OpenGL_Mesh::SBind(meshID);
+    mesh->Bind();
     shader->Bind();
 
     shader->UploadUniform(transform.ToMat4(), "uVP");
@@ -20,7 +20,7 @@ void OpenGL_DrawMeshCommand::Execute() const {
             GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
             (void *)(object.pointer * sizeof(uint32_t)), count);
 
-    OpenGL_Mesh::SUnbind();
+    mesh->Unbind();
     shader->Unbind();
 }
 

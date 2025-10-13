@@ -13,17 +13,13 @@ public:
                   const std::string &fragmentSource);
     ~OpenGL_Shader();
 
-    virtual void Bind() const override { SBind(m_ID); }
-    virtual void Unbind() const override { SUnbind(); }
+    virtual void Bind() const override;
+    virtual void Unbind() const override;
 
     virtual void UploadUniform(const glm::mat4 &mat,
                                const std::string &name) const override;
 
     virtual uint32_t GetID() const override { return m_ID; }
-
-public:
-    static void SBind(uint32_t id);
-    static void SUnbind() { SBind(0); }
 
 private:
     uint32_t m_ID;

@@ -13,8 +13,8 @@ public:
     OpenGL_Mesh(const Ref<Buffer> &indexBuffer);
     ~OpenGL_Mesh();
 
-    virtual void Bind() const override { SBind(m_ID); }
-    virtual void Unbind() const override { SUnbind(); }
+    virtual void Bind() const override;
+    virtual void Unbind() const override;
 
     virtual void AddObject(size_t pointer, size_t indexCount,
                            const std::string &name) override;
@@ -25,10 +25,6 @@ public:
         return m_IndexBuffer;
     }
     virtual uint32_t GetID() const override { return m_ID; }
-
-public:
-    static void SBind(uint32_t id);
-    static void SUnbind() { SBind(0); }
 
 private:
     uint32_t m_ID;

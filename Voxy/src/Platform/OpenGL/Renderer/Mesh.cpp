@@ -66,6 +66,8 @@ void OpenGL_Mesh::AddAttribute(const VertexAttribute &attrib) {
     Unbind();
 }
 
-void OpenGL_Mesh::SBind(uint32_t id) { glBindVertexArray(id); }
+void OpenGL_Mesh::Bind() const { glBindVertexArray(m_ID); }
+
+void OpenGL_Mesh::Unbind() const { glBindVertexArray(0); }
 
 } // namespace Voxy::Renderer

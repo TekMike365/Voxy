@@ -9,9 +9,9 @@ namespace Voxy::Renderer {
 struct OpenGL_DrawMeshCommand {
     Transform transform;
     Mesh::Object object;
-    Ref<Shader> shader; // TODO: No pointers >:(
+    Ref<Mesh> mesh;
+    Ref<Shader> shader;
     size_t count;
-    uint32_t meshID;
 
     void Execute() const;
 };
