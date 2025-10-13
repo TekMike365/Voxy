@@ -9,6 +9,8 @@
 #include "Renderer/Renderer.hpp"
 #include "Renderer/Shader.hpp"
 
+#include "Transform.hpp"
+
 namespace Voxy {
 
 class TestLayer : public Layer {
@@ -43,6 +45,8 @@ private:
     Ref<Renderer::Buffer> m_VertexBuffer;
     Ref<Renderer::Buffer> m_IndexBuffer;
     Ref<Renderer::Buffer> m_OffsetsBuffer;
+
+    Transform m_Transform;
 };
 
 } // namespace Voxy

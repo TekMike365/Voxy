@@ -61,12 +61,14 @@ void TestLayer::SetupDemo() {
             layout (location = 1) in vec3 aColor;
             layout (location = 2) in vec3 aOffset;
 
+            uniform mat4 uVP;
+
             out vec3 vColor;
 
             void main()
             {
                 vColor = aColor;
-                gl_Position = vec4(aPos + aOffset, 1.0);
+                gl_Position = uVP * vec4(aPos + aOffset, 1.0);
             }
         )";
 
@@ -106,12 +108,14 @@ void TestLayer::SetupDemo() {
         VertexAttribute(2, STfloat3, 0, 12, m_OffsetsBuffer, 1));
 
     m_Shader = Shader::Create(g_VertexSource, g_FragmentSource);
+
+    m_Transform.pos = glm::vec3(0.25f, 0.0f, 0.0f);
 }
 
 void TestLayer::RenderDemo(TimeStep deltaTime) {
     (void)deltaTime;
-    m_Renderer->SubmitMesh(m_Mesh, m_Shader, "triangle", 2);
-    m_Renderer->SubmitMesh(m_Mesh, m_Shader, "inversedTriangle");
+    m_Renderer->SubmitMesh(m_Mesh, m_Shader, "triangle", m_Transform, 2);
+    m_Renderer->SubmitMesh(m_Mesh, m_Shader, "inversedTriangle", m_Transform);
 }
 
 } // namespace Voxy

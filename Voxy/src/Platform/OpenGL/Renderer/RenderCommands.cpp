@@ -8,7 +8,9 @@ namespace Voxy::Renderer {
 
 void OpenGL_DrawMeshCommand::Execute() const {
     OpenGL_Mesh::SBind(meshID);
-    OpenGL_Shader::SBind(shaderID);
+    shader->Bind();
+
+    shader->UploadUniform(transform.ToMat4(), "uVP");
 
     if (count == 1)
         glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT,
@@ -19,7 +21,7 @@ void OpenGL_DrawMeshCommand::Execute() const {
             (void *)(object.pointer * sizeof(uint32_t)), count);
 
     OpenGL_Mesh::SUnbind();
-    OpenGL_Shader::SUnbind();
+    shader->Unbind();
 }
 
 } // namespace Voxy::Renderer
