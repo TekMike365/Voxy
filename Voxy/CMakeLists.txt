@@ -14,6 +14,8 @@ add_executable(Voxy
     "src/Platform/OpenGL/Renderer/Buffer.cpp"
     "src/Platform/OpenGL/Renderer/Mesh.cpp"
     "src/Platform/OpenGL/Renderer/Shader.cpp"
+    "src/Platform/OpenGL/Renderer/RenderCommands.cpp"
+    "src/Platform/OpenGL/Renderer/CommandQueue.cpp"
 
     "src/Layers/LayerStack.cpp"
     "src/Layers/TestLayer.cpp"
