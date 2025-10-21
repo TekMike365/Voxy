@@ -12,7 +12,7 @@ add_executable(Voxy
 
     "src/Platform/OpenGL/Renderer/Renderer.cpp"
     "src/Platform/OpenGL/Renderer/Buffer.cpp"
-    "src/Platform/OpenGL/Renderer/Mesh.cpp"
+    "src/Platform/OpenGL/Renderer/VertexArray.cpp"
     "src/Platform/OpenGL/Renderer/Shader.cpp"
     "src/Platform/OpenGL/Renderer/RenderCommands.cpp"
     "src/Platform/OpenGL/Renderer/CommandQueue.cpp"

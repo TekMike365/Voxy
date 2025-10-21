@@ -8,9 +8,11 @@ namespace Voxy::Renderer {
 class OpenGL_Renderer : public Renderer {
 public:
     virtual void Render() override;
-    virtual void SubmitMesh(const Ref<Mesh> &mesh, const Ref<Shader> &shader,
-                            const std::string &objectName,
-                            const Transform &transform, size_t count) override;
+    virtual void SubmitVertexArray(const Ref<VertexArray> &mesh,
+                                   const Ref<Shader> &shader,
+                                   const std::string &objectName,
+                                   const Transform &transform,
+                                   size_t count) override;
 
 private:
     OpenGL_CommandQueue m_CommandQ;

@@ -4,14 +4,14 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Renderer/Mesh.hpp"
+#include "Renderer/VertexArray.hpp"
 
 namespace Voxy::Renderer {
 
-class OpenGL_Mesh : public Mesh {
+class OpenGL_VertexArray : public VertexArray {
 public:
-    OpenGL_Mesh(const Ref<Buffer> &indexBuffer);
-    ~OpenGL_Mesh();
+    OpenGL_VertexArray(const Ref<Buffer> &indexBuffer);
+    ~OpenGL_VertexArray();
 
     virtual void Bind() const override;
     virtual void Unbind() const override;

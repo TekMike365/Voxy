@@ -1,4 +1,4 @@
-#include "Mesh.hpp"
+#include "VertexArray.hpp"
 
 #include <glad/glad.h>
 
@@ -6,8 +6,8 @@
 
 namespace Voxy::Renderer {
 
-Ref<Mesh> Mesh::Create(const Ref<Buffer> &indexBuffer) {
-    return std::make_shared<OpenGL_Mesh>(indexBuffer);
+Ref<VertexArray> VertexArray::Create(const Ref<Buffer> &indexBuffer) {
+    return std::make_shared<OpenGL_VertexArray>(indexBuffer);
 }
 
 inline GLenum GetGLType(ShaderType type) {
@@ -24,7 +24,7 @@ inline GLenum GetGLType(ShaderType type) {
     }
 }
 
-OpenGL_Mesh::OpenGL_Mesh(const Ref<Buffer> &indexBuffer)
+OpenGL_VertexArray::OpenGL_VertexArray(const Ref<Buffer> &indexBuffer)
     : m_IndexBuffer(indexBuffer) {
     VoxyAssert(indexBuffer->GetType() == Renderer::BufferType::Index,
                "Buffer isn't of type Index buffer");
@@ -36,18 +36,18 @@ OpenGL_Mesh::OpenGL_Mesh(const Ref<Buffer> &indexBuffer)
     m_IndexBuffer->Unbind();
 }
 
-OpenGL_Mesh::~OpenGL_Mesh() { glDeleteVertexArrays(1, &m_ID); }
+OpenGL_VertexArray::~OpenGL_VertexArray() { glDeleteVertexArrays(1, &m_ID); }
 
-void OpenGL_Mesh::AddObject(size_t pointer, size_t indexCount,
-                            const std::string &name) {
+void OpenGL_VertexArray::AddObject(size_t pointer, size_t indexCount,
+                                   const std::string &name) {
     m_Objects[name] = {pointer, indexCount};
 }
 
-Mesh::Object &OpenGL_Mesh::GetObject(const std::string &name) {
+VertexArray::Object &OpenGL_VertexArray::GetObject(const std::string &name) {
     return m_Objects.at(name);
 }
 
-void OpenGL_Mesh::AddAttribute(const VertexAttribute &attrib) {
+void OpenGL_VertexArray::AddAttribute(const VertexAttribute &attrib) {
     Bind();
     attrib.buffer->Bind();
 
@@ -66,8 +66,8 @@ void OpenGL_Mesh::AddAttribute(const VertexAttribute &attrib) {
     Unbind();
 }
 
-void OpenGL_Mesh::Bind() const { glBindVertexArray(m_ID); }
+void OpenGL_VertexArray::Bind() const { glBindVertexArray(m_ID); }
 
-void OpenGL_Mesh::Unbind() const { glBindVertexArray(0); }
+void OpenGL_VertexArray::Unbind() const { glBindVertexArray(0); }
 
 } // namespace Voxy::Renderer

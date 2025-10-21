@@ -1,15 +1,15 @@
 #pragma once
 
 #include "ECS/Transform.hpp"
-#include "Mesh.hpp"
 #include "Renderer/Shader.hpp"
+#include "VertexArray.hpp"
 
 namespace Voxy::Renderer {
 
-struct OpenGL_DrawMeshCommand {
+struct OpenGL_DrawVertexArrayCommand {
     Transform transform;
-    Mesh::Object object;
-    Ref<Mesh> mesh;
+    VertexArray::Object object;
+    Ref<VertexArray> mesh;
     Ref<Shader> shader;
     size_t count;
 

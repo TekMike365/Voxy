@@ -59,7 +59,7 @@ public:
     }
 };
 
-class Mesh {
+class VertexArray {
 public:
     struct Object {
         size_t pointer = 0;
@@ -67,7 +67,7 @@ public:
     };
 
 public:
-    virtual ~Mesh() = default;
+    virtual ~VertexArray() = default;
 
     virtual void Bind() const = 0;
     virtual void Unbind() const = 0;
@@ -81,7 +81,7 @@ public:
     virtual uint32_t GetID() const = 0;
 
 public:
-    static Ref<Mesh> Create(const Ref<Buffer> &indexBuffer);
+    static Ref<VertexArray> Create(const Ref<Buffer> &indexBuffer);
 };
 
 } // namespace Voxy::Renderer

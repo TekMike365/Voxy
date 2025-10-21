@@ -2,8 +2,8 @@
 
 #include <glad/glad.h>
 
-#include "Mesh.hpp"
 #include "Shader.hpp"
+#include "VertexArray.hpp"
 
 namespace Voxy::Renderer {
 
@@ -14,11 +14,12 @@ void OpenGL_Renderer::Render() {
     m_CommandQ.Flush();
 }
 
-void OpenGL_Renderer::SubmitMesh(const Ref<Mesh> &mesh,
-                                 const Ref<Shader> &shader,
-                                 const std::string &objectName,
-                                 const Transform &transform, size_t count) {
-    m_CommandQ.PushDrawMeshCommand(
+void OpenGL_Renderer::SubmitVertexArray(const Ref<VertexArray> &mesh,
+                                        const Ref<Shader> &shader,
+                                        const std::string &objectName,
+                                        const Transform &transform,
+                                        size_t count) {
+    m_CommandQ.PushDrawVertexArrayCommand(
         {transform, mesh->GetObject(objectName), mesh, shader, count});
 }
 

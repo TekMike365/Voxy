@@ -4,19 +4,19 @@
 
 namespace Voxy::Renderer {
 
-void OpenGL_CommandQueue::PushDrawMeshCommand(
-    const OpenGL_DrawMeshCommand &cmd) {
-    m_CommandQ.Push(RenderCommand::DrawMesh);
-    m_DrawMeshQ.Push(cmd);
+void OpenGL_CommandQueue::PushDrawVertexArrayCommand(
+    const OpenGL_DrawVertexArrayCommand &cmd) {
+    m_CommandQ.Push(RenderCommand::DrawVertexArray);
+    m_DrawVertexArrayQ.Push(cmd);
 }
 
 void OpenGL_CommandQueue::Flush() {
     while (!m_CommandQ.IsEmpty()) {
         switch (*m_CommandQ.Pop()) {
-        case RenderCommand::DrawMesh:
-            VoxyAssert(!m_DrawMeshQ.IsEmpty(),
+        case RenderCommand::DrawVertexArray:
+            VoxyAssert(!m_DrawVertexArrayQ.IsEmpty(),
                        "This shouldn't happen (I think).");
-            m_DrawMeshQ.Pop()->Execute();
+            m_DrawVertexArrayQ.Pop()->Execute();
             break;
         default:
             break;
@@ -25,7 +25,7 @@ void OpenGL_CommandQueue::Flush() {
 
     // This feels ugly
     m_CommandQ.Clear();
-    m_DrawMeshQ.Clear();
+    m_DrawVertexArrayQ.Clear();
 }
 
 } // namespace Voxy::Renderer

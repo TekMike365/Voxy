@@ -8,11 +8,11 @@ namespace Voxy::Renderer {
 
 class OpenGL_CommandQueue {
 public:
-    void PushDrawMeshCommand(const OpenGL_DrawMeshCommand &cmd);
+    void PushDrawVertexArrayCommand(const OpenGL_DrawVertexArrayCommand &cmd);
     void Flush();
 
 private:
-    enum class RenderCommand { None = 0, DrawMesh };
+    enum class RenderCommand { None = 0, DrawVertexArray };
 
     template <typename T> class VectorQueue {
     public:
@@ -37,7 +37,7 @@ private:
 
 private:
     VectorQueue<RenderCommand> m_CommandQ;
-    VectorQueue<OpenGL_DrawMeshCommand> m_DrawMeshQ;
+    VectorQueue<OpenGL_DrawVertexArrayCommand> m_DrawVertexArrayQ;
 };
 
 } // namespace Voxy::Renderer

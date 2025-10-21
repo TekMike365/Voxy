@@ -5,9 +5,9 @@
 #include "Layer.hpp"
 
 #include "Renderer/Buffer.hpp"
-#include "Renderer/Mesh.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Renderer/Shader.hpp"
+#include "Renderer/VertexArray.hpp"
 
 #include "ECS/Transform.hpp"
 
@@ -38,7 +38,7 @@ private:
     void RenderDemo(TimeStep deltaTime);
 
 private:
-    Ref<Renderer::Mesh> m_Mesh;
+    Ref<Renderer::VertexArray> m_VertexArray;
     Ref<Renderer::Shader> m_Shader;
     Ref<Renderer::Renderer> m_Renderer;
 

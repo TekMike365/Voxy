@@ -6,7 +6,7 @@
 
 namespace Voxy::Renderer {
 
-void OpenGL_DrawMeshCommand::Execute() const {
+void OpenGL_DrawVertexArrayCommand::Execute() const {
     mesh->Bind();
     shader->Bind();
 

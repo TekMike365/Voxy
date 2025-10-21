@@ -99,12 +99,14 @@ void TestLayer::SetupDemo() {
     m_OffsetsBuffer =
         Buffer::Create(BufferType::Vertex, sizeof(g_Offsets), g_Offsets);
 
-    m_Mesh = Mesh::Create(m_IndexBuffer);
-    m_Mesh->AddObject(0, 3, "triangle");
-    m_Mesh->AddObject(3, 3, "inversedTriangle");
-    m_Mesh->AddAttribute(VertexAttribute(0, STfloat3, 0, 24, m_VertexBuffer));
-    m_Mesh->AddAttribute(VertexAttribute(1, STfloat3, 12, 24, m_VertexBuffer));
-    m_Mesh->AddAttribute(
+    m_VertexArray = VertexArray::Create(m_IndexBuffer);
+    m_VertexArray->AddObject(0, 3, "triangle");
+    m_VertexArray->AddObject(3, 3, "inversedTriangle");
+    m_VertexArray->AddAttribute(
+        VertexAttribute(0, STfloat3, 0, 24, m_VertexBuffer));
+    m_VertexArray->AddAttribute(
+        VertexAttribute(1, STfloat3, 12, 24, m_VertexBuffer));
+    m_VertexArray->AddAttribute(
         VertexAttribute(2, STfloat3, 0, 12, m_OffsetsBuffer, 1));
 
     m_Shader = Shader::Create(g_VertexSource, g_FragmentSource);
@@ -114,8 +116,10 @@ void TestLayer::SetupDemo() {
 
 void TestLayer::RenderDemo(TimeStep deltaTime) {
     (void)deltaTime;
-    m_Renderer->SubmitMesh(m_Mesh, m_Shader, "triangle", m_Transform, 2);
-    m_Renderer->SubmitMesh(m_Mesh, m_Shader, "inversedTriangle", m_Transform);
+    m_Renderer->SubmitVertexArray(m_VertexArray, m_Shader, "triangle",
+                                  m_Transform, 2);
+    m_Renderer->SubmitVertexArray(m_VertexArray, m_Shader, "inversedTriangle",
+                                  m_Transform);
 }
 
 } // namespace Voxy
