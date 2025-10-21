@@ -19,6 +19,9 @@ add_executable(Voxy
 
     "src/Layers/LayerStack.cpp"
     "src/Layers/TestLayer.cpp"
+
+    "src/ECS/Scene.cpp"
+    "src/ECS/Entity.cpp"
 )
 target_link_libraries(Voxy PRIVATE
     spdlog

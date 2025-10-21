@@ -9,7 +9,7 @@
 #include "Renderer/Renderer.hpp"
 #include "Renderer/Shader.hpp"
 
-#include "Transform.hpp"
+#include "ECS/Transform.hpp"
 
 namespace Voxy {
 

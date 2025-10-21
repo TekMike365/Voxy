@@ -4,7 +4,7 @@
 #include "Mesh.hpp"
 #include "Shader.hpp"
 
-#include "Transform.hpp"
+#include "ECS/Transform.hpp"
 
 namespace Voxy::Renderer {
 
