@@ -30,10 +30,10 @@ void Application::Run() {
     while (m_IsRunning) {
         BeginFrame();
 
-        for (Layer *layer : m_LayerStack)
+        for (auto &layer : m_LayerStack)
             layer->OnUpdate(deltaTime);
 
-        for (Layer *layer : m_LayerStack)
+        for (auto &layer : m_LayerStack)
             layer->OnRender();
 
         m_Window->Update(deltaTime);
@@ -55,9 +55,10 @@ void Application::OnEvent(Event &e) {
     if (handled)
         return;
 
-    for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++)
+    for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++) {
         if ((*it)->OnEvent(e))
             break;
+    }
 }
 
 bool Application::OnWindowClose(WindowCloseEvent &e) {

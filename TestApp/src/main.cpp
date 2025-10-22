@@ -8,7 +8,7 @@ int main(void) {
 
     auto *app = new Voxy::Application;
 
-    app->PushLayer(new TestLayer());
+    app->AddLayer<TestLayer>();
 
     app->Run();
     delete app;

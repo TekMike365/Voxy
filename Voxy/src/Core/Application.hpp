@@ -17,8 +17,10 @@ public:
 
     void Run();
 
-    inline void PushLayer(Layer *layer) { m_LayerStack.PushLayer(layer); }
-    inline void PushOverlay(Layer *layer) { m_LayerStack.PushOverlay(layer); }
+    template <typename T> inline void AddLayer() { m_LayerStack.AddLayer<T>(); }
+    template <typename T> inline void AddOverlay() {
+        m_LayerStack.AddOverlay<T>();
+    }
 
     Ref<Window> GetWindow() { return m_Window; }
 
