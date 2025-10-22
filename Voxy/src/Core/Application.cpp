@@ -1,11 +1,10 @@
 #include "Application.hpp"
 
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+
 #include "Log.hpp"
 #include "Time.hpp"
-
-#include "Layers/GUILayer.hpp"
-#include "Layers/RenderingLayer.hpp"
-#include "Layers/TestLayer.hpp"
 
 #define BIND_APP_EVENT(fn)                                                     \
     std::bind(&Application::fn, this, std::placeholders::_1)
@@ -19,13 +18,9 @@ Application::Application() : m_LayerStack("CoreUpdateStack") {
     s_Instance = this;
 
     m_Window = Voxy::Window::Create({.Callback = BIND_APP_EVENT(OnEvent)});
-
-    m_LayerStack.PushOverlay(new RenderingLayer);
-    m_LayerStack.PushOverlay(new GUILayer);
-    m_LayerStack.PushLayer(new TestLayer);
 }
 
-Application::~Application() {}
+Application::~Application() { s_Instance = nullptr; }
 
 void Application::Run() {
     VoxyCoreInfo("Main loop started");
@@ -33,10 +28,17 @@ void Application::Run() {
     TimeStep deltaTime = 0;
     Time now, then = Time::Now();
     while (m_IsRunning) {
-        m_Window->Update(deltaTime);
+        BeginFrame();
 
         for (Layer *layer : m_LayerStack)
             layer->OnUpdate(deltaTime);
+
+        for (Layer *layer : m_LayerStack)
+            layer->OnRender();
+
+        m_Window->Update(deltaTime);
+
+        EndFrame();
 
         now = Time::Now();
         deltaTime = now - then;
@@ -63,6 +65,19 @@ bool Application::OnWindowClose(WindowCloseEvent &e) {
     VoxyCoreWarn("Shutting down");
     m_IsRunning = false;
     return true;
+}
+
+void Application::BeginFrame() {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+}
+
+void Application::EndFrame() {
+    m_Window->GetGraphicsContext()->GetRenderer()->Render();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 } // namespace Voxy

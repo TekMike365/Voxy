@@ -43,3 +43,4 @@ set(ENTT_INCLUDE "${PROJECT_SOURCE_DIR}/vendor/entt")
 
 # Adding projects
 add_subdirectory(Voxy)
+add_subdirectory(TestApp)

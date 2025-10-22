@@ -2,40 +2,38 @@
 
 #include <imgui.h>
 
-#include "Layer.hpp"
+#include <Layers/Layer.hpp>
 
-#include "Renderer/Buffer.hpp"
-#include "Renderer/Renderer.hpp"
-#include "Renderer/Shader.hpp"
-#include "Renderer/VertexArray.hpp"
+#include <Renderer/Buffer.hpp>
+#include <Renderer/Renderer.hpp>
+#include <Renderer/Shader.hpp>
+#include <Renderer/VertexArray.hpp>
 
-#include "ECS/Transform.hpp"
+#include <ECS/Transform.hpp>
 
-namespace Voxy {
+using namespace Voxy; // -_(:3)_-
 
 class TestLayer : public Layer {
 public:
     virtual void OnAttach() override { SetupDemo(); }
 
-    virtual void OnDetach() override {}
+    virtual void OnUpdate(TimeStep deltaTime) override { m_DT = deltaTime; }
 
-    virtual void OnUpdate(TimeStep deltaTime) override {
+    virtual void OnRender() override {
         // ImGui::ShowDemoWindow();
-        DisplayOverlay(deltaTime);
-        RenderDemo(deltaTime);
-    }
-
-    virtual bool OnEvent(Event &e) override {
-        (void)e;
-        return false;
+        DisplayOverlay();
+        RenderDemo();
     }
 
     virtual const char *GetDebugName() const override { return "TestLayer"; }
 
 private:
-    void DisplayOverlay(TimeStep deltaTime);
+    void DisplayOverlay();
     void SetupDemo();
-    void RenderDemo(TimeStep deltaTime);
+    void RenderDemo();
+
+private:
+    TimeStep m_DT = 0;
 
 private:
     Ref<Renderer::VertexArray> m_VertexArray;
@@ -48,5 +46,3 @@ private:
 
     Transform m_Transform;
 };
-
-} // namespace Voxy

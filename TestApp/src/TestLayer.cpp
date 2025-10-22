@@ -2,9 +2,7 @@
 
 #include "Core/Application.hpp"
 
-namespace Voxy {
-
-void TestLayer::DisplayOverlay(TimeStep deltaTime) {
+void TestLayer::DisplayOverlay() {
     const ImGuiViewport *viewport = ImGui::GetMainViewport();
     ImVec2 workPos = viewport->WorkPos; // Top-left
     ImVec2 workSize = viewport->WorkSize;
@@ -27,8 +25,8 @@ void TestLayer::DisplayOverlay(TimeStep deltaTime) {
         ImGuiWindowFlags_NoMove;
 
     ImGui::Begin("Overlay", nullptr, windowFlags);
-    ImGui::Text("Frame: %.3f ms (%.1f FPS)", deltaTime.Miliseconds(),
-                1.0f / deltaTime.Seconds());
+    ImGui::Text("Frame: %.3f ms (%.1f FPS)", m_DT.Miliseconds(),
+                1.0f / m_DT.Seconds());
     ImGui::End();
 }
 
@@ -114,12 +112,9 @@ void TestLayer::SetupDemo() {
     m_Transform.pos = glm::vec3(0.25f, 0.0f, 0.0f);
 }
 
-void TestLayer::RenderDemo(TimeStep deltaTime) {
-    (void)deltaTime;
+void TestLayer::RenderDemo() {
     m_Renderer->SubmitVertexArray(m_VertexArray, m_Shader, "triangle",
                                   m_Transform, 2);
     m_Renderer->SubmitVertexArray(m_VertexArray, m_Shader, "inversedTriangle",
                                   m_Transform);
 }
-
-} // namespace Voxy

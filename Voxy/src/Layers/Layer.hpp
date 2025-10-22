@@ -11,11 +11,12 @@ public:
 
     virtual void OnAttach() {}
     virtual void OnDetach() {}
-    virtual void OnUpdate(TimeStep deltaTime) { (void)deltaTime; }
     virtual bool OnEvent(Event &e) {
         (void)e;
         return false;
     }
+    virtual void OnUpdate(TimeStep deltaTime) { (void)deltaTime; }
+    virtual void OnRender() {}
 
     virtual const char *GetDebugName() const = 0;
 };

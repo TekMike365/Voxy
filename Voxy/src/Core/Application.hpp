@@ -17,6 +17,9 @@ public:
 
     void Run();
 
+    inline void PushLayer(Layer *layer) { m_LayerStack.PushLayer(layer); }
+    inline void PushOverlay(Layer *layer) { m_LayerStack.PushOverlay(layer); }
+
     Ref<Window> GetWindow() { return m_Window; }
 
 public:
@@ -25,6 +28,8 @@ public:
 private:
     void OnEvent(Event &e);
     bool OnWindowClose(WindowCloseEvent &e);
+    void BeginFrame();
+    void EndFrame();
 
 private:
     LayerStack m_LayerStack;
