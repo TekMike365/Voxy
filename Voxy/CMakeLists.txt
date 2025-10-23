@@ -1,42 +1,19 @@
+include("Dependencies.cmake")
+
 add_library(Voxy STATIC
-    "src/Log.cpp"
-    "src/Setup.cpp"
-    "src/Core/Application.cpp"
-
-    "src/Platform/GLFW/GLFW.cpp"
-    "src/Platform/GLFW/Window.cpp"
-
-    "src/Platform/OpenGL/OpenGL.cpp"
-    "src/Platform/OpenGL/GraphicsContext.cpp"
-
-    "src/Platform/OpenGL/Renderer/Renderer.cpp"
-    "src/Platform/OpenGL/Renderer/Buffer.cpp"
-    "src/Platform/OpenGL/Renderer/VertexArray.cpp"
-    "src/Platform/OpenGL/Renderer/Shader.cpp"
-    "src/Platform/OpenGL/Renderer/RenderCommands.cpp"
-    "src/Platform/OpenGL/Renderer/CommandQueue.cpp"
-
-    "src/Layers/LayerStack.cpp"
-
-    "src/ECS/Scene.cpp"
-    "src/ECS/Entity.cpp"
+    "src/tmp.cpp"
 )
-target_link_libraries(Voxy
-    PRIVATE
-    glfw
+
+target_link_libraries(Voxy PRIVATE
     OpenGL::GL
     glad
-
-    PUBLIC
-    glm
-    imgui
-    spdlog
+    # glfw
+    # glm
+    # imgui
+    # spdlog
 )
-target_include_directories(Voxy
-    PRIVATE
-    "${ENTT_INCLUDE}"
 
-    PUBLIC # for now
+target_include_directories(Voxy PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
