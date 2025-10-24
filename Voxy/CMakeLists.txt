@@ -1,29 +1,20 @@
+project(Voxy)
 include("Dependencies.cmake")
 
-add_library(Voxy STATIC
-    "src/tmp.cpp"
+add_library(${PROJECT_NAME} STATIC
+    "src/Test.cpp"
 )
 
-target_link_libraries(Voxy PRIVATE
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    spdlog
+    glfw
     OpenGL::GL
     glad
-    # glfw
-    # glm
-    # imgui
-    # spdlog
+    glm
 )
 
-target_include_directories(Voxy PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+target_include_directories(${PROJECT_NAME} PUBLIC
+    "${PROJECT_SOURCE_DIR}/src"
 )
 
-set_property(TARGET Voxy PROPERTY CXX_STANDARD 20)
-set_property(TARGET Voxy PROPERTY CXX_STANDARD_REQUIRED ON)
-set_property(TARGET Voxy PROPERTY CXX_EXTENSIONS OFF)
-
-# Compiler settings
-if (MSVC)
-    message(ERROR "Complier settings (MSVC): Why do you use this crap???")
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -pedantic")
-endif()
+include("${CMAKE_SOURCE_DIR}/CompilerSettings.cmake")
