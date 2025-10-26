@@ -1,9 +1,8 @@
 #pragma once
 
+#include "Helpers.hpp"
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
-
-#include "Helpers.hpp"
 
 namespace Voxy::Log {
 
