@@ -7,6 +7,9 @@ add_library(${PROJECT_NAME} STATIC
     "src/Voxy/Log.cpp"
     "src/Voxy/Voxy.cpp"
     "src/Voxy/Application.cpp"
+
+    "src/Platform/Platform.cpp"
+    "src/Platform/GLFW/GLFWWindow.cpp"
 )
 
 target_include_directories(${PROJECT_NAME}

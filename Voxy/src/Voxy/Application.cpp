@@ -1,5 +1,6 @@
 #include "Application.hpp"
 
+#include "Platform/Platform.hpp"
 #include <GLFW/glfw3.h>
 
 namespace Voxy {
@@ -9,46 +10,28 @@ Application::Application() {}
 Application::~Application() {}
 
 void Application::Run() {
-    GLFWwindow *window;
-    GLFWwindow *window2;
-
     /* Initialize the library */
     if (!glfwInit())
         return;
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window) {
-        glfwTerminate();
-        return;
-    }
-
-    window2 = glfwCreateWindow(640, 480, "Hello World #2", NULL, NULL);
-    if (!window2) {
-        glfwTerminate();
-        return;
-    }
+    Ref<IWindow> wnd1 = Platform::CreateWindow();
+    Ref<IWindow> wnd2 = Platform::CreateWindow();
 
     bool running = true;
     /* Loop until the user closes the window */
     while (running) {
-        bool quit = true;
+        if (wnd1)
+            wnd1->Update();
+        if (wnd2)
+            wnd2->Update();
 
-        glfwMakeContextCurrent(window);
-        if (!glfwWindowShouldClose(window))
-            quit = false;
-        glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        if (wnd1 && wnd1->ShouldClose())
+            wnd1.reset();
+        if (wnd2 && wnd2->ShouldClose())
+            wnd2.reset();
 
-        glfwMakeContextCurrent(window2);
-        if (!glfwWindowShouldClose(window2))
-            quit = false;
-        glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-
-        running = !quit;
+        if (!wnd1 && !wnd2)
+            running = false;
     }
 
     glfwTerminate();
