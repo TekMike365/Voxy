@@ -1,4 +1,3 @@
-#include <Voxy/Log.hpp>
-#include <Voxy/Test.hpp>
+#include <Voxy/Voxy.hpp>
 
 int main(void) { Voxy::Init(); }
