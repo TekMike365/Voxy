@@ -11,6 +11,7 @@ public:
     virtual ~GLFWWindow();
 
     virtual void Update() override;
+    virtual void MakeContextCurrent() override;
     virtual inline bool ShouldClose() override { return _shouldClose; }
 
 private:

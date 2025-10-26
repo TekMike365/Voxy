@@ -18,17 +18,20 @@ GLFWWindow::GLFWWindow(const WindowParams &params)
 GLFWWindow::~GLFWWindow() { glfwDestroyWindow(_hwnd); }
 
 void GLFWWindow::Update() {
-    glfwMakeContextCurrent(_hwnd); // TODO: less swaps
-    glfwSwapInterval(1);           // enable VSync (needs bound context)
-
     _shouldClose = glfwWindowShouldClose(_hwnd);
 
     // Render
     glClearColor(RGBto3f(0xf4a261), 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+
     glfwSwapBuffers(_hwnd);
 
     glfwPollEvents();
+}
+
+void GLFWWindow::MakeContextCurrent() {
+    glfwMakeContextCurrent(_hwnd); // TODO: less swaps
+    glfwSwapInterval(1);           // enable VSync (needs bound context)
 }
 
 } // namespace Voxy::Platform

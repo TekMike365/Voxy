@@ -6,7 +6,10 @@
 
 namespace Voxy {
 
-Application::Application() { _window = Platform::CreateWindow(); }
+Application::Application() {
+    _window = Platform::CreateWindow();
+    _window->MakeContextCurrent();
+}
 
 Application::~Application() {}
 
