@@ -15,6 +15,10 @@ Application::~Application() {}
 void Application::Run() {
     Log::Info("Application started.");
 
+    auto wnd2 = Platform::CreateWindow({640, 480, "wnd2"});
+
+    _window->MakeContextCurrent();
+
     _running = true;
     while (_running) {
         BeginFrame();
@@ -30,6 +34,12 @@ void Application::Run() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         _window->Update();
+
+        if (wnd2) {
+            wnd2->Update();
+            if (wnd2->ShouldClose())
+                wnd2.reset();
+        }
 
         EndFrame();
 

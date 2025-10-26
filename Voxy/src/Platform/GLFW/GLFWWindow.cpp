@@ -18,11 +18,15 @@ GLFWWindow::GLFWWindow(const WindowParams &params)
     glfwMakeContextCurrent(_hwnd);
     glfwSwapInterval(1); // enable VSync (needs bound context)
 
-    Log::Info("New GLFW window created: {}", _params.title);
+    Log::Trace("GLFW window created: {} (0x{:x})", _params.title,
+               (size_t)_hwnd);
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
+
+    _imGuiContext = ImGui::CreateContext();
+    ImGui::SetCurrentContext(_imGuiContext);
+
     ImGuiIO &io = ImGui::GetIO();
     (void)io;
     io.ConfigFlags |=
@@ -54,18 +58,30 @@ GLFWWindow::GLFWWindow(const WindowParams &params)
 }
 
 GLFWWindow::~GLFWWindow() {
-    glfwDestroyWindow(_hwnd);
+    auto *context = ImGui::GetCurrentContext();
+    ImGui::SetCurrentContext(_imGuiContext);
 
-    // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
+    ImGui::DestroyContext(_imGuiContext);
+
+    glfwDestroyWindow(_hwnd);
+
+    ImGui::SetCurrentContext(context);
+
+    Log::Trace("GLFW window terminated: {} (0x{:x})", _params.title,
+               (size_t)_hwnd);
 }
 
 void GLFWWindow::Update() {
     _shouldClose = glfwWindowShouldClose(_hwnd);
     glfwSwapBuffers(_hwnd);
     glfwPollEvents();
+}
+
+void GLFWWindow::MakeContextCurrent() {
+    glfwMakeContextCurrent(_hwnd);
+    ImGui::SetCurrentContext(_imGuiContext);
 }
 
 } // namespace Voxy::Platform
