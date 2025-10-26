@@ -10,6 +10,7 @@ Application::~Application() {}
 
 void Application::Run() {
     GLFWwindow *window;
+    GLFWwindow *window2;
 
     /* Initialize the library */
     if (!glfwInit())
@@ -22,19 +23,32 @@ void Application::Run() {
         return;
     }
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+    window2 = glfwCreateWindow(640, 480, "Hello World #2", NULL, NULL);
+    if (!window2) {
+        glfwTerminate();
+        return;
+    }
 
+    bool running = true;
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window)) {
-        /* Render here */
+    while (running) {
+        bool quit = true;
+
+        glfwMakeContextCurrent(window);
+        if (!glfwWindowShouldClose(window))
+            quit = false;
         glClear(GL_COLOR_BUFFER_BIT);
-
-        /* Swap front and back buffers */
         glfwSwapBuffers(window);
-
-        /* Poll for and process events */
         glfwPollEvents();
+
+        glfwMakeContextCurrent(window2);
+        if (!glfwWindowShouldClose(window2))
+            quit = false;
+        glClear(GL_COLOR_BUFFER_BIT);
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+
+        running = !quit;
     }
 
     glfwTerminate();
