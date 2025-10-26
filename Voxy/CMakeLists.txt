@@ -6,6 +6,7 @@ add_definitions(-DVOXY_CORE)
 add_library(${PROJECT_NAME} STATIC
     "src/Voxy/Log.cpp"
     "src/Voxy/Voxy.cpp"
+    "src/Voxy/Application.cpp"
 )
 
 target_include_directories(${PROJECT_NAME}
