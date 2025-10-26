@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Helpers.hpp"
+#include "Window.hpp"
+
 namespace Voxy {
 
 class Application {
@@ -8,6 +11,11 @@ public:
     ~Application();
 
     void Run();
+    void Quit();
+
+private:
+    bool _running;
+    Ref<IWindow> _window;
 };
 
 } // namespace Voxy

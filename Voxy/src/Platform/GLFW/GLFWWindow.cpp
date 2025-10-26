@@ -1,6 +1,6 @@
 #include "GLFWWindow.hpp"
 
-#include <Log.hpp>
+#include "Log.hpp"
 #include <cassert>
 
 namespace Voxy::Platform {
