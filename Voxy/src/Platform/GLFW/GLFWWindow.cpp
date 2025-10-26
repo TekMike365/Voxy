@@ -19,13 +19,7 @@ GLFWWindow::~GLFWWindow() { glfwDestroyWindow(_hwnd); }
 
 void GLFWWindow::Update() {
     _shouldClose = glfwWindowShouldClose(_hwnd);
-
-    // Render
-    glClearColor(RGBto3f(0xf4a261), 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
     glfwSwapBuffers(_hwnd);
-
     glfwPollEvents();
 }
 

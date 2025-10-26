@@ -1,15 +1,13 @@
 #include "Platform.hpp"
 
+#include "GLFW/GLFW.hpp"
 #include "GLFW/GLFWWindow.hpp"
 
 namespace Voxy::Platform {
 
-void Init() {
-    if (!glfwInit())
-        return;
-}
+void Init() { GLFWInit(); }
 
-void Terminate() { glfwTerminate(); }
+void Terminate() { GLFWTerminate(); }
 
 Ref<IWindow> CreateWindow(const WindowParams &params) {
     return std::make_shared<GLFWWindow>(params);

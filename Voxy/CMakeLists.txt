@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} STATIC
 
     "src/Platform/Platform.cpp"
     "src/Platform/GLFW/GLFWWindow.cpp"
+    "src/Platform/GLFW/GLFW.cpp"
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -25,6 +26,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
     PUBLIC
     spdlog
+    imgui
 )
 
 include("${CMAKE_SOURCE_DIR}/CompilerSettings.cmake")

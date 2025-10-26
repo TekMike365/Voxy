@@ -18,8 +18,11 @@ void Application::Run() {
 
     _running = true;
     while (_running) {
-        _window->Update();
+        // Render
+        glClearColor(RGBto3f(0xf4a261), 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
 
+        _window->Update();
         if (_window->ShouldClose())
             Quit();
     }
