@@ -13,8 +13,8 @@ struct WindowParams {
 class IWindow {
 public:
     virtual void Update() = 0;
-    virtual void MakeContextCurrent() = 0;
     virtual bool ShouldClose() = 0; // TODO: events
+    virtual const WindowParams &GetParams() const = 0;
 };
 
 } // namespace Voxy

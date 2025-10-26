@@ -1,11 +1,17 @@
 #include "Platform.hpp"
 
+#include <glad/glad.h>
+
 #include "GLFW/GLFW.hpp"
 #include "GLFW/GLFWWindow.hpp"
+#include <cassert>
 
 namespace Voxy::Platform {
 
-void Init() { GLFWInit(); }
+void Init() {
+    GLFWInit();
+    assert(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress));
+}
 
 void Terminate() { GLFWTerminate(); }
 

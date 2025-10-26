@@ -14,6 +14,10 @@ public:
     void Quit();
 
 private:
+    void BeginFrame();
+    void EndFrame();
+
+private:
     bool _running;
     Ref<IWindow> _window;
 };

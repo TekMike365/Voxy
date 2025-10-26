@@ -11,8 +11,8 @@ public:
     virtual ~GLFWWindow();
 
     virtual void Update() override;
-    virtual void MakeContextCurrent() override;
     virtual inline bool ShouldClose() override { return _shouldClose; }
+    virtual const WindowParams &GetParams() const override { return _params; }
 
 private:
     WindowParams _params;
