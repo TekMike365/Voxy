@@ -13,9 +13,8 @@ extern Ref<spdlog::logger> g_Logger;
 #else // ifndef VOXY_CORE
 extern Ref<spdlog::logger> g_CoreLogger;
 #define VOXY_LOGGER g_CoreLogger
-#endif // ifndef VOXY_CORE
-
 void Init();
+#endif // ifndef VOXY_CORE
 
 template <typename... Args>
 static inline void Trace(const std::string &fmt, Args &&...args) {

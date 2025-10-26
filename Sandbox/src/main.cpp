@@ -1,11 +1,12 @@
-#include <Log.hpp>
-#include <Test.hpp>
+#include <Voxy/Application.hpp>
+#include <Voxy/Voxy.hpp>
 
 int main(void) {
-    SayHello();
+    Voxy::Init();
 
-    Voxy::Log::Trace("This is amazing!");
+    auto *app = new Voxy::Application();
+    app->Run();
+    delete app;
 
-    Voxy::Log::Logger l("TestSys");
-    l.Info("It werks! :3");
+    Voxy::Terminate();
 }
