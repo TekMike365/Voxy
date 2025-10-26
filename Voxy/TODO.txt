@@ -1,4 +1,0 @@
-[ ] Create Logger abstracting spdlog
-[ ] Figure out graphics context
-[ ] Load models
-[ ] Render the shit out of them
