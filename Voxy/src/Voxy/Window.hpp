@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GraphicsContext.hpp"
+#include "Helpers.hpp"
 #include <string>
 
 namespace Voxy {
@@ -13,9 +15,10 @@ struct WindowParams {
 class IWindow {
 public:
     virtual void Update() = 0;
+
     virtual bool ShouldClose() = 0; // TODO: events
-    virtual void MakeContextCurrent() = 0;
     virtual const WindowParams &GetParams() const = 0;
+    virtual const IGraphicsContext *GetContext() const = 0;
 };
 
 } // namespace Voxy

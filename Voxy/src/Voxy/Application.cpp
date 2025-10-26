@@ -17,7 +17,7 @@ void Application::Run() {
 
     auto wnd2 = Platform::CreateWindow({640, 480, "wnd2"});
 
-    _window->MakeContextCurrent();
+    _window->GetContext()->MakeCurrent();
 
     _running = true;
     while (_running) {
@@ -32,6 +32,7 @@ void Application::Run() {
         glClearColor(RGBto3f(0xf4a261), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        _window->GetContext()->SwapBuffers();
 
         _window->Update();
 

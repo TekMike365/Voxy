@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GLFWGraphicsContext.hpp"
+#include "Helpers.hpp"
 #include "Window.hpp"
 #include <GLFW/glfw3.h>
 #include <imgui.h>
@@ -12,16 +14,18 @@ public:
     virtual ~GLFWWindow();
 
     virtual void Update() override;
-    virtual void MakeContextCurrent() override;
+
     virtual inline bool ShouldClose() override { return _shouldClose; }
     virtual const WindowParams &GetParams() const override { return _params; }
+    virtual inline const IGraphicsContext *GetContext() const override {
+        return _context.get();
+    }
 
 private:
-    WindowParams _params;
     GLFWwindow *_hwnd;
+    WindowParams _params;
+    URef<GLFWGraphicsContext> _context;
     bool _shouldClose;
-
-    ImGuiContext *_imGuiContext = nullptr; //? TMP
 };
 
 } // namespace Voxy::Platform
