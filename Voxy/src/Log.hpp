@@ -1,32 +1,69 @@
 #pragma once
 
-namespace Voxy {
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/spdlog.h>
 
-/*
-  2 types (Core & App)
-  Needs the ability to be named
-  Severity: Trace, Info, Warn, Error
-  Stripped on release? // piped into a file?
+#include "Helpers.hpp"
 
-  format:
-    [timestamp] [Core/App:Name] (Severity): msg
+namespace Voxy::Log {
 
-  usage:
-    # Core
-    CoreLogger logger("Renderer");
-    logger.Info("logger initialized.");
+#ifndef VOXY_CORE
+extern Ref<spdlog::logger> g_Logger;
+#define VOXY_LOGGER g_Logger
+#else // ifndef VOXY_CORE
+extern Ref<spdlog::logger> g_CoreLogger;
+#define VOXY_LOGGER g_CoreLogger
+#endif // ifndef VOXY_CORE
 
-    [2020-11-26 08:25:04 +00:00] [Core:Renderer] (info): logger initialized
+void Init();
 
-    # App
-    Logger logger("Player");
-    logger.Warn("Not good");
+template <typename... Args>
+static inline void Trace(const std::string &fmt, Args &&...args) {
+    VOXY_LOGGER->trace(fmt::runtime(fmt), std::forward<Args>(args)...);
+}
 
-    [2020-11-26 08:25:04 +00:00] [App:Player] (warn): Not good
- */
+template <typename... Args>
+static inline void Info(const std::string &fmt, Args &&...args) {
+    VOXY_LOGGER->info(fmt::runtime(fmt), std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+static inline void Warn(const std::string &fmt, Args &&...args) {
+    VOXY_LOGGER->warn(fmt::runtime(fmt), std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+static inline void Error(const std::string &fmt, Args &&...args) {
+    VOXY_LOGGER->error(fmt::runtime(fmt), std::forward<Args>(args)...);
+}
+
 class Logger {
 public:
+    Logger(const std::string &name)
+        : _prefix("\x1b[35m" + name + ": \x1b[39;49m") {}
+
+    template <typename... Args>
+    inline void Trace(const std::string &fmt, Args &&...args) const {
+        Log::Trace(_prefix + fmt, std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    inline void Info(const std::string &fmt, Args &&...args) const {
+        Log::Info(_prefix + fmt, std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    inline void Warn(const std::string &fmt, Args &&...args) const {
+        Log::Warn(_prefix + fmt, std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    inline void Error(const std::string &fmt, Args &&...args) const {
+        Log::Error(_prefix + fmt, std::forward<Args>(args)...);
+    }
+
 private:
+    const std::string _prefix;
 };
 
-} // namespace Voxy
+} // namespace Voxy::Log
