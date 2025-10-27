@@ -14,9 +14,6 @@ public:
     virtual inline void MakeCurrent() const override;
     virtual inline void SwapBuffers() const override { glfwSwapBuffers(_hwnd); }
 
-    virtual void BeginFrame() const override;
-    virtual void EndFrame() const override;
-
 private:
     ImGuiContext *_imGuiContext;
     GLFWwindow *_hwnd;

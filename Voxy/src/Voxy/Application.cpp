@@ -17,12 +17,11 @@ void Application::Run() {
 
     auto wnd2 = Platform::CreateWindow({640, 480, "wnd2"});
 
-    auto *context = _window->GetContext();
-    context->MakeCurrent();
+    _window->GetContext()->MakeCurrent();
 
     _running = true;
     while (_running) {
-        context->BeginFrame();
+        BeginFrame();
 
         ImGui::ShowDemoWindow();
 
@@ -33,7 +32,7 @@ void Application::Run() {
         glClearColor(RGBto3f(0xf4a261), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        context->SwapBuffers();
+        _window->GetContext()->SwapBuffers();
 
         _window->Update();
 
@@ -43,7 +42,7 @@ void Application::Run() {
                 wnd2.reset();
         }
 
-        context->EndFrame();
+        EndFrame();
 
         if (_window->ShouldClose())
             Quit();
@@ -54,5 +53,13 @@ void Application::Quit() {
     Log::Info("Exitting application.");
     _running = false;
 }
+
+void Application::BeginFrame() {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+}
+
+void Application::EndFrame() {}
 
 } // namespace Voxy
