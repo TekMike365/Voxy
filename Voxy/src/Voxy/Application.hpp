@@ -15,7 +15,6 @@ public:
 
 private:
     void BeginFrame();
-    void EndFrame();
 
 private:
     bool _running;
