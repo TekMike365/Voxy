@@ -18,7 +18,7 @@ public:
 
     virtual bool ShouldClose() = 0; // TODO: events
     virtual const WindowParams &GetParams() const = 0;
-    virtual const IGraphicsContext *GetContext() const = 0;
+    virtual const IGraphicsContext &GetContext() const = 0;
 };
 
 } // namespace Voxy

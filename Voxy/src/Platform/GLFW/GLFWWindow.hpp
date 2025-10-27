@@ -17,8 +17,8 @@ public:
 
     virtual inline bool ShouldClose() override { return _shouldClose; }
     virtual const WindowParams &GetParams() const override { return _params; }
-    virtual inline const IGraphicsContext *GetContext() const override {
-        return _context.get();
+    virtual inline const IGraphicsContext &GetContext() const override {
+        return *_context;
     }
 
 private:
