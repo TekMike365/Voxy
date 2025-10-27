@@ -63,4 +63,12 @@ inline void GLFWGraphicsContext::MakeCurrent() const {
     ImGui::SetCurrentContext(_imGuiContext);
 }
 
+void GLFWGraphicsContext::BeginFrame() const {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+}
+
+void GLFWGraphicsContext::EndFrame() const {}
+
 } // namespace Voxy::Platform
