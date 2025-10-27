@@ -8,7 +8,7 @@ public:
     virtual void SwapBuffers() const = 0;
 
     virtual void BeginFrame() const = 0;
-    virtual void Render() const = 0;
+    virtual void EndFrame() const = 0;
 
     static inline const IGraphicsContext *GetCurrentContext() {
         return s_Current;

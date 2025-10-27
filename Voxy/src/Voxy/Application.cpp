@@ -26,6 +26,15 @@ void Application::Run() {
 
         ImGui::ShowDemoWindow();
 
+        // Render
+        ImGui::Render();
+        auto &wndParams = _window->GetParams();
+        glViewport(0, 0, wndParams.width, wndParams.height);
+        glClearColor(RGBto3f(0xf4a261), 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        context->SwapBuffers();
+
         _window->Update();
 
         if (wnd2) {
@@ -34,7 +43,7 @@ void Application::Run() {
                 wnd2.reset();
         }
 
-        context->Render();
+        context->EndFrame();
 
         if (_window->ShouldClose())
             Quit();
