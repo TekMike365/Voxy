@@ -1,5 +1,6 @@
 #include "GLFWGraphicsContext.hpp"
 
+#include "Helpers.hpp"
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
@@ -69,6 +70,20 @@ void GLFWGraphicsContext::BeginFrame() const {
     ImGui::NewFrame();
 }
 
-void GLFWGraphicsContext::EndFrame() const {}
+void GLFWGraphicsContext::Render() const {
+    // Render
+    ImGui::Render();
+
+    int wndWidth, wndHeight;
+    glfwGetWindowSize(_hwnd, &wndWidth, &wndHeight);
+    glViewport(0, 0, wndWidth, wndHeight);
+
+    glClearColor(RGBto3f(0xf4a261), 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+    SwapBuffers();
+}
 
 } // namespace Voxy::Platform
