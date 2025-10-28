@@ -4,6 +4,7 @@
 #include "Mesh.hpp"
 #include "Shader.hpp"
 #include "Transform.hpp"
+#include "Window.hpp"
 
 namespace Voxy::Renderer {
 
@@ -11,6 +12,8 @@ struct IMaterial {};
 
 class IRenderer {
 public:
+    virtual void Init(const Wef<IWindow> &window) = 0;
+
     virtual void BeginFrame() = 0;
     virtual void EndFrame() = 0;
     virtual void Render() = 0;
