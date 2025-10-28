@@ -9,7 +9,7 @@ namespace Voxy::Renderer {
 
 struct IMaterial {};
 
-class Renderer {
+class IRenderer {
 public:
     virtual void BeginFrame() = 0;
     virtual void EndFrame() = 0;
