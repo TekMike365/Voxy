@@ -25,7 +25,6 @@ void Application::Run() {
     Log::Info("Application started.");
 
     auto &context = _window->GetContext();
-    context.MakeCurrent();
 
     _running = true;
     while (_running) {
@@ -34,6 +33,8 @@ void Application::Run() {
         ImGui::ShowDemoWindow();
 
         ImGuiManager::EndFrame();
+
+        context.MakeCurrent();
 
         // Render
         auto &wndParams = _window->GetParams();
