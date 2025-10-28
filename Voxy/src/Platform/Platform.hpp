@@ -10,4 +10,6 @@ void Terminate();
 
 Ref<IWindow> CreateWindow(const WindowParams &params = WindowParams());
 
+void BeginImGuiFrame();
+
 } // namespace Voxy::Platform

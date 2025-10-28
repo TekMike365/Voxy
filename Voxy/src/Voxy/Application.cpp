@@ -1,5 +1,6 @@
 #include "Application.hpp"
 
+#include "ImGuiManager.hpp"
 #include "Log.hpp"
 #include "Platform/Platform.hpp"
 #include <GLFW/glfw3.h>
@@ -8,9 +9,17 @@
 
 namespace Voxy {
 
-Application::Application() { _window = Platform::CreateWindow(); }
+Application *Application::s_Instance = nullptr;
 
-Application::~Application() {}
+Application::Application() {
+    if (s_Instance)
+        assert(0);
+    s_Instance = this;
+
+    _window = Platform::CreateWindow();
+}
+
+Application::~Application() { s_Instance = nullptr; }
 
 void Application::Run() {
     Log::Info("Application started.");
@@ -20,9 +29,11 @@ void Application::Run() {
 
     _running = true;
     while (_running) {
-        BeginFrame();
+        ImGuiManager::BeginFrame();
 
         ImGui::ShowDemoWindow();
+
+        ImGuiManager::EndFrame();
 
         // Render
         auto &wndParams = _window->GetParams();
@@ -30,8 +41,7 @@ void Application::Run() {
         glClearColor(RGBto3f(0xf4a261), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplOpenGL3_RenderDrawData(ImGuiManager::GetDrawData());
 
         context.SwapBuffers();
 
@@ -45,12 +55,6 @@ void Application::Run() {
 void Application::Quit() {
     Log::Info("Exitting application.");
     _running = false;
-}
-
-void Application::BeginFrame() {
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
 }
 
 } // namespace Voxy

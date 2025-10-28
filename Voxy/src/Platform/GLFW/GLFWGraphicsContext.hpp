@@ -17,7 +17,6 @@ public:
     virtual inline void SwapBuffers() const override { glfwSwapBuffers(_hwnd); }
 
 private:
-    ImGuiContext *_imGuiContext;
     GLFWwindow *_hwnd;
 };
 

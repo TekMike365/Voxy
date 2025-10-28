@@ -13,12 +13,13 @@ public:
     void Run();
     void Quit();
 
-private:
-    void BeginFrame();
+    static Application &Get() { return *s_Instance; }
 
 private:
     bool _running;
     Ref<IWindow> _window;
+
+    static Application *s_Instance;
 };
 
 } // namespace Voxy

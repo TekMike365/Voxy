@@ -7,7 +7,7 @@ add_library(${PROJECT_NAME} STATIC
     "src/Voxy/Log.cpp"
     "src/Voxy/Voxy.cpp"
     "src/Voxy/Application.cpp"
-    "src/Voxy/GraphicsContext.cpp"
+    "src/Voxy/ImGuiManager.cpp"
 
     "src/Platform/Platform.cpp"
     "src/Platform/GLFW/GLFW.cpp"
