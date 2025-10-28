@@ -2,3 +2,7 @@
 - [X] Figure out graphics context
 - [ ] Load models
 > [ ] Render the shit out of them
+    - [ ] ImGui viewports
+    - [ ] ImGui rendering inside Renderer
+    - [ ] Multiple Windows & Renderers in Application
+    - [ ] The OpenGLRenderer implementation
