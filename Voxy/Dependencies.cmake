@@ -25,7 +25,7 @@ add_library(imgui STATIC
 
     "${IMGUI_PATH}/misc/cpp/imgui_stdlib.cpp"
 )
-target_link_libraries(imgui PRIVATE glfw)
+target_link_libraries(imgui PRIVATE glfw X11)
 target_include_directories(imgui PUBLIC
     ${IMGUI_PATH}
     "${IMGUI_PATH}/backends"
