@@ -8,24 +8,25 @@ namespace Voxy::Platform {
 
 GLFWWindow::GLFWWindow(const WindowParams &params)
     : _params(params), _shouldClose(false) {
-    _hwnd = glfwCreateWindow(_params.width, _params.height,
-                             _params.title.c_str(), NULL, NULL);
-    _context = std::make_unique<GLFWGraphicsContext>(_hwnd);
+    GLFWwindow *hwnd = glfwCreateWindow(_params.width, _params.height,
+                                        _params.title.c_str(), NULL, NULL);
+    _context = std::make_unique<GLFWGraphicsContext>(hwnd);
 
     Log::Trace("GLFW window created: {} (0x{:x})", _params.title,
-               (size_t)_hwnd);
+               (size_t)_context->_hwnd);
 }
 
 GLFWWindow::~GLFWWindow() {
+    GLFWwindow *hwnd = _context->_hwnd;
     _context.reset(); // destroy context
-    glfwDestroyWindow(_hwnd);
+    glfwDestroyWindow(hwnd);
 
     Log::Trace("GLFW window terminated: {} (0x{:x})", _params.title,
-               (size_t)_hwnd);
+               (size_t)hwnd);
 }
 
 void GLFWWindow::Update() {
-    _shouldClose = glfwWindowShouldClose(_hwnd);
+    _shouldClose = glfwWindowShouldClose(_context->_hwnd);
     glfwPollEvents();
 }
 

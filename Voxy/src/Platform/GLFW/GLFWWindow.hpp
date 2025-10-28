@@ -22,7 +22,6 @@ public:
     }
 
 private:
-    GLFWwindow *_hwnd;
     WindowParams _params;
     URef<GLFWGraphicsContext> _context;
     bool _shouldClose;

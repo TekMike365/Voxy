@@ -7,6 +7,8 @@
 namespace Voxy::Platform {
 
 class GLFWGraphicsContext : public IGraphicsContext {
+    friend class GLFWWindow;
+
 public:
     GLFWGraphicsContext(GLFWwindow *hwnd);
     virtual ~GLFWGraphicsContext();
