@@ -5,10 +5,10 @@ namespace Voxy::Renderer {
 
 struct Shader { // TODO
 public:
-    inline uint32_t GetID() const { return _id; }
+    inline uint32_t GetID() const { return m_ID; }
 
 private:
-    uint32_t _id;
+    uint32_t m_ID;
 };
 
 } // namespace Voxy::Renderer

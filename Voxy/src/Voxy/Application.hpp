@@ -16,8 +16,8 @@ public:
     static Application &Get() { return *s_Instance; }
 
 private:
-    bool _running;
-    Ref<IWindow> _window;
+    bool m_Running;
+    Ref<IWindow> m_Rindow;
 
     static Application *s_Instance;
 };

@@ -15,16 +15,16 @@ public:
 
     virtual void Update() override;
 
-    virtual inline bool ShouldClose() override { return _shouldClose; }
-    virtual const WindowParams &GetParams() const override { return _params; }
+    virtual inline bool ShouldClose() override { return m_ShouldClose; }
+    virtual const WindowParams &GetParams() const override { return m_Params; }
     virtual inline const IGraphicsContext &GetContext() const override {
-        return *_context;
+        return *m_Context;
     }
 
 private:
-    WindowParams _params;
-    URef<GLFWGraphicsContext> _context;
-    bool _shouldClose;
+    WindowParams m_Params;
+    URef<GLFWGraphicsContext> m_Context;
+    bool m_ShouldClose;
 };
 
 } // namespace Voxy::Platform

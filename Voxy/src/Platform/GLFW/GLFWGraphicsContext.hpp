@@ -14,10 +14,12 @@ public:
     virtual ~GLFWGraphicsContext();
 
     virtual inline void MakeCurrent() const override;
-    virtual inline void SwapBuffers() const override { glfwSwapBuffers(_hwnd); }
+    virtual inline void SwapBuffers() const override {
+        glfwSwapBuffers(m_Hwnd);
+    }
 
 private:
-    GLFWwindow *_hwnd;
+    GLFWwindow *m_Hwnd;
 };
 
 } // namespace Voxy::Platform

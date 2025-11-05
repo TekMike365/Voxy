@@ -38,30 +38,30 @@ static inline void Error(const std::string &fmt, Args &&...args) {
 class Logger {
 public:
     Logger(const std::string &name)
-        : _prefix("\x1b[35m" + name + ": \x1b[39;49m") {}
+        : m_Prefix("\x1b[35m" + name + ": \x1b[39;49m") {}
 
     template <typename... Args>
     inline void Trace(const std::string &fmt, Args &&...args) const {
-        Log::Trace(_prefix + fmt, std::forward<Args>(args)...);
+        Log::Trace(m_Prefix + fmt, std::forward<Args>(args)...);
     }
 
     template <typename... Args>
     inline void Info(const std::string &fmt, Args &&...args) const {
-        Log::Info(_prefix + fmt, std::forward<Args>(args)...);
+        Log::Info(m_Prefix + fmt, std::forward<Args>(args)...);
     }
 
     template <typename... Args>
     inline void Warn(const std::string &fmt, Args &&...args) const {
-        Log::Warn(_prefix + fmt, std::forward<Args>(args)...);
+        Log::Warn(m_Prefix + fmt, std::forward<Args>(args)...);
     }
 
     template <typename... Args>
     inline void Error(const std::string &fmt, Args &&...args) const {
-        Log::Error(_prefix + fmt, std::forward<Args>(args)...);
+        Log::Error(m_Prefix + fmt, std::forward<Args>(args)...);
     }
 
 private:
-    const std::string _prefix;
+    const std::string m_Prefix;
 };
 
 } // namespace Voxy::Log

@@ -16,7 +16,7 @@ Application::Application() {
         assert(0);
     s_Instance = this;
 
-    _window = Platform::CreateWindow();
+    m_Rindow = Platform::CreateWindow();
 }
 
 Application::~Application() { s_Instance = nullptr; }
@@ -24,10 +24,10 @@ Application::~Application() { s_Instance = nullptr; }
 void Application::Run() {
     Log::Info("Application started.");
 
-    auto &context = _window->GetContext();
+    auto &context = m_Rindow->GetContext();
 
-    _running = true;
-    while (_running) {
+    m_Running = true;
+    while (m_Running) {
         ImGuiManager::BeginFrame();
 
         ImGui::ShowDemoWindow();
@@ -37,7 +37,7 @@ void Application::Run() {
         context.MakeCurrent();
 
         // Render
-        auto &wndParams = _window->GetParams();
+        auto &wndParams = m_Rindow->GetParams();
         glViewport(0, 0, wndParams.width, wndParams.height);
         glClearColor(RGBto3f(0xf4a261), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -46,16 +46,16 @@ void Application::Run() {
 
         context.SwapBuffers();
 
-        _window->Update();
+        m_Rindow->Update();
 
-        if (_window->ShouldClose())
+        if (m_Rindow->ShouldClose())
             Quit();
     }
 }
 
 void Application::Quit() {
     Log::Info("Exitting application.");
-    _running = false;
+    m_Running = false;
 }
 
 } // namespace Voxy

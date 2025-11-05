@@ -7,13 +7,13 @@ using namespace Math;
 
 struct Camera { // TODO
     Camera(float fovy, float aspect, float near, float far) {
-        _projection = glm::perspective(fovy, aspect, near, far);
+        m_Projection = glm::perspective(fovy, aspect, near, far);
     }
 
-    inline const Matrix4 &GetProjection() const { return _projection; }
+    inline const Matrix4 &GetProjection() const { return m_Projection; }
 
 private:
-    Matrix4 _projection;
+    Matrix4 m_Projection;
 };
 
 } // namespace Voxy::Renderer

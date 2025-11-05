@@ -6,9 +6,9 @@
 
 namespace Voxy::Platform {
 
-GLFWGraphicsContext::GLFWGraphicsContext(GLFWwindow *hwnd) : _hwnd(hwnd) {
+GLFWGraphicsContext::GLFWGraphicsContext(GLFWwindow *hwnd) : m_Hwnd(hwnd) {
     // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(_hwnd, true);
+    ImGui_ImplGlfw_InitForOpenGL(m_Hwnd, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 }
 
@@ -18,7 +18,7 @@ GLFWGraphicsContext::~GLFWGraphicsContext() {
 }
 
 inline void GLFWGraphicsContext::MakeCurrent() const {
-    glfwMakeContextCurrent(_hwnd);
+    glfwMakeContextCurrent(m_Hwnd);
 }
 
 } // namespace Voxy::Platform

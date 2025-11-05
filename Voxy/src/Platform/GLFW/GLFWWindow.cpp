@@ -7,30 +7,30 @@
 namespace Voxy::Platform {
 
 GLFWWindow::GLFWWindow(const WindowParams &params)
-    : _params(params), _shouldClose(false) {
-    GLFWwindow *hwnd = glfwCreateWindow(_params.width, _params.height,
-                                        _params.title.c_str(), NULL, NULL);
+    : m_Params(params), m_ShouldClose(false) {
+    GLFWwindow *hwnd = glfwCreateWindow(m_Params.width, m_Params.height,
+                                        m_Params.title.c_str(), NULL, NULL);
 
     glfwMakeContextCurrent(hwnd);
     glfwSwapInterval(1); // enable VSync (needs bound context)
 
-    _context = std::make_unique<GLFWGraphicsContext>(hwnd);
+    m_Context = std::make_unique<GLFWGraphicsContext>(hwnd);
 
-    Log::Trace("GLFW window created: {} (0x{:x})", _params.title,
-               (size_t)_context->_hwnd);
+    Log::Trace("GLFW window created: {} (0x{:x})", m_Params.title,
+               (size_t)m_Context->m_Hwnd);
 }
 
 GLFWWindow::~GLFWWindow() {
-    GLFWwindow *hwnd = _context->_hwnd;
-    _context.reset(); // destroy context
+    GLFWwindow *hwnd = m_Context->m_Hwnd;
+    m_Context.reset(); // destroy context
     glfwDestroyWindow(hwnd);
 
-    Log::Trace("GLFW window terminated: {} (0x{:x})", _params.title,
+    Log::Trace("GLFW window terminated: {} (0x{:x})", m_Params.title,
                (size_t)hwnd);
 }
 
 void GLFWWindow::Update() {
-    _shouldClose = glfwWindowShouldClose(_context->_hwnd);
+    m_ShouldClose = glfwWindowShouldClose(m_Context->m_Hwnd);
     glfwPollEvents();
 }
 
